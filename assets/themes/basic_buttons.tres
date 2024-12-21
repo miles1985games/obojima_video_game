@@ -1,0 +1,87 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://d1t08nb7i4mnk"]
+
+[ext_resource type="FontFile" uid="uid://wb7t5kwvgpkd" path="res://assets/fonts/Sneakers Pro Medium.ttf" id="1_iu2x8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcycd"]
+bg_color = Color(0.92549, 0.905882, 0.866667, 0.372549)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.447059, 0.262745, 0.180392, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jhg6r"]
+bg_color = Color(0.92549, 0.905882, 0.866667, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.756863, 0.607843, 0.380392, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rxigt"]
+bg_color = Color(0.870588, 0.835294, 0.792157, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.447059, 0.262745, 0.180392, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wfj2f"]
+bg_color = Color(0.92549, 0.905882, 0.866667, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.447059, 0.262745, 0.180392, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ws4nr"]
+bg_color = Color(0.92549, 0.905882, 0.866667, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.756863, 0.607843, 0.380392, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[resource]
+Button/colors/font_color = Color(0.45098, 0.262745, 0.180392, 1)
+Button/colors/font_disabled_color = Color(0.45098, 0.262745, 0.180392, 1)
+Button/colors/font_focus_color = Color(0.45098, 0.262745, 0.180392, 1)
+Button/colors/font_hover_color = Color(0.45098, 0.262745, 0.180392, 1)
+Button/colors/font_pressed_color = Color(0.45098, 0.262745, 0.180392, 1)
+Button/colors/icon_focus_color = Color(0.45098, 0.262745, 0.180392, 1)
+Button/fonts/font = ExtResource("1_iu2x8")
+Button/styles/disabled = SubResource("StyleBoxFlat_tcycd")
+Button/styles/focus = SubResource("StyleBoxFlat_jhg6r")
+Button/styles/hover = SubResource("StyleBoxFlat_rxigt")
+Button/styles/normal = SubResource("StyleBoxFlat_wfj2f")
+Button/styles/pressed = SubResource("StyleBoxFlat_ws4nr")
