@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://cil241lrc5c03"]
+
+[ext_resource type="Script" path="res://mains/start_screen.gd" id="1_g64q6"]
+[ext_resource type="Texture2D" uid="uid://ds42eqiuiyvik" path="res://assets/backgrounds/observatory.png" id="1_so7lv"]
+[ext_resource type="Theme" uid="uid://d1t08nb7i4mnk" path="res://assets/themes/basic_buttons.tres" id="2_rsrai"]
+
+[node name="StartScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g64q6")
+
+[node name="BG" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_so7lv")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 850
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 850
+theme_override_constants/margin_bottom = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="DemoButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_rsrai")
+text = "Play Demo"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/DemoButton" to="." method="demo_button_pressed"]
