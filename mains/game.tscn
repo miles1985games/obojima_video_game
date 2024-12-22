@@ -1,14 +1,21 @@
-[gd_scene load_steps=18 format=3 uid="uid://ctc405b6xqaws"]
+[gd_scene load_steps=43 format=3 uid="uid://ctc405b6xqaws"]
 
 [ext_resource type="Script" path="res://mains/game.gd" id="1_me1qu"]
 [ext_resource type="PackedScene" uid="uid://cbhaf8txxy8n8" path="res://locations/town.tscn" id="2_wtwuq"]
 [ext_resource type="Script" path="res://handlers/location_handler.gd" id="3_gudru"]
+[ext_resource type="Script" path="res://handlers/interact_handler.gd" id="3_jpbie"]
+[ext_resource type="Texture2D" uid="uid://c0ixjtc35cpx2" path="res://assets/ui/interact_arrow.png" id="4_ht0s1"]
 [ext_resource type="PackedScene" uid="uid://c4bl72owsiskt" path="res://locations/home_interior.tscn" id="4_p60nc"]
 [ext_resource type="PackedScene" uid="uid://crlhmm08kmt4a" path="res://player/player.tscn" id="5_hbtvp"]
 [ext_resource type="Script" path="res://ui/inventory_ui.gd" id="6_f00rt"]
 [ext_resource type="Theme" uid="uid://d1t08nb7i4mnk" path="res://assets/themes/default_theme.tres" id="6_gcd55"]
 [ext_resource type="Texture2D" uid="uid://bgqsfuuqglwj6" path="res://assets/ui/ingredients_icon.png" id="7_in5lr"]
+[ext_resource type="Texture2D" uid="uid://5aeky0noulx5" path="res://assets/ui/inventory_icon.png" id="8_aq8sq"]
 [ext_resource type="Texture2D" uid="uid://d3ocb3kp057de" path="res://assets/ingredients/amber.png" id="9_adc2n"]
+[ext_resource type="PackedScene" uid="uid://03yuses2lmgk" path="res://drops/drop.tscn" id="11_2wh48"]
+[ext_resource type="Script" path="res://ui/alert_ui.gd" id="12_4damj"]
+[ext_resource type="Script" path="res://ui/potion_ui.gd" id="15_8c8tt"]
+[ext_resource type="FontFile" uid="uid://wb7t5kwvgpkd" path="res://assets/fonts/Sneakers Pro Medium.ttf" id="16_8w25p"]
 
 [sub_resource type="Animation" id="Animation_mm8lr"]
 length = 0.001
@@ -100,6 +107,41 @@ _data = {
 "fade_to_black": SubResource("Animation_kkxkl")
 }
 
+[sub_resource type="Animation" id="Animation_dgtae"]
+resource_name = "bounce"
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArrowSprite:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.0333333, 0.5, 0.966667)
+}
+
+[sub_resource type="Animation" id="Animation_go4h5"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArrowSprite:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rwj84"]
+_data = {
+"RESET": SubResource("Animation_go4h5"),
+"bounce": SubResource("Animation_dgtae")
+}
+
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_43jf3"]
 color = Color(0.490196, 0.321569, 0.239216, 1)
 grow_begin = 0.0
@@ -127,6 +169,58 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_uuu7i"]
+color = Color(0.52549, 0.372549, 0.294118, 1)
+grow_begin = -300.0
+grow_end = -300.0
+thickness = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6map4"]
+bg_color = Color(0.92549, 0.905882, 0.866667, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.52549, 0.372549, 0.294118, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_vjb28"]
+color = Color(0.52549, 0.372549, 0.294118, 0.47451)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_rnt87"]
+color = Color(0.52549, 0.372549, 0.294118, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2budl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bjggo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6updb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_emgpa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vlneu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0yjwk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xl6vh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6a0nb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oig5r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k5cf1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vo4w8"]
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_me1qu")
 
@@ -149,6 +243,23 @@ libraries = {
 "": SubResource("AnimationLibrary_jn8jo")
 }
 
+[node name="InteractHandler" type="Node2D" parent="."]
+script = ExtResource("3_jpbie")
+
+[node name="Arrow" type="Node2D" parent="InteractHandler"]
+visible = false
+
+[node name="ArrowSprite" type="Sprite2D" parent="InteractHandler/Arrow"]
+z_index = 5
+texture_filter = 1
+texture = ExtResource("4_ht0s1")
+
+[node name="ArrowAnimation" type="AnimationPlayer" parent="InteractHandler/Arrow"]
+libraries = {
+"": SubResource("AnimationLibrary_rwj84")
+}
+autoplay = "bounce"
+
 [node name="Locations" type="Node2D" parent="."]
 
 [node name="Town" parent="Locations" instance=ExtResource("2_wtwuq")]
@@ -159,6 +270,7 @@ position = Vector2(-1235, -1455)
 [node name="Player" parent="." instance=ExtResource("5_hbtvp")]
 
 [node name="InventoryUI" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("6_f00rt")
 
 [node name="MarginContainer" type="MarginContainer" parent="InventoryUI"]
@@ -167,6 +279,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 300
 theme_override_constants/margin_top = 200
 theme_override_constants/margin_right = 300
@@ -175,6 +288,7 @@ theme_override_constants/margin_bottom = 200
 [node name="Panel" type="Panel" parent="InventoryUI/MarginContainer"]
 modulate = Color(1, 1, 1, 0.901961)
 layout_mode = 2
+mouse_filter = 2
 theme = ExtResource("6_gcd55")
 
 [node name="MarginContainer" type="MarginContainer" parent="InventoryUI/MarginContainer/Panel"]
@@ -184,6 +298,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
@@ -191,23 +306,47 @@ theme_override_constants/margin_bottom = 50
 
 [node name="VBoxContainer" type="VBoxContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/separation = 15
 
-[node name="HBoxContainer" type="HBoxContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Tabs" type="HBoxContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="IngredientsButton" type="Button" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="InventoryButton" type="Button" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
+icon = ExtResource("8_aq8sq")
+icon_alignment = 1
+expand_icon = true
+
+[node name="IngredientsButton" type="Button" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
 icon = ExtResource("7_in5lr")
 icon_alignment = 1
 expand_icon = true
@@ -219,14 +358,20 @@ layout_mode = 2
 theme = ExtResource("6_gcd55")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "Ingredients"
+text = "Inventory"
 fit_content = true
 
 [node name="HSeparator" type="HSeparator" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_43jf3")
 
-[node name="IngredientsContainer" type="ScrollContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="InventoryScrollContainer" type="ScrollContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
@@ -235,7 +380,25 @@ theme = ExtResource("6_gcd55")
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="IngredientsGrid" type="GridContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/IngredientsContainer"]
+[node name="InventoryGrid" type="GridContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/InventoryScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 50
+columns = 5
+
+[node name="IngredientsScrollContainer" type="ScrollContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("6_gcd55")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="IngredientsGrid" type="GridContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/IngredientsScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -247,6 +410,7 @@ columns = 5
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
@@ -255,12 +419,14 @@ theme_override_constants/margin_bottom = 50
 [node name="DetailedView" type="VBoxContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/separation = 60
 alignment = 2
 
 [node name="Name" type="RichTextLabel" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/DetailedView"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 theme = ExtResource("6_gcd55")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
@@ -270,13 +436,16 @@ fit_content = true
 [node name="Icon" type="TextureRect" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/DetailedView"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("9_adc2n")
 expand_mode = 1
 stretch_mode = 3
 
 [node name="Stats" type="HBoxContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/DetailedView"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="Combat" type="PanelContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/DetailedView/Stats"]
@@ -323,4 +492,248 @@ theme = ExtResource("6_gcd55")
 text = "This chunk of petrified tree sap is prized for its color and gem-like luster and is often used in jewelry. Some arcane jewelers claim that it has special properties, especially if an ancient insect is trapped within it. Amber can be found in rocky areas where petrifi ed wood is found, and it has been known to wash up on certain beaches."
 autowrap_mode = 2
 
-[connection signal="pressed" from="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/IngredientsButton" to="InventoryUI" method="ingredients_button_pressed"]
+[node name="Drop" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-170, 29)
+type = "ingredient"
+item = "amber"
+
+[node name="Drop2" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-238, 115)
+type = "ingredient"
+item = "amber"
+
+[node name="Drop3" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-287, -47)
+type = "ingredient"
+item = "bamboo"
+
+[node name="Drop4" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-326, 51)
+type = "ingredient"
+item = "amber"
+
+[node name="Drop5" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-178, -56)
+type = "ingredient"
+item = "apper_carrot"
+
+[node name="AlertUI" type="CanvasLayer" parent="."]
+script = ExtResource("12_4damj")
+
+[node name="MarginContainer" type="MarginContainer" parent="AlertUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="AlertContainer" type="VBoxContainer" parent="AlertUI/MarginContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 2
+alignment = 2
+
+[node name="PotionUI" type="CanvasLayer" parent="."]
+script = ExtResource("15_8c8tt")
+
+[node name="MarginContainer" type="MarginContainer" parent="PotionUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 400
+theme_override_constants/margin_bottom = 200
+
+[node name="Panel" type="Panel" parent="PotionUI/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("6_gcd55")
+
+[node name="MarginContainer" type="MarginContainer" parent="PotionUI/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PotionUI/MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_gcd55")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[center]Potion Brewing[/center]"
+fit_content = true
+
+[node name="HSeparator" type="HSeparator" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_uuu7i")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_gcd55")
+theme_override_font_sizes/font_size = 25
+text = "Ingredients"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("6_gcd55")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Grid" type="GridContainer" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 50
+columns = 5
+
+[node name="MarginContainer2" type="MarginContainer" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_gcd55")
+theme_override_font_sizes/font_size = 25
+text = "Click ingredients to mix a potion!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 125)
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="ChosenIngredient1" type="PanelContainer" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0.74902)
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_6map4")
+
+[node name="TextureRect" type="TextureRect" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer/ChosenIngredient1"]
+modulate = Color(1, 1, 1, 0.513726)
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+texture = ExtResource("7_in5lr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ChosenIngredient2" type="PanelContainer" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0.74902)
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_6map4")
+
+[node name="TextureRect" type="TextureRect" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer/ChosenIngredient2"]
+modulate = Color(1, 1, 1, 0.513726)
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+texture = ExtResource("7_in5lr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ChosenIngredient3" type="PanelContainer" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0.74902)
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_6map4")
+
+[node name="TextureRect" type="TextureRect" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer/ChosenIngredient3"]
+modulate = Color(1, 1, 1, 0.513726)
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+texture = ExtResource("7_in5lr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HSeparator" type="HSeparator" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_vjb28")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSeparator" type="HSeparator" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_rnt87")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_gcd55")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[center]Result:[/center]"
+fit_content = true
+
+[node name="ResultIcon" type="TextureRect" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="PotionUI/MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.458824, 0.286275, 0.188235, 1)
+theme_override_fonts/font = ExtResource("16_8w25p")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2budl")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_bjggo")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6updb")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_emgpa")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_vlneu")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_0yjwk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_xl6vh")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_6a0nb")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oig5r")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_k5cf1")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vo4w8")
+text = "X"
+
+[connection signal="pressed" from="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/InventoryButton" to="InventoryUI" method="inventory_button_pressed"]
+[connection signal="pressed" from="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/IngredientsButton" to="InventoryUI" method="ingredients_button_pressed"]
+[connection signal="pressed" from="PotionUI/MarginContainer/MarginContainer/CloseButton" to="PotionUI" method="close_button_pressed"]

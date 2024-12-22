@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmdmpdrb24uik"]
+
+[ext_resource type="Theme" uid="uid://d1t08nb7i4mnk" path="res://assets/themes/default_theme.tres" id="1_cn27m"]
+[ext_resource type="Script" path="res://ui/alert_panel.gd" id="2_fupy3"]
+[ext_resource type="Texture2D" uid="uid://d3ocb3kp057de" path="res://assets/ingredients/amber.png" id="2_taxxj"]
+
+[node name="AlertPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(400, 75)
+theme = ExtResource("1_cn27m")
+script = ExtResource("2_fupy3")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Amber Discovered!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("2_taxxj")
+expand_mode = 1
+stretch_mode = 4

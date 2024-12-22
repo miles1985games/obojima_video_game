@@ -1,17 +1,24 @@
 extends CanvasLayer
 
+@onready var inventory_button = %InventoryButton
+@onready var inventory_scroll_container = %InventoryScrollContainer
+@onready var inventory_grid = %InventoryGrid
+
 @onready var ingredients_button = %IngredientsButton
-@onready var ingredients_container = %IngredientsContainer
+@onready var ingredients_scroll_container = %IngredientsScrollContainer
 @onready var ingredients_grid = %IngredientsGrid
 @onready var active_tab_label = %ActiveTabLabel
+
 @onready var detailed_name = %Name
 @onready var icon = %Icon
+@onready var stats = %Stats
 @onready var combat_label = %CombatLabel
 @onready var utility_label = %UtilityLabel
 @onready var whimsy_label = %WhimsyLabel
 @onready var details = %Details
 
 var ingredient_icon = preload("res://ui/ingredient_icon.tscn")
+var inventory_icon = preload("res://ui/inventory_icon.tscn")
 
 func _ready():
 	hide()
@@ -24,12 +31,13 @@ func _input(event):
 		else:
 			show()
 			World.active_player.state_machine.state = "ui"
-			spawn_ingredient_icons()
+			inventory_button_pressed()
 
 func ingredients_button_pressed():
-	active_tab_label.text = "Ingredients"
+	reset()
+	active_tab_label.text = "Ingredients Encyclopedia"
 	spawn_ingredient_icons()
-	ingredients_container.show()
+	ingredients_scroll_container.show()
 
 func spawn_ingredient_icons():
 	for i in ingredients_grid.get_children():
@@ -63,3 +71,49 @@ func ingredient_icon_pressed(ingredient):
 		icon.texture = i["icon"]
 		icon.modulate = Color.BLACK
 		details.text = ""
+	
+	stats.show()
+
+func reset():
+	ingredients_scroll_container.hide()
+	inventory_scroll_container.hide()
+	detailed_name.text = "[center]Click an item to inspect[/center]"
+	icon.texture = null
+	icon.modulate = Color.WHITE
+	stats.hide()
+	combat_label.text = "?"
+	utility_label.text = "?"
+	whimsy_label.text = "?"
+	details.text = ""
+
+func inventory_button_pressed():
+	reset()
+	active_tab_label.text = "Inventory"
+	spawn_inventory()
+	inventory_scroll_container.show()
+
+func spawn_inventory():
+	for i in inventory_grid.get_children():
+		i.free()
+	var inventory = World.active_player.inventory.get_children()
+	for i in inventory:
+		var existing = null
+		for e in inventory_grid.get_children():
+			if e.item == i.item:
+				existing = e
+		
+		if existing != null:
+			existing.stack += 1
+			existing.populate()
+		else:
+			var new_icon = inventory_icon.instantiate()
+			new_icon.type = i.type
+			new_icon.item = i.item
+			inventory_grid.add_child(new_icon)
+			new_icon.populate()
+			new_icon.pressed.connect(inventory_icon_pressed.bind(new_icon))
+
+func inventory_icon_pressed(new_icon):
+	match new_icon.type:
+		"ingredient":
+			ingredient_icon_pressed(new_icon.item)

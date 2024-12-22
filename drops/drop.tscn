@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://03yuses2lmgk"]
+
+[ext_resource type="Script" path="res://drops/drop.gd" id="1_bsuv5"]
+[ext_resource type="Texture2D" uid="uid://d3ocb3kp057de" path="res://assets/ingredients/amber.png" id="1_thuam"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dulp4"]
+radius = 34.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vat53"]
+radius = 7.0
+
+[node name="Drop" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_bsuv5")
+state = "idle"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_thuam")
+
+[node name="MoveArea" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MoveArea"]
+shape = SubResource("CircleShape2D_dulp4")
+
+[node name="PickupArea" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("CircleShape2D_vat53")
+
+[connection signal="body_entered" from="MoveArea" to="." method="move_area_body_entered"]
+[connection signal="body_entered" from="PickupArea" to="." method="pickup_area_body_entered"]

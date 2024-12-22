@@ -1,9 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://crlhmm08kmt4a"]
+[gd_scene load_steps=26 format=3 uid="uid://crlhmm08kmt4a"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_kn8up"]
 [ext_resource type="Texture2D" uid="uid://cq6g5k2e5spnx" path="res://assets/spritesheets/player_temp.png" id="1_u1kki"]
 [ext_resource type="Script" path="res://player/player_state_machine.gd" id="3_lmojj"]
 [ext_resource type="Script" path="res://player/state_default.gd" id="4_wm8sj"]
+[ext_resource type="Script" path="res://player/inventory.gd" id="5_btu3x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xy3kx"]
 atlas = ExtResource("1_u1kki")
@@ -155,12 +156,16 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wwjwy"]
 size = Vector2(9, 7)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_87mut"]
+radius = 29.0689
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 3
 script = ExtResource("1_kn8up")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_kmcw0")
 animation = &"stand"
 
@@ -168,7 +173,7 @@ animation = &"stand"
 zoom = Vector2(3, 3)
 
 [node name="BodyCollider" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 10.5)
+position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_wwjwy")
 
 [node name="StateMachine" type="Node2D" parent="."]
@@ -181,3 +186,19 @@ script = ExtResource("4_wm8sj")
 
 [node name="ui" type="Node2D" parent="StateMachine"]
 process_mode = 4
+
+[node name="Inventory" type="Node2D" parent="."]
+script = ExtResource("5_btu3x")
+
+[node name="InteractArea" type="Area2D" parent="."]
+position = Vector2(0, -11)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("CircleShape2D_87mut")
+
+[connection signal="area_entered" from="InteractArea" to="." method="interact_area_area_entered"]
+[connection signal="area_exited" from="InteractArea" to="." method="interact_area_area_exited"]
+[connection signal="body_entered" from="InteractArea" to="." method="interact_area_body_entered"]
+[connection signal="body_exited" from="InteractArea" to="." method="interact_area_body_exited"]

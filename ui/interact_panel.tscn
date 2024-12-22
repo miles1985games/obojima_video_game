@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=3 uid="uid://bo6f15juuea0p"]
+
+[ext_resource type="Theme" uid="uid://d1t08nb7i4mnk" path="res://assets/themes/default_theme.tres" id="1_bex3a"]
+[ext_resource type="Script" path="res://ui/interact_panel.gd" id="2_sb56x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g55jy"]
+bg_color = Color(0.92549, 0.905882, 0.866667, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.47451, 0.294118, 0.215686, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 15.0
+expand_margin_top = 15.0
+expand_margin_right = 15.0
+expand_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w1502"]
+bg_color = Color(0.92549, 0.905882, 0.866667, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.47451, 0.294118, 0.215686, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_si886"]
+bg_color = Color(0.772219, 0.724347, 0.628551, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.47451, 0.294118, 0.215686, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[node name="InteractPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(400, 50)
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = ExtResource("1_bex3a")
+theme_override_styles/panel = SubResource("StyleBoxFlat_g55jy")
+script = ExtResource("2_sb56x")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 30
+text = "You have interacted with something."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_w1502")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_w1502")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w1502")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_si886")
+theme_override_styles/normal = SubResource("StyleBoxFlat_w1502")
+text = "X"
+icon_alignment = 1
+
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_button_pressed"]

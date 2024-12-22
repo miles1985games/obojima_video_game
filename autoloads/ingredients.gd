@@ -8,8 +8,8 @@ var ingredients_roster: Dictionary = {
 		"utility" = 5,
 		"whimsy" = 4,
 		"description" = "This chunk of petrified tree sap is prized for its color and gem-like luster and is often used in jewelry. Somearcane jewelers claim that it has special properties, especially if an ancient insect is trapped within it. Amber can be found in rocky areas where petrifi ed wood is found, and it has been known to wash up on certain beaches.",
-		"discovered" = true,
-		"stats_discovered" = true,
+		"discovered" = false,
+		"stats_discovered" = false,
 	},
 	"apper_carrot" = {
 		"name" = "Apper Carrot",
@@ -28,7 +28,7 @@ var ingredients_roster: Dictionary = {
 		"utility" = 3,
 		"whimsy" = 3,
 		"description" = "Used in everything from building material to drinking vessels and musical instruments, bamboo is perhaps the most versatile material on the island. Patches of bamboo can be found in most places on Obojima, however there are a few bamboo forests in the foothills and mountainous regions where it can grow as thick as a tree.",
-		"discovered" = true,
+		"discovered" = false,
 		"stats_discovered" = false,
 	},
 }

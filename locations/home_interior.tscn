@@ -1,10 +1,13 @@
-[gd_scene load_steps=17 format=4 uid="uid://c4bl72owsiskt"]
+[gd_scene load_steps=21 format=4 uid="uid://c4bl72owsiskt"]
 
 [ext_resource type="Texture2D" uid="uid://dsltri33fclsj" path="res://assets/tilesets/home_interior/Floors.png" id="1_5ks5s"]
 [ext_resource type="Script" path="res://locations/home_interior.gd" id="1_mh43u"]
 [ext_resource type="Texture2D" uid="uid://utlt0o61c36d" path="res://assets/tilesets/home_interior/All Walls.png" id="2_l1yru"]
 [ext_resource type="Texture2D" uid="uid://boyn2btdnqpc5" path="res://assets/tilesets/home_interior/Exterior Border.png" id="3_eajhy"]
 [ext_resource type="Texture2D" uid="uid://c8kkyfya45cy6" path="res://assets/tilesets/home_interior/All Items.png" id="4_f7dej"]
+[ext_resource type="Texture2D" uid="uid://ce26enkjvv5cv" path="res://assets/objects/tv.png" id="6_85onl"]
+[ext_resource type="Script" path="res://interactables/class_interactable.gd" id="6_rve81"]
+[ext_resource type="PackedScene" uid="uid://cbh7cykbfuxbt" path="res://interactables/cauldron.tscn" id="8_3sa6h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_idln8"]
 texture = ExtResource("1_5ks5s")
@@ -422,6 +425,9 @@ sources/3 = SubResource("TileSetAtlasSource_c3rhy")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8mfb7"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eb0nb"]
+size = Vector2(25, 25)
+
 [node name="HomeInterior" type="Node2D" node_paths=PackedStringArray("spawn_point")]
 script = ExtResource("1_mh43u")
 spawn_point = NodePath("SpawnPoint")
@@ -450,5 +456,21 @@ position = Vector2(0, 27)
 shape = SubResource("RectangleShape2D_8mfb7")
 
 [node name="SpawnPoint" type="Node2D" parent="."]
+
+[node name="TV" type="StaticBody2D" parent="."]
+position = Vector2(-75, -83)
+collision_layer = 2
+script = ExtResource("6_rve81")
+interact_text = "You have no VHS tapes."
+
+[node name="Sprite2D" type="Sprite2D" parent="TV"]
+texture_filter = 1
+texture = ExtResource("6_85onl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TV"]
+position = Vector2(-0.5, 1.5)
+shape = SubResource("RectangleShape2D_eb0nb")
+
+[node name="Caudron" parent="." instance=ExtResource("8_3sa6h")]
 
 [connection signal="body_entered" from="ExitDoorway" to="." method="exit_doorway_body_entered"]
