@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://bpu1kb6lm03gv"]
+
+[ext_resource type="Texture2D" uid="uid://b0727h3gsogcg" path="res://assets/ui/question_mark.png" id="1_4y3vg"]
+[ext_resource type="Script" path="res://ui/ingredient_icon.gd" id="3_f0rv0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4go7"]
+bg_color = Color(0.92549, 0.905882, 0.866667, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.717647, 0.454902, 0.337255, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jydp7"]
+bg_color = Color(0.92549, 0.905882, 0.866667, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.717097, 0.454524, 0.33829, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3630o"]
+bg_color = Color(0.858366, 0.823069, 0.752506, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.447059, 0.262745, 0.180392, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1y1j6"]
+bg_color = Color(0.92549, 0.905882, 0.866667, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.447059, 0.262745, 0.180392, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[node name="IngredientIcon" type="Button"]
+custom_minimum_size = Vector2(75, 75)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_d4go7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_jydp7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jydp7")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_jydp7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3630o")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_jydp7")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1y1j6")
+icon = ExtResource("1_4y3vg")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("3_f0rv0")

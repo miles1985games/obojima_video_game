@@ -1,10 +1,10 @@
 [gd_scene load_steps=16 format=4 uid="uid://cbhaf8txxy8n8"]
 
+[ext_resource type="Script" path="res://locations/town.gd" id="1_5mw8g"]
 [ext_resource type="Texture2D" uid="uid://bftayvr7hhear" path="res://assets/backgrounds/mt_arbora_blurred.png" id="1_06ajf"]
 [ext_resource type="Texture2D" uid="uid://w86a5cdnj1xa" path="res://assets/tilesets/ground_tileset.png" id="1_gurf3"]
 [ext_resource type="Texture2D" uid="uid://bp8x67kq3gqqn" path="res://assets/tilesets/foliage_tileset.png" id="2_8lxdc"]
 [ext_resource type="Texture2D" uid="uid://bm3htxig70j5j" path="res://assets/environment/cloud_1.png" id="2_f1asc"]
-[ext_resource type="PackedScene" uid="uid://crlhmm08kmt4a" path="res://player/player.tscn" id="3_4drkc"]
 [ext_resource type="PackedScene" uid="uid://bl0c4cg1xigdj" path="res://buildings/home_exterior.tscn" id="6_rsxtp"]
 
 [sub_resource type="Curve" id="Curve_3vo7b"]
@@ -581,7 +581,10 @@ texture = ExtResource("2_8lxdc")
 physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_34y0k")
 
-[node name="Town" type="Node2D"]
+[node name="Town" type="Node2D" node_paths=PackedStringArray("spawn_point")]
+script = ExtResource("1_5mw8g")
+spawn_point = NodePath("HomeExterior/SpawnPoint")
+location_id = "town"
 
 [node name="Environment" type="Node2D" parent="."]
 
@@ -616,4 +619,5 @@ tile_set = SubResource("TileSet_xguy7")
 [node name="HomeExterior" parent="." instance=ExtResource("6_rsxtp")]
 position = Vector2(-32, -79)
 
-[node name="Player" parent="." instance=ExtResource("3_4drkc")]
+[node name="SpawnPoint" type="Node2D" parent="HomeExterior"]
+position = Vector2(33, 81)

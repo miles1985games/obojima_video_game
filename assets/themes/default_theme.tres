@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://d1t08nb7i4mnk"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://d1t08nb7i4mnk"]
 
-[ext_resource type="FontFile" uid="uid://wb7t5kwvgpkd" path="res://assets/fonts/Sneakers Pro Medium.ttf" id="1_iu2x8"]
+[ext_resource type="FontFile" uid="uid://wb7t5kwvgpkd" path="res://assets/fonts/Sneakers Pro Medium.ttf" id="1_rkcq2"]
+[ext_resource type="FontFile" uid="uid://dwwcpxqwxeoth" path="res://assets/fonts/rogliano.otf" id="2_gi0ta"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcycd"]
 bg_color = Color(0.92549, 0.905882, 0.866667, 0.372549)
@@ -72,6 +73,41 @@ corner_radius_bottom_left = 5
 expand_margin_top = 10.0
 expand_margin_bottom = 10.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gau00"]
+bg_color = Color(0.92549, 0.905882, 0.866667, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.447059, 0.262745, 0.180392, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6a2bi"]
+bg_color = Color(0.862745, 0.847059, 0.811765, 1)
+border_color = Color(0.486275, 0.321569, 0.243137, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_klqjj"]
+bg_color = Color(0.917647, 0.901961, 0.862745, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0.917647, 0.901961, 0.862745, 1)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8tw7g"]
+bg_color = Color(0.457895, 0.284996, 0.188049, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.458824, 0.286275, 0.188235, 1)
+
 [resource]
 Button/colors/font_color = Color(0.45098, 0.262745, 0.180392, 1)
 Button/colors/font_disabled_color = Color(0.45098, 0.262745, 0.180392, 1)
@@ -79,9 +115,17 @@ Button/colors/font_focus_color = Color(0.45098, 0.262745, 0.180392, 1)
 Button/colors/font_hover_color = Color(0.45098, 0.262745, 0.180392, 1)
 Button/colors/font_pressed_color = Color(0.45098, 0.262745, 0.180392, 1)
 Button/colors/icon_focus_color = Color(0.45098, 0.262745, 0.180392, 1)
-Button/fonts/font = ExtResource("1_iu2x8")
+Button/fonts/font = ExtResource("1_rkcq2")
 Button/styles/disabled = SubResource("StyleBoxFlat_tcycd")
 Button/styles/focus = SubResource("StyleBoxFlat_jhg6r")
 Button/styles/hover = SubResource("StyleBoxFlat_rxigt")
 Button/styles/normal = SubResource("StyleBoxFlat_wfj2f")
 Button/styles/pressed = SubResource("StyleBoxFlat_ws4nr")
+Label/colors/font_color = Color(0.179263, 0.12251, 0.0915497, 1)
+Label/fonts/font = ExtResource("2_gi0ta")
+Panel/styles/panel = SubResource("StyleBoxFlat_gau00")
+RichTextLabel/colors/default_color = Color(0.52549, 0.372549, 0.294118, 1)
+RichTextLabel/fonts/normal_font = ExtResource("1_rkcq2")
+ScrollContainer/styles/panel = SubResource("StyleBoxFlat_6a2bi")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_klqjj")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_8tw7g")
