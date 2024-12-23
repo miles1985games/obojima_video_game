@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://ctc405b6xqaws"]
+[gd_scene load_steps=54 format=3 uid="uid://ctc405b6xqaws"]
 
 [ext_resource type="Script" path="res://mains/game.gd" id="1_me1qu"]
 [ext_resource type="PackedScene" uid="uid://cbhaf8txxy8n8" path="res://locations/town.tscn" id="2_wtwuq"]
@@ -107,6 +107,20 @@ _data = {
 "fade_to_black": SubResource("Animation_kkxkl")
 }
 
+[sub_resource type="Animation" id="Animation_go4h5"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArrowSprite:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
 [sub_resource type="Animation" id="Animation_dgtae"]
 resource_name = "bounce"
 loop_mode = 1
@@ -120,20 +134,6 @@ tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0.0333333, 0.5, 0.966667)
-}
-
-[sub_resource type="Animation" id="Animation_go4h5"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ArrowSprite:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rwj84"]
@@ -186,6 +186,28 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wqtng"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kivn3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_736y7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_62ep7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0amdi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_33bbn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3y4wq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4duxk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ypdxt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eduvy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3lp73"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_vjb28"]
 color = Color(0.52549, 0.372549, 0.294118, 0.47451)
@@ -540,6 +562,7 @@ mouse_filter = 2
 alignment = 2
 
 [node name="PotionUI" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("15_8c8tt")
 
 [node name="MarginContainer" type="MarginContainer" parent="PotionUI"]
@@ -593,6 +616,7 @@ theme_override_constants/margin_bottom = 15
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="Label" type="Label" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -645,6 +669,7 @@ theme_override_constants/separation = 25
 alignment = 1
 
 [node name="ChosenIngredient1" type="PanelContainer" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.74902)
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
@@ -659,7 +684,31 @@ texture = ExtResource("7_in5lr")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="RemoveButton" type="Button" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer/ChosenIngredient1"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 0)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(1, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wqtng")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_kivn3")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_736y7")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_62ep7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_0amdi")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_33bbn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3y4wq")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_4duxk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ypdxt")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_eduvy")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3lp73")
+text = "X"
+
 [node name="ChosenIngredient2" type="PanelContainer" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.74902)
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
@@ -674,7 +723,31 @@ texture = ExtResource("7_in5lr")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="RemoveButton" type="Button" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer/ChosenIngredient2"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 0)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(1, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wqtng")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_kivn3")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_736y7")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_62ep7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_0amdi")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_33bbn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3y4wq")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_4duxk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ypdxt")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_eduvy")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3lp73")
+text = "X"
+
 [node name="ChosenIngredient3" type="PanelContainer" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.74902)
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
@@ -688,6 +761,35 @@ layout_mode = 2
 texture = ExtResource("7_in5lr")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="RemoveButton" type="Button" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer/ChosenIngredient3"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 0)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(1, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 0)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wqtng")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_kivn3")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_736y7")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_62ep7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_0amdi")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_33bbn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3y4wq")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_4duxk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ypdxt")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_eduvy")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3lp73")
+text = "X"
 
 [node name="HSeparator" type="HSeparator" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
@@ -712,7 +814,17 @@ text = "[center]Result:[/center]"
 fit_content = true
 
 [node name="ResultIcon" type="TextureRect" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+stretch_mode = 3
+
+[node name="PotionNameLabel" type="Label" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("6_gcd55")
+text = "No Potion"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CloseButton" type="Button" parent="PotionUI/MarginContainer/MarginContainer"]
 layout_mode = 2
