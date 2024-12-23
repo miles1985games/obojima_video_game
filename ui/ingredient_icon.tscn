@@ -14,8 +14,6 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
-expand_margin_top = 10.0
-expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jydp7"]
 bg_color = Color(0.92549, 0.905882, 0.866667, 1)
@@ -28,8 +26,6 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
-expand_margin_top = 10.0
-expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3630o"]
 bg_color = Color(0.858366, 0.823069, 0.752506, 1)
@@ -42,8 +38,6 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
-expand_margin_top = 10.0
-expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1y1j6"]
 bg_color = Color(0.92549, 0.905882, 0.866667, 1)
@@ -56,8 +50,6 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
-expand_margin_top = 10.0
-expand_margin_bottom = 10.0
 
 [node name="IngredientIcon" type="Button"]
 custom_minimum_size = Vector2(75, 75)

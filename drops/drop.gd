@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Drop
 
 @export var type: String
+@export var subtype: String
 @export var item: String
 
 var current_speed: float = 0.0
@@ -29,5 +30,5 @@ func move_area_body_entered(body):
 
 func pickup_area_body_entered(body):
 	if body is Player:
-		body.inventory.add_to_inventory(type, item, 1)
+		body.inventory.add_to_inventory(type, subtype, item, 1)
 		queue_free()

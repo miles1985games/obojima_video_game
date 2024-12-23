@@ -6,16 +6,22 @@ extends CanvasLayer
 @onready var chosen_ingredient_3 = %ChosenIngredient3
 @onready var potion_name_label = %PotionNameLabel
 @onready var result_icon = %ResultIcon
+@onready var brew_button: Button = %BrewButton
 
 var inventory_icon = preload("res://ui/inventory_icon.tscn")
 var default_ingredient_icon = preload("res://assets/ui/ingredients_icon.png")
 
 @onready var chosen_panels: Array = [chosen_ingredient_1, chosen_ingredient_2, chosen_ingredient_3]
 var chosen_ingredients = []
+var calculated_potion: Dictionary = {"type": null, "id": null, "name": null}
+
+signal potion_brewed
 
 func _ready():
 	World.potion_ui = self
 	
+	await get_tree().create_timer(.5).timeout
+	potion_brewed.connect(World.active_player.inventory.add_to_inventory)
 	for panel in chosen_panels:
 		panel.get_child(1).pressed.connect(remove_button_pressed.bind(panel))
 
@@ -50,17 +56,9 @@ func ingredient_pressed(ingredient):
 		if i.has_meta("ingredient"):
 			pass
 		else:
-			var current_amount = 0
-			var corresponding_icon
-			for c in chosen_ingredients:
-				if c == ingredient:
-					current_amount += 1
-
-			for icon in grid.get_children():
-				if icon.item == ingredient:
-					corresponding_icon = icon
-			
-			if corresponding_icon.stack >= current_amount + 1:
+			if chosen_ingredients.has(ingredient):
+				pass
+			else:
 				i.set_meta("ingredient", ingredient)
 				chosen_ingredients.append(ingredient)
 				break
@@ -77,13 +75,15 @@ func remove_button_pressed(panel):
 	update_chosen_ingredients()
 
 func update_chosen_ingredients():
+	calculated_potion["type"] = "none"
 	for i in chosen_panels:
 		if i.has_meta("ingredient"):
 			var ingredient = i.get_meta("ingredient")
 			i.get_child(0).texture = Ingredients.ingredients_roster[ingredient]["icon"]
 		else:
 			i.get_child(0).texture = default_ingredient_icon
-	calculate_recipe()
+	if chosen_ingredients.size() >= 3:
+		calculate_recipe()
 
 func show_remove_button(panel):
 	panel.get_child(1).show()
@@ -114,13 +114,34 @@ func calculate_recipe():
 		type = "whimsy"
 		highest_number = total_whimsy
 	
+	highest_number = str(highest_number)
 	if total_combat + total_utility + total_whimsy == 0:
 		potion_name_label.text = "No Potion"
 	else:
 		potion_name_label.text = "Unknown " + type + " potion"
 		if Potions.potions_roster.keys().has(type):
-			if Potions.potions_roster[type].keys().has(str(highest_number)):
-				result_icon.texture = Potions.potions_roster[type][str(highest_number)]["icon"]
-				print(Potions.potions_roster[type][str(highest_number)]["name"])
-				if Potions.potions_roster[type][str(highest_number)]["discovered"] == false:
+			if Potions.potions_roster[type].keys().has(highest_number):
+				result_icon.texture = Potions.potions_roster[type][highest_number]["icon"]
+				
+				calculated_potion["type"] = type
+				calculated_potion["id"] = highest_number
+				calculated_potion["name"] = Potions.potions_roster[type][highest_number]["name"]
+				
+				print(Potions.potions_roster[type][highest_number]["name"])
+				if Potions.potions_roster[type][highest_number]["discovered"] == false:
 					result_icon.modulate = Color.BLACK
+
+func brew_button_pressed() -> void:
+	if calculated_potion["type"] != null:
+		brew_potion(calculated_potion)
+
+func brew_potion(potion_dict):
+	potion_brewed.emit("potion", potion_dict["type"], potion_dict["id"], 1)
+	if Potions.potions_roster[potion_dict["type"]][potion_dict["id"]]["discovered"] == false:
+		Potions.potions_roster[potion_dict["type"]][potion_dict["id"]]["discovered"] = true
+		result_icon.modulate = Color.WHITE
+		chosen_ingredients.clear()
+		for i in chosen_panels:
+			if i.has_meta("ingredient"):
+				i.remove_meta("ingredient")
+	

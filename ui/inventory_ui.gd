@@ -7,8 +7,12 @@ extends CanvasLayer
 @onready var ingredients_button = %IngredientsButton
 @onready var ingredients_scroll_container = %IngredientsScrollContainer
 @onready var ingredients_grid = %IngredientsGrid
-@onready var active_tab_label = %ActiveTabLabel
 
+@onready var potions_button: Button = %PotionsButton
+@onready var potions_scroll_container: ScrollContainer = %PotionsScrollContainer
+@onready var potions_grid: GridContainer = %PotionsGrid
+
+@onready var active_tab_label = %ActiveTabLabel
 @onready var detailed_name = %Name
 @onready var icon = %Icon
 @onready var stats = %Stats
@@ -19,6 +23,7 @@ extends CanvasLayer
 
 var ingredient_icon = preload("res://ui/ingredient_icon.tscn")
 var inventory_icon = preload("res://ui/inventory_icon.tscn")
+var potion_icon = preload("res://ui/potion_icon.tscn")
 
 func _ready():
 	hide()
@@ -77,6 +82,7 @@ func ingredient_icon_pressed(ingredient):
 func reset():
 	ingredients_scroll_container.hide()
 	inventory_scroll_container.hide()
+	potions_scroll_container.hide()
 	detailed_name.text = "[center]Click an item to inspect[/center]"
 	icon.texture = null
 	icon.modulate = Color.WHITE
@@ -108,6 +114,8 @@ func spawn_inventory():
 		else:
 			var new_icon = inventory_icon.instantiate()
 			new_icon.type = i.type
+			if i.subtype != null:
+				new_icon.subtype = i.subtype
 			new_icon.item = i.item
 			inventory_grid.add_child(new_icon)
 			new_icon.populate()
@@ -117,3 +125,38 @@ func inventory_icon_pressed(new_icon):
 	match new_icon.type:
 		"ingredient":
 			ingredient_icon_pressed(new_icon.item)
+
+func potions_button_pressed() -> void:
+	reset()
+	active_tab_label.text = "Potions Encyclopedia"
+	spawn_potions()
+	potions_scroll_container.show()
+
+func spawn_potions():
+	for i in potions_grid.get_children():
+		i.free()
+	
+	for potion_type in Potions.potions_roster.keys():
+		for potion_id in Potions.potions_roster[potion_type].keys():
+			var new_icon = potion_icon.instantiate()
+			potions_grid.add_child(new_icon)
+			
+			new_icon.type = potion_type
+			new_icon.id = potion_id
+			new_icon.populate()
+			
+			new_icon.pressed.connect(potion_icon_pressed.bind(new_icon.type, new_icon.id))
+
+func potion_icon_pressed(type, id):
+	stats.hide()
+	var potion = Potions.potions_roster[type][id]
+	if potion["discovered"] == true:
+		detailed_name.text = str("[center]") + potion["name"] + str("[/center]")
+		icon.texture = potion["icon"]
+		icon.modulate = Color.WHITE
+		details.text = potion["description"]
+	else:
+		detailed_name.text = "[center]Unknown Potion[/center]"
+		icon.texture = potion["icon"]
+		icon.modulate = Color.BLACK
+		details.text = ""

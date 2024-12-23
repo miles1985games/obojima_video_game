@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://ctc405b6xqaws"]
+[gd_scene load_steps=55 format=3 uid="uid://ctc405b6xqaws"]
 
 [ext_resource type="Script" path="res://mains/game.gd" id="1_me1qu"]
 [ext_resource type="PackedScene" uid="uid://cbhaf8txxy8n8" path="res://locations/town.tscn" id="2_wtwuq"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://d3ocb3kp057de" path="res://assets/ingredients/amber.png" id="9_adc2n"]
 [ext_resource type="PackedScene" uid="uid://03yuses2lmgk" path="res://drops/drop.tscn" id="11_2wh48"]
 [ext_resource type="Script" path="res://ui/alert_ui.gd" id="12_4damj"]
+[ext_resource type="Texture2D" uid="uid://bvybucxlse52j" path="res://assets/ui/potions_icon.png" id="12_sslvd"]
 [ext_resource type="Script" path="res://ui/potion_ui.gd" id="15_8c8tt"]
 [ext_resource type="FontFile" uid="uid://wb7t5kwvgpkd" path="res://assets/fonts/Sneakers Pro Medium.ttf" id="16_8w25p"]
 
@@ -292,7 +293,6 @@ position = Vector2(-1235, -1455)
 [node name="Player" parent="." instance=ExtResource("5_hbtvp")]
 
 [node name="InventoryUI" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("6_f00rt")
 
 [node name="MarginContainer" type="MarginContainer" parent="InventoryUI"]
@@ -373,6 +373,20 @@ icon = ExtResource("7_in5lr")
 icon_alignment = 1
 expand_icon = true
 
+[node name="PotionsButton" type="Button" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
+icon = ExtResource("12_sslvd")
+icon_alignment = 1
+expand_icon = true
+
 [node name="ActiveTabLabel" type="RichTextLabel" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 texture_filter = 2
@@ -395,7 +409,6 @@ theme_override_constants/margin_bottom = 30
 
 [node name="InventoryScrollContainer" type="ScrollContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
-clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("6_gcd55")
@@ -413,7 +426,6 @@ columns = 5
 [node name="IngredientsScrollContainer" type="ScrollContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 visible = false
-clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("6_gcd55")
@@ -421,6 +433,24 @@ horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
 [node name="IngredientsGrid" type="GridContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/IngredientsScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 50
+columns = 5
+
+[node name="PotionsScrollContainer" type="ScrollContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("6_gcd55")
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="PotionsGrid" type="GridContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/PotionsScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -443,7 +473,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/separation = 60
-alignment = 2
+alignment = 1
 
 [node name="Name" type="RichTextLabel" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/DetailedView"]
 unique_name_in_owner = true
@@ -458,6 +488,7 @@ fit_content = true
 [node name="Icon" type="TextureRect" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/DetailedView"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 3
 mouse_filter = 2
 texture = ExtResource("9_adc2n")
 expand_mode = 1
@@ -467,6 +498,7 @@ stretch_mode = 3
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+size_flags_vertical = 10
 mouse_filter = 2
 alignment = 1
 
@@ -510,6 +542,7 @@ vertical_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_vertical = 10
 theme = ExtResource("6_gcd55")
 text = "This chunk of petrified tree sap is prized for its color and gem-like luster and is often used in jewelry. Some arcane jewelers claim that it has special properties, especially if an ancient insect is trapped within it. Amber can be found in rocky areas where petrifi ed wood is found, and it has been known to wash up on certain beaches."
 autowrap_mode = 2
@@ -622,7 +655,7 @@ theme_override_constants/separation = 20
 layout_mode = 2
 theme = ExtResource("6_gcd55")
 theme_override_font_sizes/font_size = 25
-text = "Ingredients"
+text = "Click ingredients to brew a potion!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -658,7 +691,7 @@ layout_mode = 2
 layout_mode = 2
 theme = ExtResource("6_gcd55")
 theme_override_font_sizes/font_size = 25
-text = "Click ingredients to mix a potion!"
+text = "Chosen Ingredients"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -798,6 +831,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_vjb28")
 [node name="VBoxContainer" type="VBoxContainer" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 20
 
 [node name="HSeparator" type="HSeparator" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
@@ -826,6 +860,14 @@ text = "No Potion"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="BrewButton" type="Button" parent="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 10
+theme = ExtResource("6_gcd55")
+theme_override_font_sizes/font_size = 30
+text = "BREW!"
+
 [node name="CloseButton" type="Button" parent="PotionUI/MarginContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -848,4 +890,6 @@ text = "X"
 
 [connection signal="pressed" from="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/InventoryButton" to="InventoryUI" method="inventory_button_pressed"]
 [connection signal="pressed" from="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/IngredientsButton" to="InventoryUI" method="ingredients_button_pressed"]
+[connection signal="pressed" from="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/PotionsButton" to="InventoryUI" method="potions_button_pressed"]
+[connection signal="pressed" from="PotionUI/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/BrewButton" to="PotionUI" method="brew_button_pressed"]
 [connection signal="pressed" from="PotionUI/MarginContainer/MarginContainer/CloseButton" to="PotionUI" method="close_button_pressed"]
