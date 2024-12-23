@@ -14,3 +14,7 @@ func start_demo():
 	
 	var new_game = game_scene.instantiate()
 	add_child(new_game)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("quick_quit"):
+		get_tree().quit()
