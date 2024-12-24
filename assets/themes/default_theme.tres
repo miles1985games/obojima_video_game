@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://d1t08nb7i4mnk"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://d1t08nb7i4mnk"]
 
 [ext_resource type="FontFile" uid="uid://wb7t5kwvgpkd" path="res://assets/fonts/Sneakers Pro Medium.ttf" id="1_rkcq2"]
 [ext_resource type="FontFile" uid="uid://dwwcpxqwxeoth" path="res://assets/fonts/rogliano.otf" id="2_gi0ta"]
@@ -32,6 +32,34 @@ expand_margin_top = 10.0
 expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rxigt"]
+bg_color = Color(0.870588, 0.835294, 0.792157, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.447059, 0.262745, 0.180392, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_60gqe"]
+bg_color = Color(0.870588, 0.835294, 0.792157, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.447059, 0.262745, 0.180392, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ob4bq"]
 bg_color = Color(0.870588, 0.835294, 0.792157, 1)
 border_width_left = 3
 border_width_top = 3
@@ -133,6 +161,8 @@ Button/fonts/font = ExtResource("1_rkcq2")
 Button/styles/disabled = SubResource("StyleBoxFlat_tcycd")
 Button/styles/focus = SubResource("StyleBoxFlat_jhg6r")
 Button/styles/hover = SubResource("StyleBoxFlat_rxigt")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_60gqe")
+Button/styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_ob4bq")
 Button/styles/normal = SubResource("StyleBoxFlat_wfj2f")
 Button/styles/pressed = SubResource("StyleBoxFlat_ws4nr")
 Label/colors/font_color = Color(0.179263, 0.12251, 0.0915497, 1)

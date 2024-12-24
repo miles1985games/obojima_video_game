@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://crlhmm08kmt4a"]
+[gd_scene load_steps=28 format=3 uid="uid://crlhmm08kmt4a"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_kn8up"]
 [ext_resource type="Texture2D" uid="uid://cq6g5k2e5spnx" path="res://assets/spritesheets/player_temp.png" id="1_u1kki"]
 [ext_resource type="Script" path="res://player/player_state_machine.gd" id="3_lmojj"]
 [ext_resource type="Script" path="res://player/state_default.gd" id="4_wm8sj"]
+[ext_resource type="Script" path="res://player/state_ui.gd" id="5_24m15"]
 [ext_resource type="Script" path="res://player/inventory.gd" id="5_btu3x"]
 [ext_resource type="PackedScene" uid="uid://cmex2chxqbkgo" path="res://ui/inventory_node.tscn" id="6_5quah"]
 
@@ -187,6 +188,7 @@ script = ExtResource("4_wm8sj")
 
 [node name="ui" type="Node2D" parent="StateMachine"]
 process_mode = 4
+script = ExtResource("5_24m15")
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("5_btu3x")

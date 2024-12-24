@@ -90,7 +90,11 @@ func update_chosen_ingredients():
 	for i in chosen_panels:
 		if i.has_meta("ingredient"):
 			var ingredient = i.get_meta("ingredient")
-			i.get_child(0).texture = Ingredients.ingredients_roster[ingredient]["icon"]
+			if i.get_child(0).texture == default_ingredient_icon:
+				i.get_child(0).texture = Ingredients.ingredients_roster[ingredient]["icon"]
+				World.tween_handler.bounce(i.get_child(0), 1, 1)
+			else:
+				i.get_child(0).texture = Ingredients.ingredients_roster[ingredient]["icon"]
 			i.get_child(0).modulate = Color.WHITE
 			animated_ingredients[index].texture = Ingredients.ingredients_roster[ingredient]["icon"]
 		else:

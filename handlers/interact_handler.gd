@@ -5,13 +5,16 @@ var targeted_interactable
 @onready var arrow = $Arrow
 
 signal interacted
+signal npc_interacted
 signal cauldron_interacted
 
 func _ready():
 	World.interact_handler = self
-	await get_tree().create_timer(.5).timeout
+	
+	await get_tree().create_timer(.1).timeout
 	interacted.connect(World.alert_ui.spawn_interact)
 	cauldron_interacted.connect(World.potion_ui.open)
+	npc_interacted.connect(World.alert_ui.interact_with_npc)
 
 func add_interactable(interactable):
 	in_range_interactables.append(interactable)
@@ -46,5 +49,7 @@ func _input(event):
 func interact():
 	if targeted_interactable is Cauldron:
 		cauldron_interacted.emit()
+	elif targeted_interactable is InteractableNPC:
+		npc_interacted.emit(targeted_interactable)
 	else:
 		interacted.emit(targeted_interactable.interact_text)

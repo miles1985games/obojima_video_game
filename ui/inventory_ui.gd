@@ -33,7 +33,7 @@ func _input(event):
 		if visible and World.active_player.state_machine.state == "ui": 
 			hide()
 			World.active_player.state_machine.state = "default"
-		else:
+		elif World.active_player.state_machine.state == "default":
 			show()
 			World.active_player.state_machine.state = "ui"
 			inventory_button_pressed()

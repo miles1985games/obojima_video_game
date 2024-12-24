@@ -9,6 +9,8 @@ var current_movespeed: float = 5000.0
 
 signal interactable_entered
 signal interactable_exited
+signal in_ui
+signal out_ui
 
 func _ready():
 	World.active_player = self

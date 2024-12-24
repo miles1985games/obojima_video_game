@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://ctc405b6xqaws"]
+[gd_scene load_steps=56 format=3 uid="uid://ctc405b6xqaws"]
 
 [ext_resource type="Script" path="res://mains/game.gd" id="1_me1qu"]
 [ext_resource type="PackedScene" uid="uid://cbhaf8txxy8n8" path="res://locations/town.tscn" id="2_wtwuq"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://ui/potion_ui.gd" id="15_8c8tt"]
 [ext_resource type="FontFile" uid="uid://wb7t5kwvgpkd" path="res://assets/fonts/Sneakers Pro Medium.ttf" id="16_8w25p"]
 [ext_resource type="Texture2D" uid="uid://crhjgapbgav6p" path="res://assets/backgrounds/potion_table.png" id="18_rledg"]
+[ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="19_bbuib"]
 
 [sub_resource type="Animation" id="Animation_mm8lr"]
 length = 0.001
@@ -172,6 +173,24 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="Gradient" id="Gradient_lp6jk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ud0o3"]
+noise_type = 4
+frequency = 0.1031
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f6hhs"]
+seamless = true
+seamless_blend_skirt = 0.82
+color_ramp = SubResource("Gradient_lp6jk")
+noise = SubResource("FastNoiseLite_ud0o3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nadhx"]
+shader = ExtResource("19_bbuib")
+shader_parameter/progress = 0.0
+shader_parameter/strength = 0.1
+shader_parameter/noise_tex_normal = SubResource("NoiseTexture2D_f6hhs")
+
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_uuu7i"]
 color = Color(0.52549, 0.372549, 0.294118, 1)
 grow_begin = -300.0
@@ -240,77 +259,6 @@ color = Color(0.52549, 0.372549, 0.294118, 1)
 grow_begin = 0.0
 grow_end = 0.0
 thickness = 5
-
-[sub_resource type="Animation" id="Animation_kxmxn"]
-resource_name = "ingredients_wiggling"
-length = 3.0
-loop_mode = 2
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedIngredient1:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(834, -0.25, 0, 0.25, 0, 858, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0.266667, 2.86667)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedIngredient1:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(291, -0.25, 0, 0.25, 0, 291, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 2.93333)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedIngredient2:position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(995, -0.25, 0, 0.25, 0, 995, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0.0666667, 2.9)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AnimatedIngredient2:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(357, -0.25, 0, 0.25, 0, 382, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0.2, 2.7)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AnimatedIngredient3:position:x")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(814, -0.25, 0, 0.25, 0, 844, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0.366667, 2.66667)
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("AnimatedIngredient3:position:y")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(443, -0.25, 0, 0.25, 0, 427, -0.25, 0, 0.25, 0, 443, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0.0666667, 1.43333, 2.8)
-}
 
 [sub_resource type="Animation" id="Animation_y4k85"]
 length = 0.001
@@ -515,6 +463,77 @@ tracks/5/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
 "points": PackedFloat32Array(316, -0.25, 0, 0.25, 0, 323, -0.25, 0, 0.25, 0, 375, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.866667, 1.5)
+}
+
+[sub_resource type="Animation" id="Animation_kxmxn"]
+resource_name = "ingredients_wiggling"
+length = 3.0
+loop_mode = 2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedIngredient1:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(834, -0.25, 0, 0.25, 0, 858, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.266667, 2.86667)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedIngredient1:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(291, -0.25, 0, 0.25, 0, 291, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.93333)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedIngredient2:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(995, -0.25, 0, 0.25, 0, 995, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.0666667, 2.9)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedIngredient2:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(357, -0.25, 0, 0.25, 0, 382, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.2, 2.7)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimatedIngredient3:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(814, -0.25, 0, 0.25, 0, 844, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.366667, 2.66667)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AnimatedIngredient3:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(443, -0.25, 0, 0.25, 0, 427, -0.25, 0, 0.25, 0, 443, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.0666667, 1.43333, 2.8)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qg5dg"]
@@ -871,6 +890,8 @@ visible = false
 script = ExtResource("15_8c8tt")
 
 [node name="BG" type="TextureRect" parent="PotionUI"]
+modulate = Color(1, 1, 1, 78.7607)
+material = SubResource("ShaderMaterial_nadhx")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1113,18 +1134,26 @@ text = "X"
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_vjb28")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 20
 
-[node name="HSeparator" type="HSeparator" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_rnt87")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("6_gcd55")
 theme_override_font_sizes/normal_font_size = 30
@@ -1132,13 +1161,13 @@ bbcode_enabled = true
 text = "[center]Result:[/center]"
 fit_content = true
 
-[node name="ResultIcon" type="TextureRect" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+[node name="ResultIcon" type="TextureRect" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("12_sslvd")
 stretch_mode = 3
 
-[node name="PotionNameLabel" type="Label" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+[node name="PotionNameLabel" type="Label" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("6_gcd55")
@@ -1146,7 +1175,7 @@ text = "No Potion"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BrewButton" type="Button" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+[node name="BrewButton" type="Button" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 10
@@ -1173,7 +1202,6 @@ offset_left = 927.0
 offset_top = 267.0
 offset_right = 1055.0
 offset_bottom = 395.0
-texture = ExtResource("9_adc2n")
 
 [node name="AnimatedIngredient2" type="TextureRect" parent="PotionUI"]
 unique_name_in_owner = true
@@ -1182,7 +1210,6 @@ offset_left = 886.0
 offset_top = 460.0
 offset_right = 1014.0
 offset_bottom = 588.0
-texture = ExtResource("9_adc2n")
 
 [node name="AnimatedIngredient3" type="TextureRect" parent="PotionUI"]
 unique_name_in_owner = true
@@ -1191,7 +1218,6 @@ offset_left = 822.0
 offset_top = 316.0
 offset_right = 950.0
 offset_bottom = 444.0
-texture = ExtResource("9_adc2n")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PotionUI"]
 libraries = {
@@ -1222,8 +1248,13 @@ size_flags_horizontal = 8
 mouse_filter = 2
 alignment = 2
 
+[node name="DialogueContainer" type="VBoxContainer" parent="AlertUI/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
 [connection signal="pressed" from="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/InventoryButton" to="InventoryUI" method="inventory_button_pressed"]
 [connection signal="pressed" from="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/IngredientsButton" to="InventoryUI" method="ingredients_button_pressed"]
 [connection signal="pressed" from="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/PotionsButton" to="InventoryUI" method="potions_button_pressed"]
-[connection signal="pressed" from="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/BrewButton" to="PotionUI" method="brew_button_pressed"]
+[connection signal="pressed" from="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/VBoxContainer/BrewButton" to="PotionUI" method="brew_button_pressed"]
 [connection signal="pressed" from="PotionUI/MarginContainer/CloseButton" to="PotionUI" method="close_button_pressed"]

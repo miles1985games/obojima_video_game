@@ -1,5 +1,7 @@
 extends Node2D
 
+func _process(delta):
+	owner.out_ui.emit()
 
 func _physics_process(delta):
 	var input = get_input()
