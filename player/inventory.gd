@@ -23,9 +23,15 @@ func add_to_inventory(type, subtype, item, amount):
 				Ingredients.ingredients_roster[item]["discovered"] = true
 				trigger_alert.emit((Ingredients.ingredients_roster[item]["name"] + " discovered!"), Ingredients.ingredients_roster[item]["icon"])
 
-func remove_from_inventory(type, subtype, item, amount):
-	for i in amount:
-		for c in get_children():
-			if c.type == type:
-				if item == item:
+func remove_from_inventory(type, subtype, item):
+	for c in get_children():
+		if c.type == type:
+			if subtype != null and c.subtype != null:
+				if c.subtype == subtype:
+					if c.item == item:
+						c.queue_free()
+						break
+			else:
+				if c.item == item:
 					c.queue_free()
+					break

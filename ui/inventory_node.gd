@@ -1,6 +1,6 @@
 extends Node2D
 class_name InventoryNode
 
-var type: String
-var subtype: String
-var item: String
+@export var type: String
+@export var subtype: String
+@export var item: String

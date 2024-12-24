@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://crlhmm08kmt4a"]
+[gd_scene load_steps=27 format=3 uid="uid://crlhmm08kmt4a"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_kn8up"]
 [ext_resource type="Texture2D" uid="uid://cq6g5k2e5spnx" path="res://assets/spritesheets/player_temp.png" id="1_u1kki"]
 [ext_resource type="Script" path="res://player/player_state_machine.gd" id="3_lmojj"]
 [ext_resource type="Script" path="res://player/state_default.gd" id="4_wm8sj"]
 [ext_resource type="Script" path="res://player/inventory.gd" id="5_btu3x"]
+[ext_resource type="PackedScene" uid="uid://cmex2chxqbkgo" path="res://ui/inventory_node.tscn" id="6_5quah"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xy3kx"]
 atlas = ExtResource("1_u1kki")
@@ -189,6 +190,42 @@ process_mode = 4
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("5_btu3x")
+
+[node name="InventoryNode" parent="Inventory" instance=ExtResource("6_5quah")]
+type = "ingredient"
+item = "amber"
+
+[node name="InventoryNode2" parent="Inventory" instance=ExtResource("6_5quah")]
+type = "ingredient"
+item = "amber"
+
+[node name="InventoryNode3" parent="Inventory" instance=ExtResource("6_5quah")]
+type = "ingredient"
+item = "amber"
+
+[node name="InventoryNode4" parent="Inventory" instance=ExtResource("6_5quah")]
+type = "ingredient"
+item = "apper_carrot"
+
+[node name="InventoryNode5" parent="Inventory" instance=ExtResource("6_5quah")]
+type = "ingredient"
+item = "apper_carrot"
+
+[node name="InventoryNode6" parent="Inventory" instance=ExtResource("6_5quah")]
+type = "ingredient"
+item = "apper_carrot"
+
+[node name="InventoryNode7" parent="Inventory" instance=ExtResource("6_5quah")]
+type = "ingredient"
+item = "bamboo"
+
+[node name="InventoryNode8" parent="Inventory" instance=ExtResource("6_5quah")]
+type = "ingredient"
+item = "bamboo"
+
+[node name="InventoryNode9" parent="Inventory" instance=ExtResource("6_5quah")]
+type = "ingredient"
+item = "bamboo"
 
 [node name="InteractArea" type="Area2D" parent="."]
 position = Vector2(0, -11)

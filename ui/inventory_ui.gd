@@ -125,6 +125,8 @@ func inventory_icon_pressed(new_icon):
 	match new_icon.type:
 		"ingredient":
 			ingredient_icon_pressed(new_icon.item)
+		"potion":
+			potion_icon_pressed(new_icon.subtype, new_icon.item)
 
 func potions_button_pressed() -> void:
 	reset()

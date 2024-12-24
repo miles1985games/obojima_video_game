@@ -10,18 +10,28 @@ extends CanvasLayer
 
 var inventory_icon = preload("res://ui/inventory_icon.tscn")
 var default_ingredient_icon = preload("res://assets/ui/ingredients_icon.png")
+var default_potion_icon = preload("res://assets/ui/potions_icon.png")
 
 @onready var chosen_panels: Array = [chosen_ingredient_1, chosen_ingredient_2, chosen_ingredient_3]
 var chosen_ingredients = []
 var calculated_potion: Dictionary = {"type": null, "id": null, "name": null}
 
+@onready var animated_ingredient_1 = %AnimatedIngredient1
+@onready var animated_ingredient_2 = %AnimatedIngredient2
+@onready var animated_ingredient_3 = %AnimatedIngredient3
+@onready var animated_ingredients = [animated_ingredient_1, animated_ingredient_2, animated_ingredient_3]
+
 signal potion_brewed
+signal potion_discovered
+signal ingredient_used
 
 func _ready():
 	World.potion_ui = self
 	
-	await get_tree().create_timer(.5).timeout
+	await get_tree().create_timer(.1).timeout
 	potion_brewed.connect(World.active_player.inventory.add_to_inventory)
+	potion_discovered.connect(World.alert_ui.spawn_alert)
+	ingredient_used.connect(World.active_player.inventory.remove_from_inventory)
 	for panel in chosen_panels:
 		panel.get_child(1).pressed.connect(remove_button_pressed.bind(panel))
 
@@ -76,14 +86,28 @@ func remove_button_pressed(panel):
 
 func update_chosen_ingredients():
 	calculated_potion["type"] = "none"
+	var index = 0
 	for i in chosen_panels:
 		if i.has_meta("ingredient"):
 			var ingredient = i.get_meta("ingredient")
 			i.get_child(0).texture = Ingredients.ingredients_roster[ingredient]["icon"]
+			i.get_child(0).modulate = Color.WHITE
+			animated_ingredients[index].texture = Ingredients.ingredients_roster[ingredient]["icon"]
 		else:
 			i.get_child(0).texture = default_ingredient_icon
+			i.get_child(0).modulate.a = Color.WHITE.a / 2
+			animated_ingredients[index].texture = null
+		index += 1
 	if chosen_ingredients.size() >= 3:
+		brew_button.disabled = false
 		calculate_recipe()
+	else:
+		clear_details()
+
+func clear_details():
+	potion_name_label.text = "No Potion"
+	result_icon.texture = default_potion_icon
+	brew_button.disabled = true
 
 func show_remove_button(panel):
 	panel.get_child(1).show()
@@ -127,21 +151,44 @@ func calculate_recipe():
 				calculated_potion["id"] = highest_number
 				calculated_potion["name"] = Potions.potions_roster[type][highest_number]["name"]
 				
-				print(Potions.potions_roster[type][highest_number]["name"])
 				if Potions.potions_roster[type][highest_number]["discovered"] == false:
 					result_icon.modulate = Color.BLACK
+				else:
+					potion_name_label.text = Potions.potions_roster[type][highest_number]["name"]
 
 func brew_button_pressed() -> void:
 	if calculated_potion["type"] != null:
+		for i in chosen_ingredients:
+			ingredient_used.emit("ingredient", null, i)
+		
 		brew_potion(calculated_potion)
+		World.tween_handler.bounce(result_icon, 2, .5)
+		await get_tree().create_timer(2).timeout
+		update_chosen_ingredients()
 
 func brew_potion(potion_dict):
 	potion_brewed.emit("potion", potion_dict["type"], potion_dict["id"], 1)
-	if Potions.potions_roster[potion_dict["type"]][potion_dict["id"]]["discovered"] == false:
-		Potions.potions_roster[potion_dict["type"]][potion_dict["id"]]["discovered"] = true
-		result_icon.modulate = Color.WHITE
-		chosen_ingredients.clear()
-		for i in chosen_panels:
-			if i.has_meta("ingredient"):
-				i.remove_meta("ingredient")
 	
+	var potion = Potions.potions_roster[potion_dict["type"]][potion_dict["id"]]
+	
+	for i in chosen_panels:
+		i.get_child(0).texture = default_ingredient_icon
+		i.get_child(0).modulate.a = Color.WHITE.a / 2
+	
+	if potion["discovered"] == false:
+		potion_discovered.emit((potion["name"] + " potion discovered!"), potion["icon"])
+		Potions.potions_roster[potion_dict["type"]][potion_dict["id"]]["discovered"] = true
+	for ingredient in chosen_ingredients:
+		if Ingredients.ingredients_roster[ingredient]["stats_discovered"] == false:
+			Ingredients.ingredients_roster[ingredient]["stats_discovered"] = true
+	
+	potion_name_label.text = potion["name"]
+	result_icon.modulate = Color.WHITE
+		
+	chosen_ingredients.clear()
+	for i in chosen_panels:
+		if i.has_meta("ingredient"):
+			i.remove_meta("ingredient")
+	
+	await get_tree().create_timer(.2).timeout
+	spawn_ingredients()

@@ -11,8 +11,8 @@ signal interactable_entered
 signal interactable_exited
 
 func _ready():
-	await get_tree().create_timer(.5).timeout
 	World.active_player = self
+	await get_tree().create_timer(.1).timeout
 	interactable_entered.connect(World.interact_handler.add_interactable)
 	interactable_exited.connect(World.interact_handler.remove_interactable)
 
