@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxqsdbkqejm56"]
+
+[ext_resource type="Script" path="res://npc/quest.gd" id="1_csisu"]
+[ext_resource type="Texture2D" uid="uid://b0727h3gsogcg" path="res://assets/ui/question_mark.png" id="2_5or6x"]
+
+[node name="Quest" type="Node2D"]
+script = ExtResource("1_csisu")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -63.0
+offset_right = 16.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5or6x")
+expand_mode = 1

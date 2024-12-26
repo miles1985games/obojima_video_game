@@ -52,7 +52,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="IngredientIcon" type="Button"]
-custom_minimum_size = Vector2(75, 75)
+custom_minimum_size = Vector2(50, 50)
 theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)

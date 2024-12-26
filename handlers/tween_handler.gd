@@ -18,3 +18,10 @@ func bounce(node, intensity, duration):
 	await new_tween_2.finished
 	
 	return true
+
+func fade_out(node, duration):
+	var new_tween = create_tween()
+	new_tween.tween_property(node, "modulate", Color.TRANSPARENT, duration)
+	await new_tween.finished
+	
+	return true

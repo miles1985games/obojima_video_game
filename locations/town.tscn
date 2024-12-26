@@ -1,43 +1,13 @@
-[gd_scene load_steps=47 format=4 uid="uid://cbhaf8txxy8n8"]
+[gd_scene load_steps=41 format=4 uid="uid://cbhaf8txxy8n8"]
 
 [ext_resource type="Script" path="res://locations/town.gd" id="1_5mw8g"]
 [ext_resource type="Texture2D" uid="uid://bftayvr7hhear" path="res://assets/backgrounds/mt_arbora_blurred.png" id="1_06ajf"]
 [ext_resource type="Texture2D" uid="uid://w86a5cdnj1xa" path="res://assets/tilesets/ground_tileset.png" id="1_gurf3"]
 [ext_resource type="Texture2D" uid="uid://bp8x67kq3gqqn" path="res://assets/tilesets/foliage_tileset.png" id="2_8lxdc"]
-[ext_resource type="Texture2D" uid="uid://bm3htxig70j5j" path="res://assets/environment/cloud_1.png" id="2_f1asc"]
 [ext_resource type="Script" path="res://interactables/class_interactable.gd" id="6_hqa5f"]
 [ext_resource type="PackedScene" uid="uid://bl0c4cg1xigdj" path="res://buildings/home_exterior.tscn" id="6_rsxtp"]
 [ext_resource type="Texture2D" uid="uid://dxm3vigmmayb2" path="res://assets/objects/mailbox.png" id="6_wr4s4"]
 [ext_resource type="PackedScene" uid="uid://btm3vuit4nshb" path="res://npc/npc.tscn" id="9_05vn2"]
-
-[sub_resource type="Curve" id="Curve_3vo7b"]
-_data = [Vector2(0, 0.948617), 0.0, 0.0, 0, 0]
-point_count = 1
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_jk175"]
-curve_x = SubResource("Curve_3vo7b")
-
-[sub_resource type="Curve" id="Curve_ol2nw"]
-_data = [Vector2(0.00422833, 0.244664), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_ll83m"]
-curve = SubResource("Curve_ol2nw")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vepts"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(50, 50, 1)
-spread = 180.0
-flatness = 1.0
-directional_velocity_min = 4.99998
-directional_velocity_max = 9.99998
-directional_velocity_curve = SubResource("CurveXYZTexture_jk175")
-gravity = Vector3(0, 0, 0)
-scale_curve = SubResource("CurveTexture_ll83m")
-turbulence_noise_strength = 1.71
-turbulence_noise_speed_random = 2.26
-turbulence_influence_max = 0.361
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5v43g"]
 vertices = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
@@ -796,15 +766,6 @@ offset_top = -526.0
 offset_right = 1741.0
 offset_bottom = -188.0
 texture = ExtResource("1_06ajf")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Environment/BG"]
-position = Vector2(-846, -375)
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_vepts")
-texture = ExtResource("2_f1asc")
-lifetime = 600.0
-preprocess = 600.0
-randomness = 0.66
 
 [node name="TilemapGround" type="TileMapLayer" parent="Environment"]
 texture_filter = 1

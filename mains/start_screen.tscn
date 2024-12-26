@@ -16,9 +16,10 @@ script = ExtResource("1_g64q6")
 [node name="BG" type="TextureRect" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_right = 1280.0
+offset_bottom = 720.0
 texture = ExtResource("1_so7lv")
+expand_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

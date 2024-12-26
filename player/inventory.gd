@@ -2,11 +2,13 @@ extends Node2D
 
 var inventory_node = preload("res://ui/inventory_node.tscn")
 
-signal trigger_alert
+signal ingredient_discovered
+signal potion_discovered
 
 func _ready():
 	await get_tree().create_timer(1).timeout
-	trigger_alert.connect(World.alert_ui.spawn_alert)
+	ingredient_discovered.connect(World.alert_ui.spawn_alert)
+	potion_discovered.connect(World.alert_ui.spawn_alert)
 
 func add_to_inventory(type, subtype, item, amount):
 	for i in amount:
@@ -21,7 +23,11 @@ func add_to_inventory(type, subtype, item, amount):
 		"ingredient":
 			if Ingredients.ingredients_roster[item]["discovered"] == false:
 				Ingredients.ingredients_roster[item]["discovered"] = true
-				trigger_alert.emit((Ingredients.ingredients_roster[item]["name"] + " discovered!"), Ingredients.ingredients_roster[item]["icon"])
+				ingredient_discovered.emit((Ingredients.ingredients_roster[item]["name"] + " discovered!"), Ingredients.ingredients_roster[item]["icon"])
+		"potion":
+			if Potions.potions_roster[subtype][item]["discovered"] == false:
+				Potions.potions_roster[subtype][item]["discovered"] = true
+				potion_discovered.emit((Potions.potions_roster[subtype][item]["name"] + " discovered!"), Potions.potions_roster[subtype][item]["icon"])
 
 func remove_from_inventory(type, subtype, item):
 	for c in get_children():
@@ -29,9 +35,9 @@ func remove_from_inventory(type, subtype, item):
 			if subtype != null and c.subtype != null:
 				if c.subtype == subtype:
 					if c.item == item:
-						c.queue_free()
+						c.free()
 						break
 			else:
 				if c.item == item:
-					c.queue_free()
+					c.free()
 					break

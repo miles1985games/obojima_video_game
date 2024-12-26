@@ -23,10 +23,23 @@ func spawn_interact(text):
 	new_panel.label.text = text
 
 func interact_with_npc(interactable):
-	if interactable.dialogue.is_empty():
-		spawn_interact(interactable.interact_text)
-	else:
+	if !interactable.quest_id.is_empty():
+		var quest: Node2D
+		for i in interactable.get_children():
+			if i is Quest:
+				quest = i
+		spawn_quest_dialogue(quest)
+	elif !interactable.dialogue.is_empty():
 		spawn_dialogue(interactable)
+	else:
+		spawn_interact(interactable.interact_text)
+
+func spawn_quest_dialogue(quest):
+	World.active_player.state_machine.state = "ui"
+	var new_panel = dialogue_panel.instantiate()
+	new_panel.quest = quest
+	dialogue_container.add_child(new_panel)
+	new_panel.dialogue_finished.connect(finish_dialogue)
 
 func spawn_dialogue(interactable_npc):
 	World.active_player.state_machine.state = "ui"

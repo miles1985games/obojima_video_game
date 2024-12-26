@@ -4,6 +4,11 @@ extends CanvasLayer
 @onready var inventory_scroll_container = %InventoryScrollContainer
 @onready var inventory_grid = %InventoryGrid
 
+@onready var goals_button: Button = %GoalsButton
+@onready var goals_scroll_container: ScrollContainer = %GoalsScrollContainer
+@onready var goals_grid: GridContainer = %GoalsGrid
+@onready var goals_notification: TextureRect = %GoalsNotification
+
 @onready var ingredients_button = %IngredientsButton
 @onready var ingredients_scroll_container = %IngredientsScrollContainer
 @onready var ingredients_grid = %IngredientsGrid
@@ -22,6 +27,7 @@ extends CanvasLayer
 @onready var details = %Details
 
 var ingredient_icon = preload("res://ui/ingredient_icon.tscn")
+var goal_icon = preload("res://ui/goal_icon.tscn")
 var inventory_icon = preload("res://ui/inventory_icon.tscn")
 var potion_icon = preload("res://ui/potion_icon.tscn")
 
@@ -81,8 +87,10 @@ func ingredient_icon_pressed(ingredient):
 
 func reset():
 	ingredients_scroll_container.hide()
+	goals_scroll_container.hide()
 	inventory_scroll_container.hide()
 	potions_scroll_container.hide()
+	check_goals()
 	detailed_name.text = "[center]Click an item to inspect[/center]"
 	icon.texture = null
 	icon.modulate = Color.WHITE
@@ -162,3 +170,29 @@ func potion_icon_pressed(type, id):
 		icon.texture = potion["icon"]
 		icon.modulate = Color.BLACK
 		details.text = ""
+
+func check_goals():
+	goals_notification.hide()
+	for goal in World.goal_handler.get_children():
+		if goal.completable:
+			goals_notification.show()
+
+func reset_goals():
+	await get_tree().create_timer(.1).timeout
+	goals_button_pressed()
+
+func goals_button_pressed() -> void:
+	reset()
+	active_tab_label.text = "Goals"
+	spawn_goals()
+	goals_scroll_container.show()
+
+func spawn_goals():
+	for i in goals_grid.get_children():
+		i.queue_free()
+	
+	for goal in World.goal_handler.get_children():
+		var new_goal_icon = goal_icon.instantiate()
+		new_goal_icon.goal = goal
+		new_goal_icon.complete_goal.connect(reset_goals)
+		goals_grid.add_child(new_goal_icon)

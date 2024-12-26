@@ -16,13 +16,7 @@ var default_potion_icon = preload("res://assets/ui/potions_icon.png")
 var chosen_ingredients = []
 var calculated_potion: Dictionary = {"type": null, "id": null, "name": null}
 
-@onready var animated_ingredient_1 = %AnimatedIngredient1
-@onready var animated_ingredient_2 = %AnimatedIngredient2
-@onready var animated_ingredient_3 = %AnimatedIngredient3
-@onready var animated_ingredients = [animated_ingredient_1, animated_ingredient_2, animated_ingredient_3]
-
 signal potion_brewed
-signal potion_discovered
 signal ingredient_used
 
 func _ready():
@@ -30,7 +24,6 @@ func _ready():
 	
 	await get_tree().create_timer(.1).timeout
 	potion_brewed.connect(World.active_player.inventory.add_to_inventory)
-	potion_discovered.connect(World.alert_ui.spawn_alert)
 	ingredient_used.connect(World.active_player.inventory.remove_from_inventory)
 	for panel in chosen_panels:
 		panel.get_child(1).pressed.connect(remove_button_pressed.bind(panel))
@@ -96,11 +89,9 @@ func update_chosen_ingredients():
 			else:
 				i.get_child(0).texture = Ingredients.ingredients_roster[ingredient]["icon"]
 			i.get_child(0).modulate = Color.WHITE
-			animated_ingredients[index].texture = Ingredients.ingredients_roster[ingredient]["icon"]
 		else:
 			i.get_child(0).texture = default_ingredient_icon
 			i.get_child(0).modulate.a = Color.WHITE.a / 2
-			animated_ingredients[index].texture = null
 		index += 1
 	if chosen_ingredients.size() >= 3:
 		brew_button.disabled = false
@@ -179,9 +170,6 @@ func brew_potion(potion_dict):
 		i.get_child(0).texture = default_ingredient_icon
 		i.get_child(0).modulate.a = Color.WHITE.a / 2
 	
-	if potion["discovered"] == false:
-		potion_discovered.emit((potion["name"] + " potion discovered!"), potion["icon"])
-		Potions.potions_roster[potion_dict["type"]][potion_dict["id"]]["discovered"] = true
 	for ingredient in chosen_ingredients:
 		if Ingredients.ingredients_roster[ingredient]["stats_discovered"] == false:
 			Ingredients.ingredients_roster[ingredient]["stats_discovered"] = true

@@ -20,11 +20,13 @@ config/icon="res://icon.svg"
 World="*res://autoloads/world.gd"
 Ingredients="*res://autoloads/ingredients.gd"
 Potions="*res://autoloads/potions.gd"
+Npc="*res://autoloads/npc.gd"
+Goals="*res://autoloads/goals.gd"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="viewport"
 
 [input]
@@ -79,4 +81,5 @@ quick_quit={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
