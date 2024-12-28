@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ct8i5c742i8ek"]
+[gd_scene load_steps=8 format=3 uid="uid://ct8i5c742i8ek"]
 
 [ext_resource type="Texture2D" uid="uid://bnwt0ea535ysy" path="res://assets/potions/paranoia.png" id="1_2gfhw"]
 [ext_resource type="Script" path="res://ui/potion_icon.gd" id="2_riswf"]
+[ext_resource type="Script" path="res://ui/ui_component_hover.gd" id="3_bg6jp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4go7"]
 bg_color = Color(0.92549, 0.905882, 0.866667, 1)
@@ -70,3 +71,8 @@ icon = ExtResource("1_2gfhw")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("2_riswf")
+
+[node name="UIHoverComponent" type="Node2D" parent="."]
+script = ExtResource("3_bg6jp")
+duration = 0.05
+scale_value = Vector2(1.05, 1.05)

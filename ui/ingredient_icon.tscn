@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bpu1kb6lm03gv"]
+[gd_scene load_steps=8 format=3 uid="uid://bpu1kb6lm03gv"]
 
 [ext_resource type="Texture2D" uid="uid://b0727h3gsogcg" path="res://assets/ui/question_mark.png" id="1_4y3vg"]
+[ext_resource type="Script" path="res://ui/ui_component_hover.gd" id="3_4cyc1"]
 [ext_resource type="Script" path="res://ui/ingredient_icon.gd" id="3_f0rv0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4go7"]
@@ -70,3 +71,8 @@ icon = ExtResource("1_4y3vg")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("3_f0rv0")
+
+[node name="UIHoverComponent" type="Node2D" parent="."]
+script = ExtResource("3_4cyc1")
+duration = 0.05
+scale_value = Vector2(1.05, 1.05)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://jlplhmp3pn70"]
+[gd_scene load_steps=9 format=3 uid="uid://jlplhmp3pn70"]
 
 [ext_resource type="Texture2D" uid="uid://d3ocb3kp057de" path="res://assets/ingredients/amber.png" id="1_c1y3t"]
 [ext_resource type="Theme" uid="uid://d1t08nb7i4mnk" path="res://assets/themes/default_theme.tres" id="1_x7310"]
 [ext_resource type="Script" path="res://ui/inventory_icon.gd" id="2_282up"]
+[ext_resource type="Script" path="res://ui/ui_component_hover.gd" id="4_b6261"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4go7"]
 bg_color = Color(0.92549, 0.905882, 0.866667, 1)
@@ -75,3 +76,8 @@ icon = ExtResource("1_c1y3t")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("2_282up")
+
+[node name="UIHoverComponent" type="Node2D" parent="."]
+script = ExtResource("4_b6261")
+duration = 0.05
+scale_value = Vector2(1.05, 1.05)

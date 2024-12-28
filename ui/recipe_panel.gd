@@ -32,6 +32,9 @@ func _ready() -> void:
 	
 	if ingredients_held >= ingredients.size():
 		button.disabled = false
+		get_parent().move_child(self, 0)
+	else:
+		get_parent().move_child(self, -1)
 
 func button_pressed() -> void:
 	recipe_pressed.emit(ingredients)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://ctc405b6xqaws"]
+[gd_scene load_steps=56 format=3 uid="uid://ctc405b6xqaws"]
 
 [ext_resource type="Script" path="res://mains/game.gd" id="1_me1qu"]
 [ext_resource type="PackedScene" uid="uid://cbhaf8txxy8n8" path="res://locations/town.tscn" id="2_wtwuq"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://ui/alert_ui.gd" id="12_4damj"]
 [ext_resource type="Texture2D" uid="uid://l5volsi2544r" path="res://assets/ui/goals_icon.png" id="12_dhkal"]
 [ext_resource type="Texture2D" uid="uid://bvybucxlse52j" path="res://assets/ui/potions_icon.png" id="12_sslvd"]
+[ext_resource type="Script" path="res://ui/ui_component_hover.gd" id="13_nua8p"]
 [ext_resource type="Texture2D" uid="uid://qm5ba6dvearm" path="res://assets/ui/exclamation.png" id="14_rtfug"]
 [ext_resource type="Script" path="res://ui/potion_ui.gd" id="15_8c8tt"]
 [ext_resource type="FontFile" uid="uid://wb7t5kwvgpkd" path="res://assets/fonts/Sneakers Pro Medium.ttf" id="16_8w25p"]
@@ -319,7 +320,6 @@ script = ExtResource("7_dwmdn")
 position = Vector2(-1235, -1455)
 
 [node name="InventoryUI" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("6_f00rt")
 
 [node name="MarginContainer" type="MarginContainer" parent="InventoryUI"]
@@ -388,6 +388,11 @@ icon = ExtResource("8_aq8sq")
 icon_alignment = 1
 expand_icon = true
 
+[node name="UIHoverComponent" type="Node2D" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/InventoryButton"]
+script = ExtResource("13_nua8p")
+duration = 0.05
+scale_value = Vector2(1.05, 1.05)
+
 [node name="GoalsButton" type="Button" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
@@ -416,6 +421,11 @@ grow_horizontal = 0
 texture = ExtResource("14_rtfug")
 expand_mode = 1
 
+[node name="UIHoverComponent" type="Node2D" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/GoalsButton"]
+script = ExtResource("13_nua8p")
+duration = 0.05
+scale_value = Vector2(1.05, 1.05)
+
 [node name="IngredientsButton" type="Button" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
@@ -430,6 +440,11 @@ icon = ExtResource("7_in5lr")
 icon_alignment = 1
 expand_icon = true
 
+[node name="UIHoverComponent" type="Node2D" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/IngredientsButton"]
+script = ExtResource("13_nua8p")
+duration = 0.05
+scale_value = Vector2(1.05, 1.05)
+
 [node name="PotionsButton" type="Button" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
@@ -443,6 +458,11 @@ theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
 icon = ExtResource("12_sslvd")
 icon_alignment = 1
 expand_icon = true
+
+[node name="UIHoverComponent" type="Node2D" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/PotionsButton"]
+script = ExtResource("13_nua8p")
+duration = 0.05
+scale_value = Vector2(1.05, 1.05)
 
 [node name="ActiveTabLabel" type="RichTextLabel" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -478,8 +498,8 @@ vertical_scroll_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/h_separation = 25
-theme_override_constants/v_separation = 25
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
 columns = 5
 
 [node name="GoalsScrollContainer" type="ScrollContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
@@ -497,8 +517,8 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
-theme_override_constants/h_separation = 25
-theme_override_constants/v_separation = 25
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
 
 [node name="IngredientsScrollContainer" type="ScrollContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
@@ -513,8 +533,8 @@ vertical_scroll_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/h_separation = 25
-theme_override_constants/v_separation = 25
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
 columns = 5
 
 [node name="PotionsScrollContainer" type="ScrollContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
@@ -531,8 +551,8 @@ vertical_scroll_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/h_separation = 25
-theme_override_constants/v_separation = 25
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
 columns = 5
 
 [node name="MarginContainer" type="MarginContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer"]

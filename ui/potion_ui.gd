@@ -104,6 +104,8 @@ func spawn_recipes():
 		for id in known_recipes[type]:
 			for r in known_recipes[type][id]:
 				create_recipe_panel(type, id, known_recipes[type][id][r])
+	
+	
 
 func create_recipe_panel(potion_type, potion_id, recipe):
 	print("create panel")
