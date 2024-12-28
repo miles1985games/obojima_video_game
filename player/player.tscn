@@ -1,11 +1,15 @@
-[gd_scene load_steps=27 format=3 uid="uid://crlhmm08kmt4a"]
+[gd_scene load_steps=29 format=3 uid="uid://crlhmm08kmt4a"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_kn8up"]
 [ext_resource type="Texture2D" uid="uid://cq6g5k2e5spnx" path="res://assets/spritesheets/player_temp.png" id="1_u1kki"]
+[ext_resource type="Shader" path="res://shaders/pixel_filter.gdshader" id="2_8f07w"]
 [ext_resource type="Script" path="res://player/player_state_machine.gd" id="3_lmojj"]
 [ext_resource type="Script" path="res://player/state_default.gd" id="4_wm8sj"]
 [ext_resource type="Script" path="res://player/state_ui.gd" id="5_24m15"]
 [ext_resource type="Script" path="res://player/inventory.gd" id="5_btu3x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k2ng2"]
+shader = ExtResource("2_8f07w")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xy3kx"]
 atlas = ExtResource("1_u1kki")
@@ -166,12 +170,15 @@ script = ExtResource("1_kn8up")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_k2ng2")
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_kmcw0")
 animation = &"stand"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+process_callback = 0
+position_smoothing_speed = 2.0
 
 [node name="BodyCollider" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -0.5)

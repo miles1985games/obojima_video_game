@@ -1,6 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://btm3vuit4nshb"]
+[gd_scene load_steps=29 format=3 uid="uid://btm3vuit4nshb"]
 
 [ext_resource type="Script" path="res://npc/class_npc.gd" id="1_ptuc1"]
+[ext_resource type="Shader" path="res://shaders/pixel_filter.gdshader" id="2_44bfi"]
 [ext_resource type="Texture2D" uid="uid://cud4kyexvqo43" path="res://npc/sprite_wisewitch.png" id="2_g2yjw"]
 [ext_resource type="Script" path="res://npc/npc_state_machine.gd" id="3_5dg72"]
 [ext_resource type="Script" path="res://npc/npc_state_idle.gd" id="4_pk472"]
@@ -10,6 +11,9 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kl1y6"]
 radius = 7.0
 height = 14.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nmacn"]
+shader = ExtResource("2_44bfi")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7l0wu"]
 atlas = ExtResource("2_g2yjw")
@@ -162,6 +166,7 @@ animations = [{
 size = Vector2(20, 33)
 
 [node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "state_machine", "nav_agent")]
+y_sort_enabled = true
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_ptuc1")
@@ -170,11 +175,13 @@ state_machine = NodePath("StateMachine")
 nav_agent = NodePath("NavAgent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 11)
+position = Vector2(0.5, 0)
 shape = SubResource("CapsuleShape2D_kl1y6")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_nmacn")
+position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_uogpe")
 animation = &"walk_right"
 autoplay = "stand"
@@ -206,5 +213,5 @@ quest_id = "0"
 interact_text = "They don't feel like talking to you."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableNPC"]
-position = Vector2(0, 0.5)
+position = Vector2(0, -10.5)
 shape = SubResource("RectangleShape2D_6yk21")

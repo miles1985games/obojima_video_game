@@ -25,3 +25,11 @@ func fade_out(node, duration):
 	await new_tween.finished
 	
 	return true
+
+func fade_in(node, duration):
+	node.modulate = Color.TRANSPARENT
+	var new_tween = create_tween()
+	new_tween.tween_property(node, "modulate", Color.WHITE, duration)
+	await new_tween.finished
+	
+	return true

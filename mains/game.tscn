@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://ctc405b6xqaws"]
+[gd_scene load_steps=55 format=3 uid="uid://ctc405b6xqaws"]
 
 [ext_resource type="Script" path="res://mains/game.gd" id="1_me1qu"]
 [ext_resource type="PackedScene" uid="uid://cbhaf8txxy8n8" path="res://locations/town.tscn" id="2_wtwuq"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://c0ixjtc35cpx2" path="res://assets/ui/interact_arrow.png" id="4_ht0s1"]
 [ext_resource type="PackedScene" uid="uid://c4bl72owsiskt" path="res://locations/home_interior.tscn" id="4_p60nc"]
 [ext_resource type="Script" path="res://handlers/tween_handler.gd" id="5_11q8u"]
-[ext_resource type="PackedScene" uid="uid://crlhmm08kmt4a" path="res://player/player.tscn" id="5_hbtvp"]
 [ext_resource type="Script" path="res://ui/inventory_ui.gd" id="6_f00rt"]
 [ext_resource type="Theme" uid="uid://d1t08nb7i4mnk" path="res://assets/themes/default_theme.tres" id="6_gcd55"]
 [ext_resource type="Script" path="res://handlers/goal_handler.gd" id="6_i0ysj"]
@@ -318,8 +317,6 @@ script = ExtResource("7_dwmdn")
 
 [node name="HomeInterior" parent="Locations" instance=ExtResource("4_p60nc")]
 position = Vector2(-1235, -1455)
-
-[node name="Player" parent="." instance=ExtResource("5_hbtvp")]
 
 [node name="InventoryUI" type="CanvasLayer" parent="."]
 visible = false

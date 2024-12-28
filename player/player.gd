@@ -4,6 +4,7 @@ class_name Player
 @onready var sprite = $Sprite
 @onready var state_machine = $StateMachine
 @onready var inventory = $Inventory
+@onready var camera = $Camera2D
 
 var current_movespeed: float = 5000.0
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://cbhaf8txxy8n8"]
+[gd_scene load_steps=42 format=4 uid="uid://cbhaf8txxy8n8"]
 
 [ext_resource type="Script" path="res://locations/town.gd" id="1_5mw8g"]
 [ext_resource type="Texture2D" uid="uid://bftayvr7hhear" path="res://assets/backgrounds/mt_arbora_blurred.png" id="1_06ajf"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bl0c4cg1xigdj" path="res://buildings/home_exterior.tscn" id="6_rsxtp"]
 [ext_resource type="Texture2D" uid="uid://dxm3vigmmayb2" path="res://assets/objects/mailbox.png" id="6_wr4s4"]
 [ext_resource type="PackedScene" uid="uid://btm3vuit4nshb" path="res://npc/npc.tscn" id="9_05vn2"]
+[ext_resource type="PackedScene" uid="uid://crlhmm08kmt4a" path="res://player/player.tscn" id="9_gps4d"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5v43g"]
 vertices = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
@@ -748,14 +749,16 @@ physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_34y0k")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cibcp"]
-size = Vector2(16, 30)
+size = Vector2(16, 14)
 
 [node name="Town" type="Node2D" node_paths=PackedStringArray("spawn_point")]
+y_sort_enabled = true
 script = ExtResource("1_5mw8g")
 spawn_point = NodePath("HomeExterior/SpawnPoint")
 location_id = "town"
 
 [node name="Environment" type="Node2D" parent="."]
+z_index = -1
 
 [node name="BG" type="Parallax2D" parent="Environment"]
 scroll_scale = Vector2(1.01, 1.01)
@@ -778,20 +781,6 @@ texture_filter = 1
 tile_map_data = PackedByteArray("AAD5//P/AAAAAAAAAAD9//T/AAAAAAAAAAAIAPT/AAAAAAAAAAAUAPL/AAAAAAAAAADy//b/AAAAAAAAAADs//T/AAAAAAAAAAAdAPT/AAAAAAAAAAAEAPT/AAAFAAAAAAALAPT/AAAFAAAAAAAMAPb/AAAFAAAAAAAHAPb/AAAFAAAAAAABAPP/AAAFAAAAAAD///T/AAAOAAAAAAD3//X/AAAFAAAAAAD0//P/AAAFAAAAAAAQAPT/AAAFAAAAAAAWAPb/AAAFAAAAAAATAPT/AAAFAAAAAAAZAPb/AAAFAAAAAAAbAPT/AAAFAAAAAAAXAPP/AAAFAAAAAAAOAPT/AAAFAAAAAAD7//X/AAAJAAAAAAD1//T/AAAOAAAAAADu//b/AAAOAAAAAAAEAPP/AAAOAAAAAAACAPP/AAAOAAAAAAAGAPP/AAAOAAAAAAABAPb/AAASAAAAAAAcAPj/AAASAAAAAAD9//b/AAAWAAMAAADy//T/AAAFAAAAAADv//T/AAAFAAAAAAACAPb/AAAFAAAAAAAgAPX/AAAFAAAAAAAgAPf/AAAFAAAAAAAeAPf/AAAFAAAAAAANAPb/AAAOAAAAAAAUAPX/AAAOAAAAAAAJAPX/AAAOAAAAAAD4//X/AAAFAAAAAAAFAPb/AAAFAAAAAAASAPT/AAAFAAAAAAAMAPL/AAAFAAAAAAAIAPL/AAAFAAAAAAALAPL/AAAFAAAAAAATAPL/AAAFAAAAAAAPAPL/AAAFAAAAAAAYAPT/AAAFAAAAAAAOAPb/AAAFAAAAAAAbAPf/AAAFAAAAAAAVAPT/AAAFAAAAAAAaAPT/AAAFAAAAAAAeAPT/AAAOAAAAAAD3//L/AAAFAAAAAAD9//L/AAAFAAAAAADu//T/AAAJAAAAAADo//P/AAAJAAAAAADw//T/AAAJAAAAAADp//b/AAAJAAAAAADq//P/AAAJAAAAAAARAPP/AAAJAAAAAAAeAPP/AAAJAAAAAAABAPX/AAAOAAAAAAD0//X/AAAOAAAAAAD7//L/AAAOAAAAAAAaAPP/AAAOAAAAAAAXAPX/AAAOAAAAAAD4//L/AAAOAAAAAADx//P/AAAOAAAAAAA=")
 tile_set = SubResource("TileSet_xguy7")
 
-[node name="Mailbox" type="StaticBody2D" parent="Environment"]
-position = Vector2(44, -31)
-collision_layer = 2
-script = ExtResource("6_hqa5f")
-interact_text = "You have no mail."
-
-[node name="Sprite2D" type="Sprite2D" parent="Environment/Mailbox"]
-texture_filter = 1
-texture = ExtResource("6_wr4s4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Mailbox"]
-position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_cibcp")
-
 [node name="HomeExterior" parent="." instance=ExtResource("6_rsxtp")]
 position = Vector2(-32, -79)
 
@@ -799,4 +788,21 @@ position = Vector2(-32, -79)
 position = Vector2(33, 81)
 
 [node name="NPC" parent="." instance=ExtResource("9_05vn2")]
+y_sort_enabled = false
 position = Vector2(77, 118)
+
+[node name="Mailbox" type="StaticBody2D" parent="."]
+position = Vector2(44, -31)
+collision_layer = 2
+script = ExtResource("6_hqa5f")
+interact_text = "You have no mail."
+
+[node name="Sprite2D" type="Sprite2D" parent="Mailbox"]
+texture_filter = 1
+texture = ExtResource("6_wr4s4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailbox"]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_cibcp")
+
+[node name="Player" parent="." instance=ExtResource("9_gps4d")]
