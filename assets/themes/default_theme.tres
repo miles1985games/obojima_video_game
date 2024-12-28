@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=15 format=3 uid="uid://d1t08nb7i4mnk"]
+[gd_resource type="Theme" load_steps=22 format=3 uid="uid://d1t08nb7i4mnk"]
 
 [ext_resource type="FontFile" uid="uid://wb7t5kwvgpkd" path="res://assets/fonts/Sneakers Pro Medium.ttf" id="1_rkcq2"]
 [ext_resource type="FontFile" uid="uid://dwwcpxqwxeoth" path="res://assets/fonts/rogliano.otf" id="2_gi0ta"]
@@ -133,6 +133,76 @@ expand_margin_right = 20.0
 bg_color = Color(0.921569, 0.901961, 0.858824, 0)
 border_color = Color(0.486275, 0.321569, 0.243137, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yb6qo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wunkl"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.945098, 0.890196, 0.796078, 0.635294)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.458824, 0.286275, 0.188235, 0.423529)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fcp2i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kqi27"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.945098, 0.890196, 0.796078, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.458824, 0.286275, 0.188235, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwp6f"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.945098, 0.890196, 0.796078, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.458824, 0.286275, 0.188235, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tsf1i"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.945098, 0.890196, 0.796078, 0.635294)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.458824, 0.286275, 0.188235, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sa0nx"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_klqjj"]
 bg_color = Color(0.917647, 0.901961, 0.862745, 1)
 border_width_left = 20
@@ -172,5 +242,17 @@ PanelContainer/styles/panel = SubResource("StyleBoxFlat_jc6xy")
 RichTextLabel/colors/default_color = Color(0.52549, 0.372549, 0.294118, 1)
 RichTextLabel/fonts/normal_font = ExtResource("1_rkcq2")
 ScrollContainer/styles/panel = SubResource("StyleBoxFlat_6a2bi")
+TabContainer/colors/font_disabled_color = Color(0.541176, 0.341176, 0.231373, 0.454902)
+TabContainer/colors/font_hovered_color = Color(0.539931, 0.342618, 0.230771, 1)
+TabContainer/colors/font_selected_color = Color(0.458824, 0.286275, 0.188235, 1)
+TabContainer/colors/font_unselected_color = Color(0.458824, 0.286275, 0.188235, 0.721569)
+TabContainer/fonts/font = ExtResource("2_gi0ta")
+TabContainer/styles/panel = SubResource("StyleBoxEmpty_yb6qo")
+TabContainer/styles/tab_disabled = SubResource("StyleBoxFlat_wunkl")
+TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_fcp2i")
+TabContainer/styles/tab_hovered = SubResource("StyleBoxFlat_kqi27")
+TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_iwp6f")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_tsf1i")
+TabContainer/styles/tabbar_background = SubResource("StyleBoxEmpty_sa0nx")
 VScrollBar/styles/grabber = SubResource("StyleBoxFlat_klqjj")
 VScrollBar/styles/scroll = SubResource("StyleBoxFlat_8tw7g")

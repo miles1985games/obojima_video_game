@@ -1,0 +1,97 @@
+[gd_scene load_steps=18 format=3 uid="uid://ym22upr11hu7"]
+
+[ext_resource type="Theme" uid="uid://d1t08nb7i4mnk" path="res://assets/themes/default_theme.tres" id="1_so3d1"]
+[ext_resource type="Script" path="res://ui/recipe_panel.gd" id="2_fjxya"]
+[ext_resource type="Texture2D" uid="uid://bnwt0ea535ysy" path="res://assets/potions/paranoia.png" id="2_taxj0"]
+[ext_resource type="Texture2D" uid="uid://d3ocb3kp057de" path="res://assets/ingredients/amber.png" id="3_cujqu"]
+[ext_resource type="Texture2D" uid="uid://nmwdm0cynun" path="res://assets/ingredients/apper_carrot.png" id="4_rr7we"]
+[ext_resource type="Texture2D" uid="uid://dydfkacukrb7m" path="res://assets/ingredients/bamboo.png" id="5_kf327"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fuefx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_22lyj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hfxlw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sdntu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7qwbb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tsjfo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_osvfo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uc8dn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ao8xm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2jxny"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mabfs"]
+
+[node name="RecipePanel" type="PanelContainer"]
+offset_right = 147.0
+offset_bottom = 60.0
+theme = ExtResource("1_so3d1")
+script = ExtResource("2_fjxya")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("2_taxj0")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Paranoia"
+horizontal_alignment = 1
+
+[node name="IngredientsContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/IngredientsContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+texture = ExtResource("3_cujqu")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/VBoxContainer/IngredientsContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+texture = ExtResource("4_rr7we")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/VBoxContainer/IngredientsContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+texture = ExtResource("5_kf327")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fuefx")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_22lyj")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hfxlw")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_sdntu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_7qwbb")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_tsjfo")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_osvfo")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_uc8dn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ao8xm")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_2jxny")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mabfs")
+disabled = true
+
+[connection signal="pressed" from="Button" to="." method="button_pressed"]

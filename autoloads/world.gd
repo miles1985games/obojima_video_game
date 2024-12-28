@@ -6,6 +6,7 @@ var location_handler: Node2D
 var interact_handler: Node2D
 var tween_handler: Node2D
 var goal_handler: Node2D
+var recipe_handler: Node2D
 
 var alert_ui: CanvasLayer
 var potion_ui: CanvasLayer

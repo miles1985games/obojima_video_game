@@ -23,7 +23,6 @@ func potion_brewed(subtype, type, id, amount):
 			trigger_alert.emit("Goal Complete!", check_icon)
 		completable = true
 
-
 func complete():
 	current_index += 1
 	if goal_increments.size() > current_index:

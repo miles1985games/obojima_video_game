@@ -7,7 +7,7 @@ class_name Drop
 
 var current_speed: float = 0.0
 var acceleration: float = 500.0
-var max_speed: float = 5000.0
+var max_speed: float = 10000.0
 @export_enum ("idle", "moving") var state: String
 
 @onready var sprite = $Sprite2D

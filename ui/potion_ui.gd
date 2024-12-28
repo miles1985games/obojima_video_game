@@ -7,14 +7,25 @@ extends CanvasLayer
 @onready var potion_name_label = %PotionNameLabel
 @onready var result_icon = %ResultIcon
 @onready var brew_button: Button = %BrewButton
+@onready var recipes_grid: VBoxContainer = %RecipesGrid
+
 
 var inventory_icon = preload("res://ui/inventory_icon.tscn")
 var default_ingredient_icon = preload("res://assets/ui/ingredients_icon.png")
 var default_potion_icon = preload("res://assets/ui/potions_icon.png")
+var recipe_panel = preload("res://ui/recipe_panel.tscn")
 
 @onready var chosen_panels: Array = [chosen_ingredient_1, chosen_ingredient_2, chosen_ingredient_3]
 var chosen_ingredients = []
-var calculated_potion: Dictionary = {"type": null, "id": null, "name": null}
+var calculated_potion_type: String
+var calculated_potion_id: String
+var calculated_potion_name: String
+
+var known_recipes = {
+	"combat" = {},
+	"utility" = {},
+	"whimsy" = {},
+}
 
 signal potion_brewed
 signal ingredient_used
@@ -31,6 +42,7 @@ func _ready():
 func open():
 	World.active_player.state_machine.state = "ui"
 	spawn_ingredients()
+	spawn_recipes()
 	show()
 
 func spawn_ingredients():
@@ -53,6 +65,61 @@ func spawn_ingredients():
 			grid.add_child(new_icon)
 			new_icon.populate()
 			new_icon.pressed.connect(ingredient_pressed.bind(new_icon.item))
+
+func save_recipe(potion_type, potion_id, potion_name, ingredients_array):
+	var temp_array: Array = []
+	for i in ingredients_array:
+		temp_array.append(i)
+	
+	print(known_recipes)
+	temp_array.sort_custom(func(a,b): return a < b)
+	var recipe_known: bool = false
+	
+	for t in known_recipes:
+		for i in known_recipes[t]:
+			for n in known_recipes[t][i]:
+				if known_recipes[t][i][n] == temp_array:
+					recipe_known = true
+					print("found recipe: " + str(known_recipes[t][i][n]) + " ing array: " + str(temp_array))
+					break
+	if recipe_known:
+		print("recipe known")
+	else:
+		if known_recipes[potion_type].keys().has(potion_id):
+			print("recipe unknown")
+			var size = known_recipes[potion_type][potion_id].keys().size()
+			known_recipes[potion_type][potion_id][size] = temp_array
+		else:
+			print("potion unknown")
+			known_recipes[potion_type][potion_id] = {}
+			known_recipes[potion_type][potion_id]["0"] = temp_array
+	print(known_recipes)
+
+func spawn_recipes():
+	print("spawn recipes")
+	for i in recipes_grid.get_children():
+		i.queue_free()
+	
+	for type in known_recipes:
+		for id in known_recipes[type]:
+			for r in known_recipes[type][id]:
+				create_recipe_panel(type, id, known_recipes[type][id][r])
+
+func create_recipe_panel(potion_type, potion_id, recipe):
+	print("create panel")
+	var new_recipe = recipe_panel.instantiate()
+	
+	new_recipe.potion_type = potion_type
+	new_recipe.potion_id = potion_id
+	new_recipe.ingredients = recipe
+	
+	recipes_grid.add_child(new_recipe)
+	new_recipe.recipe_pressed.connect(recipe_pressed)
+	print(new_recipe)
+
+func recipe_pressed(ingredients_array):
+	for ingredient in ingredients_array:
+		ingredient_pressed(ingredient)
 
 func ingredient_pressed(ingredient):
 	for i in chosen_panels:
@@ -78,7 +145,7 @@ func remove_button_pressed(panel):
 	update_chosen_ingredients()
 
 func update_chosen_ingredients():
-	calculated_potion["type"] = "none"
+	calculated_potion_type = "none"
 	var index = 0
 	for i in chosen_panels:
 		if i.has_meta("ingredient"):
@@ -142,9 +209,9 @@ func calculate_recipe():
 			if Potions.potions_roster[type].keys().has(highest_number):
 				result_icon.texture = Potions.potions_roster[type][highest_number]["icon"]
 				
-				calculated_potion["type"] = type
-				calculated_potion["id"] = highest_number
-				calculated_potion["name"] = Potions.potions_roster[type][highest_number]["name"]
+				calculated_potion_type = type
+				calculated_potion_id = highest_number
+				calculated_potion_name = Potions.potions_roster[type][highest_number]["name"]
 				
 				if Potions.potions_roster[type][highest_number]["discovered"] == false:
 					result_icon.modulate = Color.BLACK
@@ -152,19 +219,20 @@ func calculate_recipe():
 					potion_name_label.text = Potions.potions_roster[type][highest_number]["name"]
 
 func brew_button_pressed() -> void:
-	if calculated_potion["type"] != null:
+	if calculated_potion_type != "none":
 		for i in chosen_ingredients:
 			ingredient_used.emit("ingredient", null, i)
 		
-		brew_potion(calculated_potion)
+		brew_potion(calculated_potion_type, calculated_potion_id, calculated_potion_name)
 		World.tween_handler.bounce(result_icon, 2, .5)
 		await get_tree().create_timer(2).timeout
 		update_chosen_ingredients()
 
-func brew_potion(potion_dict):
-	potion_brewed.emit("potion", potion_dict["type"], potion_dict["id"], 1)
+func brew_potion(potion_type, potion_id, potion_name):
+	potion_brewed.emit("potion", potion_type, potion_id, 1)
+	save_recipe(potion_type, potion_id, potion_name, chosen_ingredients)
 	
-	var potion = Potions.potions_roster[potion_dict["type"]][potion_dict["id"]]
+	var potion = Potions.potions_roster[potion_type][potion_id]
 	
 	for i in chosen_panels:
 		i.get_child(0).texture = default_ingredient_icon
@@ -184,3 +252,4 @@ func brew_potion(potion_dict):
 	
 	await get_tree().create_timer(.2).timeout
 	spawn_ingredients()
+	spawn_recipes()

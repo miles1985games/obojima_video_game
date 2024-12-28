@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://ctc405b6xqaws"]
+[gd_scene load_steps=56 format=3 uid="uid://ctc405b6xqaws"]
 
 [ext_resource type="Script" path="res://mains/game.gd" id="1_me1qu"]
 [ext_resource type="PackedScene" uid="uid://cbhaf8txxy8n8" path="res://locations/town.tscn" id="2_wtwuq"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://ui/inventory_ui.gd" id="6_f00rt"]
 [ext_resource type="Theme" uid="uid://d1t08nb7i4mnk" path="res://assets/themes/default_theme.tres" id="6_gcd55"]
 [ext_resource type="Script" path="res://handlers/goal_handler.gd" id="6_i0ysj"]
+[ext_resource type="Script" path="res://handlers/recipe_handler.gd" id="7_dwmdn"]
 [ext_resource type="Texture2D" uid="uid://bgqsfuuqglwj6" path="res://assets/ui/ingredients_icon.png" id="7_in5lr"]
 [ext_resource type="Texture2D" uid="uid://5aeky0noulx5" path="res://assets/ui/inventory_icon.png" id="8_aq8sq"]
 [ext_resource type="Texture2D" uid="uid://d3ocb3kp057de" path="res://assets/ingredients/amber.png" id="9_adc2n"]
@@ -308,6 +309,9 @@ script = ExtResource("5_11q8u")
 [node name="GoalHandler" type="Node2D" parent="."]
 script = ExtResource("6_i0ysj")
 
+[node name="RecipeHandler" type="Node2D" parent="."]
+script = ExtResource("7_dwmdn")
+
 [node name="Locations" type="Node2D" parent="."]
 
 [node name="Town" parent="Locations" instance=ExtResource("2_wtwuq")]
@@ -318,6 +322,7 @@ position = Vector2(-1235, -1455)
 [node name="Player" parent="." instance=ExtResource("5_hbtvp")]
 
 [node name="InventoryUI" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("6_f00rt")
 
 [node name="MarginContainer" type="MarginContainer" parent="InventoryUI"]
@@ -625,7 +630,6 @@ text = "This chunk of petrified tree sap is prized for its color and gem-like lu
 autowrap_mode = 2
 
 [node name="Drop" parent="." instance=ExtResource("11_2wh48")]
-visible = false
 position = Vector2(-170, 29)
 type = "ingredient"
 item = "amber"
@@ -646,7 +650,17 @@ type = "ingredient"
 item = "amber"
 
 [node name="Drop5" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-178, -56)
+position = Vector2(-158, -69)
+type = "ingredient"
+item = "apper_carrot"
+
+[node name="Drop10" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-390, 130)
+type = "ingredient"
+item = "apper_carrot"
+
+[node name="Drop11" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-296, 187)
 type = "ingredient"
 item = "apper_carrot"
 
@@ -656,12 +670,12 @@ type = "ingredient"
 item = "blue_back_salmon"
 
 [node name="Drop7" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-74, 60)
+position = Vector2(-85, 41)
 type = "ingredient"
 item = "bashu_powder"
 
 [node name="Drop8" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-165, 31)
+position = Vector2(-242, 28)
 type = "ingredient"
 item = "bashu_powder"
 
@@ -737,11 +751,18 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/Panel/MarginContainer"]
+[node name="TabContainer" type="TabContainer" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/Panel/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("6_gcd55")
+tab_alignment = 1
+current_tab = 0
+
+[node name="Ingredients" type="VBoxContainer" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/Panel/MarginContainer/TabContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
+metadata/_tab_index = 0
 
-[node name="Label" type="Label" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/Panel/MarginContainer/TabContainer/Ingredients"]
 layout_mode = 2
 theme = ExtResource("6_gcd55")
 theme_override_font_sizes/font_size = 20
@@ -749,7 +770,7 @@ text = "Click ingredients to brew a potion!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/Panel/MarginContainer/TabContainer/Ingredients"]
 clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -757,14 +778,49 @@ theme = ExtResource("6_gcd55")
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="Grid" type="GridContainer" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="Grid" type="GridContainer" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/Panel/MarginContainer/TabContainer/Ingredients/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/h_separation = 50
-theme_override_constants/v_separation = 50
+theme_override_constants/h_separation = 25
+theme_override_constants/v_separation = 25
 columns = 5
+
+[node name="Recipes" type="VBoxContainer" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/Panel/MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Label" type="Label" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/Panel/MarginContainer/TabContainer/Recipes"]
+layout_mode = 2
+theme = ExtResource("6_gcd55")
+theme_override_font_sizes/font_size = 20
+text = "Brew potions to save recipes!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/Panel/MarginContainer/TabContainer/Recipes"]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("6_gcd55")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/Panel/MarginContainer/TabContainer/Recipes/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 50
+
+[node name="RecipesGrid" type="VBoxContainer" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/Panel/MarginContainer/TabContainer/Recipes/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="VSeparator" type="VSeparator" parent="PotionUI/MarginContainer/VBoxContainer/HBoxContainer"]
 modulate = Color(1, 1, 1, 0)
