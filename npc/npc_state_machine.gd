@@ -1,6 +1,6 @@
 extends Node2D
 
-@export_enum ("idle", "moving") var state: String
+@export_enum ("idle", "moving", "entering_location") var state: String
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

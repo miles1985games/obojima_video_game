@@ -1,5 +1,15 @@
 extends Node
 
+var npc_roster = {
+	"head_witch" = {
+		"name" = "Head Witch",
+		"scene" = preload("res://npc/npc_head_witch.tscn"),
+		"schedule" = {
+			8: "town",
+		},
+	},
+}
+
 var quest_roster = {
 	"0" = {
 		"type" = "fetch_ingredient",

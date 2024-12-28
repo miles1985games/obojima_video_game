@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://ctc405b6xqaws"]
+[gd_scene load_steps=61 format=3 uid="uid://ctc405b6xqaws"]
 
 [ext_resource type="Script" path="res://mains/game.gd" id="1_me1qu"]
 [ext_resource type="PackedScene" uid="uid://cbhaf8txxy8n8" path="res://locations/town.tscn" id="2_wtwuq"]
@@ -10,13 +10,17 @@
 [ext_resource type="Script" path="res://ui/inventory_ui.gd" id="6_f00rt"]
 [ext_resource type="Theme" uid="uid://d1t08nb7i4mnk" path="res://assets/themes/default_theme.tres" id="6_gcd55"]
 [ext_resource type="Script" path="res://handlers/goal_handler.gd" id="6_i0ysj"]
-[ext_resource type="Script" path="res://handlers/recipe_handler.gd" id="7_dwmdn"]
+[ext_resource type="Script" path="res://handlers/npc_handler.gd" id="7_dw766"]
 [ext_resource type="Texture2D" uid="uid://bgqsfuuqglwj6" path="res://assets/ui/ingredients_icon.png" id="7_in5lr"]
 [ext_resource type="Texture2D" uid="uid://5aeky0noulx5" path="res://assets/ui/inventory_icon.png" id="8_aq8sq"]
+[ext_resource type="Script" path="res://ui/daycycle.gd" id="8_j7mc2"]
+[ext_resource type="Script" path="res://handlers/npc_instance_handler.gd" id="8_p0gbc"]
 [ext_resource type="Texture2D" uid="uid://d3ocb3kp057de" path="res://assets/ingredients/amber.png" id="9_adc2n"]
 [ext_resource type="PackedScene" uid="uid://03yuses2lmgk" path="res://drops/drop.tscn" id="11_2wh48"]
+[ext_resource type="Texture2D" uid="uid://dl5lj4dg3g324" path="res://shaders/daynightcycle-gradient-texture.tres" id="11_udcrd"]
 [ext_resource type="Script" path="res://ui/alert_ui.gd" id="12_4damj"]
 [ext_resource type="Texture2D" uid="uid://l5volsi2544r" path="res://assets/ui/goals_icon.png" id="12_dhkal"]
+[ext_resource type="Script" path="res://ui/day_cycle_ui.gd" id="12_noqdy"]
 [ext_resource type="Texture2D" uid="uid://bvybucxlse52j" path="res://assets/ui/potions_icon.png" id="12_sslvd"]
 [ext_resource type="Script" path="res://ui/ui_component_hover.gd" id="13_nua8p"]
 [ext_resource type="Texture2D" uid="uid://qm5ba6dvearm" path="res://assets/ui/exclamation.png" id="14_rtfug"]
@@ -149,6 +153,18 @@ _data = {
 "RESET": SubResource("Animation_go4h5"),
 "bounce": SubResource("Animation_dgtae")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dc52l"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.921569, 0.901961, 0.858824, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.501961, 0.345098, 0.247059, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_43jf3"]
 color = Color(0.490196, 0.321569, 0.239216, 1)
@@ -309,8 +325,12 @@ script = ExtResource("5_11q8u")
 [node name="GoalHandler" type="Node2D" parent="."]
 script = ExtResource("6_i0ysj")
 
-[node name="RecipeHandler" type="Node2D" parent="."]
-script = ExtResource("7_dwmdn")
+[node name="NPCHandler" type="Node2D" parent="."]
+script = ExtResource("7_dw766")
+
+[node name="NPCInstanceHandler" type="Node2D" parent="NPCHandler"]
+script = ExtResource("8_p0gbc")
+npc_id = "head_witch"
 
 [node name="Locations" type="Node2D" parent="."]
 
@@ -318,6 +338,49 @@ script = ExtResource("7_dwmdn")
 
 [node name="HomeInterior" parent="Locations" instance=ExtResource("4_p60nc")]
 position = Vector2(-1235, -1455)
+
+[node name="TimeHandler" type="CanvasModulate" parent="."]
+script = ExtResource("8_j7mc2")
+gradient = ExtResource("11_udcrd")
+INGAME_SPEED = 0.5
+INITIAL_HOUR = 8.0
+
+[node name="DayCycleUI" type="CanvasLayer" parent="TimeHandler"]
+script = ExtResource("12_noqdy")
+
+[node name="MarginContainer" type="MarginContainer" parent="TimeHandler/DayCycleUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TimeHandler/DayCycleUI/MarginContainer"]
+layout_mode = 2
+
+[node name="DayLabel" type="Label" parent="TimeHandler/DayCycleUI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("6_gcd55")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_dc52l")
+text = "Day 1"
+
+[node name="TimeLabel" type="Label" parent="TimeHandler/DayCycleUI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("6_gcd55")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_dc52l")
+text = "12:00"
 
 [node name="InventoryUI" type="CanvasLayer" parent="."]
 script = ExtResource("6_f00rt")
@@ -645,61 +708,6 @@ size_flags_vertical = 10
 theme = ExtResource("6_gcd55")
 text = "This chunk of petrified tree sap is prized for its color and gem-like luster and is often used in jewelry. Some arcane jewelers claim that it has special properties, especially if an ancient insect is trapped within it. Amber can be found in rocky areas where petrifi ed wood is found, and it has been known to wash up on certain beaches."
 autowrap_mode = 2
-
-[node name="Drop" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-170, 29)
-type = "ingredient"
-item = "amber"
-
-[node name="Drop2" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-238, 115)
-type = "ingredient"
-item = "amber"
-
-[node name="Drop3" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-287, -47)
-type = "ingredient"
-item = "bamboo"
-
-[node name="Drop4" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-326, 51)
-type = "ingredient"
-item = "amber"
-
-[node name="Drop5" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-158, -69)
-type = "ingredient"
-item = "apper_carrot"
-
-[node name="Drop10" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-390, 130)
-type = "ingredient"
-item = "apper_carrot"
-
-[node name="Drop11" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-296, 187)
-type = "ingredient"
-item = "apper_carrot"
-
-[node name="Drop6" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-146, 113)
-type = "ingredient"
-item = "blue_back_salmon"
-
-[node name="Drop7" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-85, 41)
-type = "ingredient"
-item = "bashu_powder"
-
-[node name="Drop8" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-242, 28)
-type = "ingredient"
-item = "bashu_powder"
-
-[node name="Drop9" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-377, -29)
-type = "ingredient"
-item = "bashu_powder"
 
 [node name="PotionUI" type="CanvasLayer" parent="."]
 visible = false
@@ -1087,6 +1095,61 @@ alignment = 2
 layout_mode = 2
 mouse_filter = 2
 alignment = 2
+
+[node name="Drop" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-170, 29)
+type = "ingredient"
+item = "amber"
+
+[node name="Drop2" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-238, 115)
+type = "ingredient"
+item = "amber"
+
+[node name="Drop3" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-287, -47)
+type = "ingredient"
+item = "bamboo"
+
+[node name="Drop4" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-326, 51)
+type = "ingredient"
+item = "amber"
+
+[node name="Drop5" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-158, -69)
+type = "ingredient"
+item = "apper_carrot"
+
+[node name="Drop10" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-390, 130)
+type = "ingredient"
+item = "apper_carrot"
+
+[node name="Drop11" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-296, 187)
+type = "ingredient"
+item = "apper_carrot"
+
+[node name="Drop6" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-146, 113)
+type = "ingredient"
+item = "blue_back_salmon"
+
+[node name="Drop7" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-85, 41)
+type = "ingredient"
+item = "bashu_powder"
+
+[node name="Drop8" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-242, 28)
+type = "ingredient"
+item = "bashu_powder"
+
+[node name="Drop9" parent="." instance=ExtResource("11_2wh48")]
+position = Vector2(-377, -29)
+type = "ingredient"
+item = "bashu_powder"
 
 [connection signal="pressed" from="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/InventoryButton" to="InventoryUI" method="inventory_button_pressed"]
 [connection signal="pressed" from="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/GoalsButton" to="InventoryUI" method="goals_button_pressed"]

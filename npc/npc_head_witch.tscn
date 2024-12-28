@@ -1,87 +1,87 @@
-[gd_scene load_steps=30 format=3 uid="uid://btm3vuit4nshb"]
+[gd_scene load_steps=30 format=3 uid="uid://3dinw3rcuaqg"]
 
-[ext_resource type="Script" path="res://npc/class_npc.gd" id="1_ptuc1"]
-[ext_resource type="Shader" path="res://shaders/pixel_filter.gdshader" id="2_44bfi"]
-[ext_resource type="Texture2D" uid="uid://cud4kyexvqo43" path="res://npc/sprite_wisewitch.png" id="2_g2yjw"]
-[ext_resource type="Script" path="res://npc/npc_state_machine.gd" id="3_5dg72"]
-[ext_resource type="Script" path="res://npc/npc_state_idle.gd" id="4_pk472"]
-[ext_resource type="Script" path="res://npc/npc_state_moving.gd" id="5_dh3mv"]
-[ext_resource type="Script" path="res://interactables/interactable_npc.gd" id="6_n2eei"]
-[ext_resource type="Script" path="res://npc/npc_state_entering_location.gd" id="7_qrqla"]
+[ext_resource type="Script" path="res://npc/class_npc.gd" id="1_jcimn"]
+[ext_resource type="Shader" path="res://shaders/pixel_filter.gdshader" id="2_m6dut"]
+[ext_resource type="Texture2D" uid="uid://cud4kyexvqo43" path="res://npc/sprite_wisewitch.png" id="3_17uow"]
+[ext_resource type="Script" path="res://npc/npc_state_machine.gd" id="4_8qya2"]
+[ext_resource type="Script" path="res://npc/npc_state_idle.gd" id="5_8c8v2"]
+[ext_resource type="Script" path="res://npc/npc_state_moving.gd" id="6_lmce2"]
+[ext_resource type="Script" path="res://interactables/interactable_npc.gd" id="7_bbvkf"]
+[ext_resource type="Script" path="res://npc/npc_state_entering_location.gd" id="7_e2c5j"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kl1y6"]
 radius = 7.0
 height = 14.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nmacn"]
-shader = ExtResource("2_44bfi")
+shader = ExtResource("2_m6dut")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7l0wu"]
-atlas = ExtResource("2_g2yjw")
+atlas = ExtResource("3_17uow")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xlw6q"]
-atlas = ExtResource("2_g2yjw")
+atlas = ExtResource("3_17uow")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fklvl"]
-atlas = ExtResource("2_g2yjw")
+atlas = ExtResource("3_17uow")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8hwmf"]
-atlas = ExtResource("2_g2yjw")
+atlas = ExtResource("3_17uow")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1sq6v"]
-atlas = ExtResource("2_g2yjw")
+atlas = ExtResource("3_17uow")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4u6aq"]
-atlas = ExtResource("2_g2yjw")
+atlas = ExtResource("3_17uow")
 region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gxqe2"]
-atlas = ExtResource("2_g2yjw")
+atlas = ExtResource("3_17uow")
 region = Rect2(32, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eoihs"]
-atlas = ExtResource("2_g2yjw")
+atlas = ExtResource("3_17uow")
 region = Rect2(64, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wo67w"]
-atlas = ExtResource("2_g2yjw")
+atlas = ExtResource("3_17uow")
 region = Rect2(32, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g8wi7"]
-atlas = ExtResource("2_g2yjw")
+atlas = ExtResource("3_17uow")
 region = Rect2(0, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b0ki2"]
-atlas = ExtResource("2_g2yjw")
+atlas = ExtResource("3_17uow")
 region = Rect2(32, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vwqli"]
-atlas = ExtResource("2_g2yjw")
+atlas = ExtResource("3_17uow")
 region = Rect2(64, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tx2j8"]
-atlas = ExtResource("2_g2yjw")
+atlas = ExtResource("3_17uow")
 region = Rect2(32, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ibhia"]
-atlas = ExtResource("2_g2yjw")
+atlas = ExtResource("3_17uow")
 region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rdas1"]
-atlas = ExtResource("2_g2yjw")
+atlas = ExtResource("3_17uow")
 region = Rect2(32, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2lbh5"]
-atlas = ExtResource("2_g2yjw")
+atlas = ExtResource("3_17uow")
 region = Rect2(64, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4xvga"]
-atlas = ExtResource("2_g2yjw")
+atlas = ExtResource("3_17uow")
 region = Rect2(32, 32, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uogpe"]
@@ -166,11 +166,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6yk21"]
 size = Vector2(20, 33)
 
-[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "state_machine", "nav_agent")]
+[node name="HeadWitch" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "state_machine", "nav_agent")]
 y_sort_enabled = true
 collision_layer = 8
 collision_mask = 3
-script = ExtResource("1_ptuc1")
+script = ExtResource("1_jcimn")
+npc_id = "head_witch"
 sprite = NodePath("Sprite")
 state_machine = NodePath("StateMachine")
 nav_agent = NodePath("NavAgent")
@@ -190,17 +191,17 @@ frame = 1
 frame_progress = 0.529629
 
 [node name="StateMachine" type="Node2D" parent="."]
-script = ExtResource("3_5dg72")
+script = ExtResource("4_8qya2")
 state = "idle"
 
 [node name="idle" type="Node2D" parent="StateMachine"]
-script = ExtResource("4_pk472")
+script = ExtResource("5_8c8v2")
 
 [node name="moving" type="Node2D" parent="StateMachine"]
-script = ExtResource("5_dh3mv")
+script = ExtResource("6_lmce2")
 
 [node name="entering_location" type="Node2D" parent="StateMachine"]
-script = ExtResource("7_qrqla")
+script = ExtResource("7_e2c5j")
 
 [node name="NavAgent" type="NavigationAgent2D" parent="."]
 path_desired_distance = 16.0
@@ -211,7 +212,7 @@ debug_path_custom_line_width = 2.0
 
 [node name="InteractableNPC" type="Area2D" parent="."]
 collision_layer = 2
-script = ExtResource("6_n2eei")
+script = ExtResource("7_bbvkf")
 dialogue = PackedStringArray("Welcome to town!", "Press WASD to move, left click to interact, TAB to open your inventory, and ESC to quit.", "I see some ingredients over there...")
 quest_id = "0"
 interact_text = "They don't feel like talking to you."

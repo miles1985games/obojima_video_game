@@ -7,8 +7,6 @@ class_name InteractableNPC
 var quest_node: PackedScene = preload("res://npc/quest.tscn")
 
 func _ready() -> void:
-	World.npcs.append(self)
-	
 	if !quest_id.is_empty():
 		create_quest(quest_id)
 
