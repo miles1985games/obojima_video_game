@@ -2,17 +2,19 @@ extends Node2D
 
 var state_machine: Node2D
 
-var nav_ready = false
+var stuck_frames: int = 0
 
 func _ready():
 	state_machine = get_parent()
 	
 	await get_tree().create_timer(.1).timeout
 	owner.nav_agent.navigation_finished.connect(target_reached)
-	nav_ready = true
+
 
 func _physics_process(delta):
-	if nav_ready and owner.nav_agent.target_position != null:
+	var last_pos = owner.global_position
+	
+	if owner.nav_ready and owner.nav_agent.target_position != null:
 		if owner.nav_agent.is_navigation_finished():
 			return
 		
@@ -21,6 +23,14 @@ func _physics_process(delta):
 		owner.move_and_slide()
 		
 		animate_movement(direction)
+	
+	var traveled_distance = owner.global_position.distance_to(last_pos)
+	if is_zero_approx(traveled_distance):
+		print("stuck")
+		stuck_frames += 1
+		if stuck_frames > 20:
+			stuck_frames = 0
+			state_machine.state = "idle"
 
 func animate_movement(vector):
 	if vector.x > 0:

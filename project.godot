@@ -20,14 +20,18 @@ config/icon="res://icon.svg"
 World="*res://autoloads/world.gd"
 Ingredients="*res://autoloads/ingredients.gd"
 Potions="*res://autoloads/potions.gd"
-Npc="*res://autoloads/npc.gd"
 Goals="*res://autoloads/goals.gd"
+NpcInfo="*res://autoloads/npc_info.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
+
+[global_group]
+
+interest=""
 
 [input]
 
@@ -73,6 +77,7 @@ quick_quit={
 2d_physics/layer_2="environment"
 2d_physics/layer_3="drops"
 2d_physics/layer_4="npc"
+2d_physics/layer_5="transitions"
 
 [physics]
 

@@ -121,7 +121,9 @@ func create_recipe_panel(potion_type, potion_id, recipe):
 
 func recipe_pressed(ingredients_array):
 	for ingredient in ingredients_array:
-		ingredient_pressed(ingredient)
+		for i in World.active_player.inventory.get_children():
+			if i.item == ingredient:
+				ingredient_pressed(ingredient)
 
 func ingredient_pressed(ingredient):
 	for i in chosen_panels:

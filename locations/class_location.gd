@@ -1,7 +1,6 @@
 extends Node2D
 class_name Location
 
-@export var spawn_point: Node2D
 @export var location_id: String
 @export var npc_spawn_point_paths: Array
 @onready var npc_spawn_points: Array = load_spawn_points(npc_spawn_point_paths)

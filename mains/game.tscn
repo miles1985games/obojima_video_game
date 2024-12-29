@@ -1,7 +1,7 @@
 [gd_scene load_steps=61 format=3 uid="uid://ctc405b6xqaws"]
 
 [ext_resource type="Script" path="res://mains/game.gd" id="1_me1qu"]
-[ext_resource type="PackedScene" uid="uid://cbhaf8txxy8n8" path="res://locations/town.tscn" id="2_wtwuq"]
+[ext_resource type="PackedScene" uid="uid://cbhaf8txxy8n8" path="res://locations/home.tscn" id="2_wtwuq"]
 [ext_resource type="Script" path="res://handlers/location_handler.gd" id="3_gudru"]
 [ext_resource type="Script" path="res://handlers/interact_handler.gd" id="3_jpbie"]
 [ext_resource type="Texture2D" uid="uid://c0ixjtc35cpx2" path="res://assets/ui/interact_arrow.png" id="4_ht0s1"]
@@ -10,16 +10,16 @@
 [ext_resource type="Script" path="res://ui/inventory_ui.gd" id="6_f00rt"]
 [ext_resource type="Theme" uid="uid://d1t08nb7i4mnk" path="res://assets/themes/default_theme.tres" id="6_gcd55"]
 [ext_resource type="Script" path="res://handlers/goal_handler.gd" id="6_i0ysj"]
-[ext_resource type="Script" path="res://handlers/npc_handler.gd" id="7_dw766"]
 [ext_resource type="Texture2D" uid="uid://bgqsfuuqglwj6" path="res://assets/ui/ingredients_icon.png" id="7_in5lr"]
 [ext_resource type="Texture2D" uid="uid://5aeky0noulx5" path="res://assets/ui/inventory_icon.png" id="8_aq8sq"]
 [ext_resource type="Script" path="res://ui/daycycle.gd" id="8_j7mc2"]
-[ext_resource type="Script" path="res://handlers/npc_instance_handler.gd" id="8_p0gbc"]
 [ext_resource type="Texture2D" uid="uid://d3ocb3kp057de" path="res://assets/ingredients/amber.png" id="9_adc2n"]
 [ext_resource type="PackedScene" uid="uid://03yuses2lmgk" path="res://drops/drop.tscn" id="11_2wh48"]
+[ext_resource type="PackedScene" uid="uid://bx483ceyr3kyq" path="res://locations/town.tscn" id="11_qk8eh"]
 [ext_resource type="Texture2D" uid="uid://dl5lj4dg3g324" path="res://shaders/daynightcycle-gradient-texture.tres" id="11_udcrd"]
 [ext_resource type="Script" path="res://ui/alert_ui.gd" id="12_4damj"]
 [ext_resource type="Texture2D" uid="uid://l5volsi2544r" path="res://assets/ui/goals_icon.png" id="12_dhkal"]
+[ext_resource type="PackedScene" uid="uid://bhuan11j6eovn" path="res://locations/head_witch_house_interior.tscn" id="12_mbbd5"]
 [ext_resource type="Script" path="res://ui/day_cycle_ui.gd" id="12_noqdy"]
 [ext_resource type="Texture2D" uid="uid://bvybucxlse52j" path="res://assets/ui/potions_icon.png" id="12_sslvd"]
 [ext_resource type="Script" path="res://ui/ui_component_hover.gd" id="13_nua8p"]
@@ -325,19 +325,19 @@ script = ExtResource("5_11q8u")
 [node name="GoalHandler" type="Node2D" parent="."]
 script = ExtResource("6_i0ysj")
 
-[node name="NPCHandler" type="Node2D" parent="."]
-script = ExtResource("7_dw766")
-
-[node name="NPCInstanceHandler" type="Node2D" parent="NPCHandler"]
-script = ExtResource("8_p0gbc")
-npc_id = "head_witch"
-
 [node name="Locations" type="Node2D" parent="."]
 
-[node name="Town" parent="Locations" instance=ExtResource("2_wtwuq")]
+[node name="Home" parent="Locations" instance=ExtResource("2_wtwuq")]
 
 [node name="HomeInterior" parent="Locations" instance=ExtResource("4_p60nc")]
 position = Vector2(-1235, -1455)
+
+[node name="Town" parent="Locations" instance=ExtResource("11_qk8eh")]
+y_sort_enabled = true
+position = Vector2(2776, 1)
+
+[node name="HeadWitchHouseInterior" parent="Locations" instance=ExtResource("12_mbbd5")]
+position = Vector2(1004, -1443)
 
 [node name="TimeHandler" type="CanvasModulate" parent="."]
 script = ExtResource("8_j7mc2")
@@ -383,6 +383,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_dc52l")
 text = "12:00"
 
 [node name="InventoryUI" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("6_f00rt")
 
 [node name="MarginContainer" type="MarginContainer" parent="InventoryUI"]
@@ -1089,7 +1090,6 @@ layout_direction = 3
 layout_mode = 2
 size_flags_horizontal = 8
 mouse_filter = 2
-alignment = 2
 
 [node name="DialogueContainer" type="VBoxContainer" parent="AlertUI/MarginContainer"]
 layout_mode = 2

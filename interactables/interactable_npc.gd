@@ -11,7 +11,7 @@ func _ready() -> void:
 		create_quest(quest_id)
 
 func create_quest(id):
-	var quest_info = Npc.quest_roster[quest_id]
+	var quest_info = NpcInfo.quest_roster[quest_id]
 	
 	var new_quest = quest_node.instantiate()
 

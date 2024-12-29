@@ -8,20 +8,23 @@ func _physics_process(_delta):
 		if owner.current_location != null:
 			if owner.current_location.npc_enter_point != null:
 				var enter_point = owner.current_location.npc_enter_point.global_position
-				final_enter_point = find_landing_point(enter_point)
+				var landing_point = find_landing_point(enter_point)
+				if landing_point != null:
+					final_enter_point = landing_point
 	else:
 		owner.state_machine.state = "moving"
 
 func find_landing_point(enter_point):
-	var total_vector = enter_point + Vector2(randf_range(-max_enter_variance, max_enter_variance), \
-		randf_range(-max_enter_variance, max_enter_variance))
-		
-	owner.nav_agent.target_position = total_vector
-	
-	while not owner.nav_agent.is_target_reachable():
-		total_vector = enter_point + Vector2(randf_range(-max_enter_variance, max_enter_variance), \
+	if owner.nav_ready:
+		var total_vector = enter_point + Vector2(randf_range(-max_enter_variance, max_enter_variance), \
 			randf_range(-max_enter_variance, max_enter_variance))
-		
+			
 		owner.nav_agent.target_position = total_vector
-	
-	return total_vector
+		
+		while not owner.nav_agent.is_target_reachable():
+			total_vector = enter_point + Vector2(randf_range(-max_enter_variance, max_enter_variance), \
+				randf_range(-max_enter_variance, max_enter_variance))
+			
+			owner.nav_agent.target_position = total_vector
+		
+		return total_vector

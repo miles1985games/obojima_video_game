@@ -30,14 +30,17 @@ func add_to_inventory(type, subtype, item, amount):
 				potion_discovered.emit((Potions.potions_roster[subtype][item]["name"] + " discovered!"), Potions.potions_roster[subtype][item]["icon"])
 
 func remove_from_inventory(type, subtype, item):
+	print("received: " + str(item))
 	for c in get_children():
 		if c.type == type:
 			if subtype != null and c.subtype != null:
 				if c.subtype == subtype:
 					if c.item == item:
 						c.free()
+						print("freed: " + str(c))
 						break
 			else:
 				if c.item == item:
+					print("freed: " + str(c))
 					c.free()
 					break

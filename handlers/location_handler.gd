@@ -5,33 +5,41 @@ extends Node2D
 var active_location
 @onready var locations = $"../Locations"
 
-var loading_location: bool = false
-
 func _ready():
 	World.location_handler = self
 
-func change_location(id):
-	if loading_location == false:
-		loading_location = true
+func change_location(body, from_location, to_location):
+	if body is Player:
 		World.tween_handler.fade_out(active_location, .2)
-		
-		var loaded_location = check_for_loaded_locations(id)
-		
-		if loaded_location != null:
-			active_location = loaded_location
-		else:
-			var new_location
-			for i in World.locations_roster.keys():
-				if i == id:
-					new_location = World.locations_roster[i].instantiate()
-					locations.add_child(new_location)
-					print("New Location Spawned: " + str(i))
-					active_location = new_location
+
+	var loaded_location = check_for_loaded_locations(to_location)
+	
+	if loaded_location != null:
+		pass
+	else:
+		var new_location
+		for i in World.locations_roster.keys():
+			if i == to_location:
+				new_location = World.locations_roster[i].instantiate()
+				locations.add_child(new_location)
+				print("New Location Spawned: " + str(i))
+				loaded_location = new_location
 					
-		World.active_player.call_deferred("reparent", active_location)
-		World.active_player.global_position = active_location.spawn_point.global_position
-		World.tween_handler.fade_in(active_location, .2)
-		loading_location = false
+	body.call_deferred("reparent", loaded_location)
+	
+	if body is Player:
+		active_location = loaded_location
+	elif body is NPC:
+		body.location_changed(loaded_location)
+		
+	var spawn_point
+	for i in loaded_location.get_children():
+		if i is SceneTransition and i.to_location == from_location:
+			spawn_point = i.spawn_point.global_position
+	body.global_position = spawn_point
+	
+	if body is Player:
+		World.tween_handler.fade_in(loaded_location, .2)
 	
 func check_for_loaded_locations(id):
 	for i in locations.get_children():

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1wnh4fevv0ds"]
+
+[ext_resource type="Script" path="res://buildings/home_exterior.gd" id="1_36el5"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_52lh2"]
+load_path = "res://.godot/imported/house_temp.png-1196bde0dc6487b304ba2c44e9e66e2c.ctex"
+
+[node name="HeadWitchHouseExterior" type="StaticBody2D"]
+script = ExtResource("1_36el5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("CompressedTexture2D_52lh2")
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-60, 8, 63, 8, 61, 30, 60, 62, 43, 62, 43, 49, 20, 49, 20, 62, 4, 62, 4, 57, -54, 58, -53, 31)
