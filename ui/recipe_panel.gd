@@ -18,23 +18,24 @@ func _ready() -> void:
 	icon.texture = potion["icon"]
 	
 	var index = 0
+	var inventory = World.active_player.inventory
+	var ingredients_held: int = 0
 	for i in ingredients_container.get_children():
 		var ingredient: Dictionary = Ingredients.ingredients_roster[ingredients[index]]
 		i.texture = ingredient["icon"]
 		index += 1
-	
-	var inventory = World.active_player.inventory
-	var ingredients_held: int = 0
-	for ingredient in ingredients:
-		for i in inventory.get_children():
-			if i.item == ingredient:
+		
+		var key = Ingredients.ingredients_roster.find_key(ingredient)
+		var inv_index: int = 0
+		for n in inventory.get_children():
+			if n.item == key:
 				ingredients_held += 1
-	
-	if ingredients_held >= ingredients.size():
-		button.disabled = false
-		get_parent().move_child(self, 0)
-	else:
-		get_parent().move_child(self, -1)
+			else:
+				inv_index += 1
+		
+		if inv_index >= inventory.get_child_count():
+			i.modulate.a *= 0.5
+			print(i.modulate.a)
 
 func button_pressed() -> void:
 	recipe_pressed.emit(ingredients)

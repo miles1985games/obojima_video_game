@@ -9,8 +9,9 @@ script = ExtResource("1_wsx5g")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(0, -56)
 texture = ExtResource("1_27v2u")
-metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -56)
 polygon = PackedVector2Array(-60, 8, 63, 8, 61, 30, 60, 62, 43, 62, 43, 49, 20, 49, 20, 62, 4, 62, 4, 57, -54, 58, -53, 31)

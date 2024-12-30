@@ -11,7 +11,19 @@ var npc_roster = {
 		},
 		"interests" = {
 			"storefront": 5,
-		}
+		},
+	},
+	"cat" = {
+		"name" = "Cat",
+		"scene" = load("res://npc/npc_cat.tscn"),
+		"schedule" = {
+			8: "beach",
+			16: "beach",
+			18: "town",
+		},
+		"interests" = {
+			"storefront": 5,
+		},
 	},
 }
 

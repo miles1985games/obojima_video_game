@@ -1,9 +1,12 @@
-[gd_scene load_steps=37 format=4 uid="uid://bx483ceyr3kyq"]
+[gd_scene load_steps=40 format=4 uid="uid://bx483ceyr3kyq"]
 
 [ext_resource type="Texture2D" uid="uid://w86a5cdnj1xa" path="res://assets/tilesets/ground_tileset.png" id="1_gurf3"]
 [ext_resource type="Script" path="res://locations/class_location.gd" id="1_n8kru"]
 [ext_resource type="PackedScene" uid="uid://b1wnh4fevv0ds" path="res://buildings/head_witch_house_exterior.tscn" id="3_nfpam"]
 [ext_resource type="Script" path="res://locations/scene_transition.gd" id="4_2tk6e"]
+[ext_resource type="PackedScene" uid="uid://cfo8a0a43kl4p" path="res://npc/npc_cat.tscn" id="5_t2n8j"]
+[ext_resource type="Script" path="res://interactables/class_interactable.gd" id="6_08voh"]
+[ext_resource type="Texture2D" uid="uid://b3ahljoc0gt76" path="res://assets/objects/k_truck.png" id="7_ft87m"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jcuob"]
 load_path = "res://.godot/imported/mt_arbora_blurred.png-7eac67a3a70ad237963dfbfacce0231b.ctex"
@@ -743,7 +746,7 @@ position = Vector2(-481, 112)
 script = ExtResource("4_2tk6e")
 from_location = "town"
 to_location = "home"
-leads_to = PackedStringArray("home_interior", "home")
+leads_to = PackedStringArray("home_interior", "home", "beach")
 spawn_point = NodePath("Node2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransitionHome"]
@@ -767,3 +770,21 @@ shape = SubResource("RectangleShape2D_p4xua")
 
 [node name="Node2D" type="Node2D" parent="SceneTransitionHeadWitchHouse"]
 position = Vector2(0, 52)
+
+[node name="Cat" parent="." instance=ExtResource("5_t2n8j")]
+position = Vector2(-16, 237)
+
+[node name="KTruck" type="StaticBody2D" parent="."]
+position = Vector2(-128, 294)
+collision_layer = 2
+script = ExtResource("6_08voh")
+interact_text = "This truck is broken down."
+
+[node name="Sprite2D" type="Sprite2D" parent="KTruck"]
+position = Vector2(-6.5, -1.29297)
+scale = Vector2(0.820313, 0.698547)
+texture = ExtResource("7_ft87m")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KTruck"]
+position = Vector2(-23.5, 26.707)
+polygon = PackedVector2Array(-30, -31, 39, -38, 65, -37, 62, -22, 55, -15, 21, 0, 1, -2, -28, -13)

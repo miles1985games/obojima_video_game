@@ -26,7 +26,6 @@ func _physics_process(delta):
 	
 	var traveled_distance = owner.global_position.distance_to(last_pos)
 	if is_zero_approx(traveled_distance):
-		print("stuck")
 		stuck_frames += 1
 		if stuck_frames > 20:
 			stuck_frames = 0

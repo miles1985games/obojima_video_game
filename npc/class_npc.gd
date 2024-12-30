@@ -46,7 +46,6 @@ func check_interests():
 		for child in current_location.get_children():
 			if child.is_in_group("interest") and child.is_in_group(interest):
 				active_interests[interest] = npc_data["interests"][interest]
-	print(active_interests)
 
 func pause_movement():
 	state_machine.process_mode = Node.PROCESS_MODE_DISABLED

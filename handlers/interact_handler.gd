@@ -38,12 +38,12 @@ func _process(_delta):
 		arrow.hide()
 
 func move_arrow():
-	arrow.global_position = Vector2(targeted_interactable.global_position.x, targeted_interactable.global_position.y - 30)
+	arrow.global_position = Vector2(targeted_interactable.global_position.x, targeted_interactable.global_position.y - 50)
 	arrow.show()
 
 func _input(event):
 	if targeted_interactable != null and World.active_player.state_machine.state == "default":
-		if event.is_action_pressed("interact") and get_global_mouse_position().distance_to(targeted_interactable.global_position) < 20:
+		if event.is_action_pressed("interact") and get_global_mouse_position().distance_to(targeted_interactable.global_position) < 50:
 			interact()
 
 func interact():

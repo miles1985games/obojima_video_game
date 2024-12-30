@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var time_label = %TimeLabel
 
 func time_tick(day, hour, minute):
-	day_label.text = "Day " + str(day)
+	day_label.text = "Day " + str(day + 1)
 	
 	if hour < 10:
 		time_label.text = "0" + str(hour)

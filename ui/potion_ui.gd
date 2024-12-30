@@ -96,7 +96,6 @@ func save_recipe(potion_type, potion_id, potion_name, ingredients_array):
 	print(known_recipes)
 
 func spawn_recipes():
-	print("spawn recipes")
 	for i in recipes_grid.get_children():
 		i.queue_free()
 	
@@ -104,11 +103,8 @@ func spawn_recipes():
 		for id in known_recipes[type]:
 			for r in known_recipes[type][id]:
 				create_recipe_panel(type, id, known_recipes[type][id][r])
-	
-	
 
 func create_recipe_panel(potion_type, potion_id, recipe):
-	print("create panel")
 	var new_recipe = recipe_panel.instantiate()
 	
 	new_recipe.potion_type = potion_type
@@ -117,7 +113,6 @@ func create_recipe_panel(potion_type, potion_id, recipe):
 	
 	recipes_grid.add_child(new_recipe)
 	new_recipe.recipe_pressed.connect(recipe_pressed)
-	print(new_recipe)
 
 func recipe_pressed(ingredients_array):
 	for ingredient in ingredients_array:

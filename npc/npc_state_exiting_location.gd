@@ -12,7 +12,6 @@ func _physics_process(delta):
 
 
 func find_scene_transition() -> SceneTransition:
-	print("targeted: " + str(owner.targeted_location))
 	if !owner.targeted_location.is_empty():
 		var transition: SceneTransition
 		
@@ -32,8 +31,5 @@ func find_scene_transition() -> SceneTransition:
 						if lead == owner.targeted_location:
 							transition = child
 		
-
-		
-		print("transition: " + str(transition))
 		return transition
 	else: return

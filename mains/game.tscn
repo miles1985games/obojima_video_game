@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://ctc405b6xqaws"]
+[gd_scene load_steps=62 format=3 uid="uid://ctc405b6xqaws"]
 
 [ext_resource type="Script" path="res://mains/game.gd" id="1_me1qu"]
 [ext_resource type="PackedScene" uid="uid://cbhaf8txxy8n8" path="res://locations/home.tscn" id="2_wtwuq"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://ui/daycycle.gd" id="8_j7mc2"]
 [ext_resource type="Texture2D" uid="uid://d3ocb3kp057de" path="res://assets/ingredients/amber.png" id="9_adc2n"]
 [ext_resource type="PackedScene" uid="uid://03yuses2lmgk" path="res://drops/drop.tscn" id="11_2wh48"]
+[ext_resource type="PackedScene" uid="uid://bbd1jat3y1671" path="res://locations/location_beach.tscn" id="11_h0xbp"]
 [ext_resource type="PackedScene" uid="uid://bx483ceyr3kyq" path="res://locations/town.tscn" id="11_qk8eh"]
 [ext_resource type="Texture2D" uid="uid://dl5lj4dg3g324" path="res://shaders/daynightcycle-gradient-texture.tres" id="11_udcrd"]
 [ext_resource type="Script" path="res://ui/alert_ui.gd" id="12_4damj"]
@@ -339,6 +340,9 @@ position = Vector2(2776, 1)
 [node name="HeadWitchHouseInterior" parent="Locations" instance=ExtResource("12_mbbd5")]
 position = Vector2(1004, -1443)
 
+[node name="Beach" parent="Locations" instance=ExtResource("11_h0xbp")]
+position = Vector2(-2567, -60)
+
 [node name="TimeHandler" type="CanvasModulate" parent="."]
 script = ExtResource("8_j7mc2")
 gradient = ExtResource("11_udcrd")
@@ -383,7 +387,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_dc52l")
 text = "12:00"
 
 [node name="InventoryUI" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("6_f00rt")
 
 [node name="MarginContainer" type="MarginContainer" parent="InventoryUI"]

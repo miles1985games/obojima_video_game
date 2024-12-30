@@ -16,4 +16,5 @@ var locations_roster: Dictionary = {
 	"home_interior" = preload("res://locations/home_interior.tscn"),
 	"town" = preload("res://locations/town.tscn"),
 	"head_witch_house_interior" = preload("res://locations/head_witch_house_interior.tscn"),
+	"beach" = preload("res://locations/location_beach.tscn"),
 }

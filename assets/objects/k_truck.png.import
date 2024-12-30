@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpa2ac0sye2yi"
-path="res://.godot/imported/Pepper publish._0.png-51142fe0f631f0fa5c954020f53b1ecf.ctex"
+uid="uid://b3ahljoc0gt76"
+path="res://.godot/imported/k_truck.png-37deec5c141bfa9d7c77e16cc6e83517.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spritesheets/Pepper publish._0.png"
-dest_files=["res://.godot/imported/Pepper publish._0.png-51142fe0f631f0fa5c954020f53b1ecf.ctex"]
+source_file="res://assets/objects/k_truck.png"
+dest_files=["res://.godot/imported/k_truck.png-37deec5c141bfa9d7c77e16cc6e83517.ctex"]
 
 [params]
 
