@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://cbhaf8txxy8n8"]
+[gd_scene load_steps=46 format=4 uid="uid://cbhaf8txxy8n8"]
 
 [ext_resource type="Script" path="res://locations/home.gd" id="1_lka2a"]
 [ext_resource type="Texture2D" uid="uid://bftayvr7hhear" path="res://assets/backgrounds/mt_arbora_blurred.png" id="2_0v348"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://interactables/class_interactable.gd" id="6_tai5d"]
 [ext_resource type="Texture2D" uid="uid://dxm3vigmmayb2" path="res://assets/objects/mailbox.png" id="7_lpvdk"]
 [ext_resource type="Script" path="res://locations/scene_transition.gd" id="9_bl8qo"]
+[ext_resource type="PackedScene" uid="uid://crlhmm08kmt4a" path="res://player/player.tscn" id="9_egtog"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5v43g"]
 vertices = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
@@ -858,3 +859,5 @@ shape = SubResource("RectangleShape2D_0ds47")
 
 [node name="Node2D" type="Node2D" parent="SceneTransitionBeach"]
 position = Vector2(57, 0)
+
+[node name="Player" parent="." instance=ExtResource("9_egtog")]

@@ -23,5 +23,4 @@ func _ready() -> void:
 		complete_goal.connect(goal.complete)
 
 func complete_button_pressed() -> void:
-	await World.tween_handler.bounce(self, 1, 1)
 	complete_goal.emit()

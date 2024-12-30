@@ -1,9 +1,8 @@
-[gd_scene load_steps=57 format=4 uid="uid://bbd1jat3y1671"]
+[gd_scene load_steps=56 format=4 uid="uid://bbd1jat3y1671"]
 
 [ext_resource type="Script" path="res://locations/location_beach.gd" id="1_mmfsu"]
 [ext_resource type="Texture2D" uid="uid://blg3wns8dpajp" path="res://assets/tilesets/tileset_beach.png" id="2_33plv"]
 [ext_resource type="Script" path="res://locations/scene_transition.gd" id="3_hy5kl"]
-[ext_resource type="PackedScene" uid="uid://crlhmm08kmt4a" path="res://player/player.tscn" id="4_w3hyo"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3osqu"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -1228,6 +1227,3 @@ position = Vector2(-41, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransition"]
 position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_g2ebw")
-
-[node name="Player" parent="." instance=ExtResource("4_w3hyo")]
-position = Vector2(-123, -30)
