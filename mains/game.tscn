@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://ctc405b6xqaws"]
+[gd_scene load_steps=66 format=3 uid="uid://ctc405b6xqaws"]
 
 [ext_resource type="Script" path="res://mains/game.gd" id="1_me1qu"]
 [ext_resource type="Script" path="res://handlers/settings_handler.gd" id="2_ls32i"]
@@ -17,9 +17,7 @@
 [ext_resource type="Script" path="res://ui/daycycle.gd" id="8_j7mc2"]
 [ext_resource type="Script" path="res://goals/class_goal_brew_potions.gd" id="8_u7yya"]
 [ext_resource type="Texture2D" uid="uid://d3ocb3kp057de" path="res://assets/ingredients/amber.png" id="9_adc2n"]
-[ext_resource type="PackedScene" uid="uid://03yuses2lmgk" path="res://drops/drop.tscn" id="11_2wh48"]
 [ext_resource type="Script" path="res://handlers/event_handler.gd" id="11_gwlwf"]
-[ext_resource type="PackedScene" uid="uid://bbd1jat3y1671" path="res://locations/location_beach.tscn" id="11_h0xbp"]
 [ext_resource type="PackedScene" uid="uid://bx483ceyr3kyq" path="res://locations/town.tscn" id="11_qk8eh"]
 [ext_resource type="Texture2D" uid="uid://dl5lj4dg3g324" path="res://shaders/daynightcycle-gradient-texture.tres" id="11_udcrd"]
 [ext_resource type="Script" path="res://ui/alert_ui.gd" id="12_4damj"]
@@ -30,6 +28,7 @@
 [ext_resource type="Script" path="res://ui/ui_component_hover.gd" id="13_nua8p"]
 [ext_resource type="Texture2D" uid="uid://qm5ba6dvearm" path="res://assets/ui/exclamation.png" id="14_rtfug"]
 [ext_resource type="Script" path="res://ui/potion_ui.gd" id="15_8c8tt"]
+[ext_resource type="Script" path="res://handlers/ingredient_handler.gd" id="16_4cr7l"]
 [ext_resource type="FontFile" uid="uid://wb7t5kwvgpkd" path="res://assets/fonts/Sneakers Pro Medium.ttf" id="16_8w25p"]
 [ext_resource type="Texture2D" uid="uid://crhjgapbgav6p" path="res://assets/backgrounds/potion_table.png" id="18_rledg"]
 [ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="19_bbuib"]
@@ -388,8 +387,10 @@ text = "12:00"
 [node name="EventHandler" type="Node2D" parent="."]
 script = ExtResource("11_gwlwf")
 
-[node name="SpiritTrain" parent="EventHandler" instance=ExtResource("30_6robm")]
-position = Vector2(2, 230)
+[node name="EventSpiritTrain" parent="EventHandler" instance=ExtResource("30_6robm")]
+
+[node name="IngredientHandler" type="Node2D" parent="."]
+script = ExtResource("16_4cr7l")
 
 [node name="Locations" type="Node2D" parent="."]
 
@@ -405,67 +406,8 @@ position = Vector2(2776, 1)
 [node name="HeadWitchHouseInterior" parent="Locations" instance=ExtResource("12_mbbd5")]
 position = Vector2(1004, -1443)
 
-[node name="Beach" parent="Locations" instance=ExtResource("11_h0xbp")]
-position = Vector2(-2567, -60)
-
-[node name="TestDrops" type="Node2D" parent="."]
-
-[node name="Drop" parent="TestDrops" instance=ExtResource("11_2wh48")]
-position = Vector2(-170, 29)
-type = "ingredient"
-item = "amber"
-
-[node name="Drop2" parent="TestDrops" instance=ExtResource("11_2wh48")]
-position = Vector2(-238, 115)
-type = "ingredient"
-item = "amber"
-
-[node name="Drop3" parent="TestDrops" instance=ExtResource("11_2wh48")]
-position = Vector2(-287, -47)
-type = "ingredient"
-item = "bamboo"
-
-[node name="Drop4" parent="TestDrops" instance=ExtResource("11_2wh48")]
-position = Vector2(-326, 51)
-type = "ingredient"
-item = "amber"
-
-[node name="Drop5" parent="TestDrops" instance=ExtResource("11_2wh48")]
-position = Vector2(-158, -69)
-type = "ingredient"
-item = "apper_carrot"
-
-[node name="Drop10" parent="TestDrops" instance=ExtResource("11_2wh48")]
-position = Vector2(-390, 130)
-type = "ingredient"
-item = "apper_carrot"
-
-[node name="Drop11" parent="TestDrops" instance=ExtResource("11_2wh48")]
-position = Vector2(-296, 187)
-type = "ingredient"
-item = "apper_carrot"
-
-[node name="Drop6" parent="TestDrops" instance=ExtResource("11_2wh48")]
-position = Vector2(-146, 113)
-type = "ingredient"
-item = "blue_back_salmon"
-
-[node name="Drop7" parent="TestDrops" instance=ExtResource("11_2wh48")]
-position = Vector2(-85, 41)
-type = "ingredient"
-item = "bashu_powder"
-
-[node name="Drop8" parent="TestDrops" instance=ExtResource("11_2wh48")]
-position = Vector2(-242, 28)
-type = "ingredient"
-item = "bashu_powder"
-
-[node name="Drop9" parent="TestDrops" instance=ExtResource("11_2wh48")]
-position = Vector2(-377, -29)
-type = "ingredient"
-item = "bashu_powder"
-
 [node name="InventoryUI" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("6_f00rt")
 
 [node name="MarginContainer" type="MarginContainer" parent="InventoryUI"]

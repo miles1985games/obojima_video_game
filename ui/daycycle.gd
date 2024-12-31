@@ -14,18 +14,23 @@ const INGRAME_TO_REAL_MINUTE_DURATION = (2 * PI) / MINUTES_PER_DAY
 var time: float = 0.0
 var past_minute: float = -1.0
 
+var player
+
 signal time_tick
 
 func _ready():
 	World.time_handler = self
 	time = INGRAME_TO_REAL_MINUTE_DURATION * INITIAL_HOUR * MINUTES_PER_HOUR
+	await get_tree().create_timer(.1).timeout
+	player = World.active_player
 
 func _process(delta) -> void:
-	time += delta * INGRAME_TO_REAL_MINUTE_DURATION * INGAME_SPEED
-	var value = (sin(time - PI / 2) + 1.0) / 2.0
-	self.color = gradient.gradient.sample(value)
-	
-	recalculate_time()
+	if player and player.state_machine.state != "ui":
+		time += delta * INGRAME_TO_REAL_MINUTE_DURATION * INGAME_SPEED
+		var value = (sin(time - PI / 2) + 1.0) / 2.0
+		self.color = gradient.gradient.sample(value)
+		
+		recalculate_time()
 
 func recalculate_time() -> void:
 	var total_minutes = int(time / INGRAME_TO_REAL_MINUTE_DURATION)

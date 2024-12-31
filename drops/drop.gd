@@ -12,7 +12,10 @@ var max_speed: float = 10000.0
 
 @onready var sprite = $Sprite2D
 
+signal picked_up
+
 func _ready():
+	print(get_parent())
 	state = "dropping"
 	match type:
 		"ingredient":
@@ -42,4 +45,5 @@ func move_area_body_entered(body):
 func pickup_area_body_entered(body):
 	if body is Player:
 		body.inventory.add_to_inventory(type, subtype, item, 1)
+		picked_up.emit(self)
 		queue_free()

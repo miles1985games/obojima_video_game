@@ -49,6 +49,16 @@ func _input(event):
 func interact():
 	if targeted_interactable is Cauldron:
 		cauldron_interacted.emit()
+	elif targeted_interactable is DigSpot:
+		var key_items = World.active_player.key_items.get_children()
+		var index = 0
+		for key in key_items:
+			if key.item == "shovel":
+				targeted_interactable.dig()
+			else:
+				index += 1
+		if index >= key_items.size():
+			interacted.emit(targeted_interactable.interact_text)
 	elif targeted_interactable is InteractableNPC:
 		npc_interacted.emit(targeted_interactable)
 	else:

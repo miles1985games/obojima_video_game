@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://1iiswtiq25kv"]
+
+[ext_resource type="Script" path="res://interactables/interactable_dig_spot.gd" id="1_dqrks"]
+[ext_resource type="Texture2D" uid="uid://bga0m4k7fcqj1" path="res://assets/environment/dig_spot.png" id="2_v27aw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_poajf"]
+
+[node name="DigSpot" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_dqrks")
+interact_text = "You have no shovel."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_poajf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_v27aw")

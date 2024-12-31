@@ -17,8 +17,9 @@ var npc_roster = {
 		"name" = "Cat",
 		"scene" = load("res://npc/npc_cat.tscn"),
 		"schedule" = {
-			8: "beach",
-			16: "beach",
+			8: "town",
+			9: "head_witch_house_interior",
+			16: "home",
 			18: "town",
 		},
 		"interests" = {
