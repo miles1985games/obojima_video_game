@@ -802,7 +802,7 @@ size = Vector2(20, 96)
 y_sort_enabled = true
 script = ExtResource("1_lka2a")
 location_id = "home"
-spawnable_ingredients = Array[String](["amber", "apper_carrot"])
+spawnable_ingredients = Array[String](["amber", "apper_carrot", "golden_root"])
 ground_tilemap = NodePath("Environment/TilemapGround")
 
 [node name="Environment" type="Node2D" parent="."]

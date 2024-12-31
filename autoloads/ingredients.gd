@@ -56,4 +56,15 @@ var ingredients_roster: Dictionary = {
 		"discovered" = false,
 		"stats_discovered" = false,
 	},
+	"golden_root" = {
+		"name" = "Golden Root",
+		"rarity" = "rare",
+		"icon" = preload("res://assets/ingredients/golden_root.png"),
+		"combat" = 18,
+		"utility" = 18,
+		"whimsy" = 18,
+		"description" = "There are only a few ancient trees with roots that stretch into the deepest depths of the heart of Obojima. These roots absorb the harmonious energy of the natural world, which turns them into gold. Gathering them requires a respectful and cooperative relationship with the forest spirits that guard these ancient trees. Only then will they offer a golden root to a worthy potion maker.",
+		"discovered" = false,
+		"stats_discovered" = false,
+	},
 }

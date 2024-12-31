@@ -1,5 +1,7 @@
 extends Node2D
 
+var active_nodes: Array = []
+
 func _ready():
 	World.tween_handler = self
 
@@ -41,28 +43,30 @@ func fade_in(node, duration):
 	return true
 
 func snap_spin(node):
-	if node is Control:
-		node.pivot_offset = node.size / 2
-	
-	var initial_rot = node.rotation
-	var initial_scl = node.scale
-	
-	var rot_tween_1 = create_tween()
-	rot_tween_1.tween_property(node, "rotation", initial_rot + .1, .05)
-	var scale_tween_1 = create_tween()
-	scale_tween_1.tween_property(node, "scale", initial_scl - Vector2(.2,.1), .05)
-	await rot_tween_1.finished
-	var rot_tween_2 = create_tween()
-	rot_tween_2.tween_property(node, "rotation", initial_rot - .1, .1)
-	var scale_tween_2 = create_tween()
-	scale_tween_2.tween_property(node, "scale", initial_scl + Vector2(.1,.05), .1)
-	await rot_tween_2.finished
-	var rot_tween_3 = create_tween()
-	rot_tween_3.tween_property(node, "rotation", initial_rot, .5).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
-	var scale_tween_3 = create_tween()
-	scale_tween_3.tween_property(node, "scale", initial_scl, .5).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
-	await rot_tween_3.finished
-
+	if !active_nodes.has(node):
+		active_nodes.append(node)
+		if node is Control:
+			node.pivot_offset = node.size / 2
+		
+		var initial_rot = node.rotation
+		var initial_scl = node.scale
+		
+		var rot_tween_1 = create_tween()
+		rot_tween_1.tween_property(node, "rotation", initial_rot + .1, .05)
+		var scale_tween_1 = create_tween()
+		scale_tween_1.tween_property(node, "scale", initial_scl - Vector2(.2,.1), .05)
+		await rot_tween_1.finished
+		var rot_tween_2 = create_tween()
+		rot_tween_2.tween_property(node, "rotation", initial_rot - .1, .1)
+		var scale_tween_2 = create_tween()
+		scale_tween_2.tween_property(node, "scale", initial_scl + Vector2(.1,.05), .1)
+		await rot_tween_2.finished
+		var rot_tween_3 = create_tween()
+		rot_tween_3.tween_property(node, "rotation", initial_rot, .5).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+		var scale_tween_3 = create_tween()
+		scale_tween_3.tween_property(node, "scale", initial_scl, .5).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+		await rot_tween_3.finished
+		active_nodes.erase(node)
 	return true
 
 func text_crawl(node: RichTextLabel) -> bool:
