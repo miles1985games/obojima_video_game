@@ -45,6 +45,7 @@ func spawn_dialogue(interactable_npc):
 	World.active_player.state_machine.state = "ui"
 	var new_panel = dialogue_panel.instantiate()
 	new_panel.dialogue = interactable_npc.dialogue
+	new_panel.interactable = interactable_npc
 	dialogue_container.add_child(new_panel)
 	new_panel.dialogue_finished.connect(finish_dialogue)
 

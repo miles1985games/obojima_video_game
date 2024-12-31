@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ck72usntfodpk"]
+
+[ext_resource type="Script" path="res://events/spirit_train/event_spirit_train.gd" id="1_qrkmf"]
+[ext_resource type="PackedScene" uid="uid://bfbla5ilirsrd" path="res://events/spirit_train/event_scene_spirit_train.tscn" id="2_tssmx"]
+
+[node name="EventSpiritTrain" type="Node2D"]
+script = ExtResource("1_qrkmf")
+scene = ExtResource("2_tssmx")
+schedule = {
+8: "home"
+}

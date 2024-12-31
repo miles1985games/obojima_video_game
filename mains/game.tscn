@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://ctc405b6xqaws"]
+[gd_scene load_steps=64 format=3 uid="uid://ctc405b6xqaws"]
 
 [ext_resource type="Script" path="res://mains/game.gd" id="1_me1qu"]
 [ext_resource type="PackedScene" uid="uid://cbhaf8txxy8n8" path="res://locations/home.tscn" id="2_wtwuq"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://ui/daycycle.gd" id="8_j7mc2"]
 [ext_resource type="Texture2D" uid="uid://d3ocb3kp057de" path="res://assets/ingredients/amber.png" id="9_adc2n"]
 [ext_resource type="PackedScene" uid="uid://03yuses2lmgk" path="res://drops/drop.tscn" id="11_2wh48"]
+[ext_resource type="Script" path="res://handlers/event_handler.gd" id="11_gwlwf"]
 [ext_resource type="PackedScene" uid="uid://bbd1jat3y1671" path="res://locations/location_beach.tscn" id="11_h0xbp"]
 [ext_resource type="PackedScene" uid="uid://bx483ceyr3kyq" path="res://locations/town.tscn" id="11_qk8eh"]
 [ext_resource type="Texture2D" uid="uid://dl5lj4dg3g324" path="res://shaders/daynightcycle-gradient-texture.tres" id="11_udcrd"]
@@ -29,6 +30,7 @@
 [ext_resource type="FontFile" uid="uid://wb7t5kwvgpkd" path="res://assets/fonts/Sneakers Pro Medium.ttf" id="16_8w25p"]
 [ext_resource type="Texture2D" uid="uid://crhjgapbgav6p" path="res://assets/backgrounds/potion_table.png" id="18_rledg"]
 [ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="19_bbuib"]
+[ext_resource type="PackedScene" uid="uid://ck72usntfodpk" path="res://events/spirit_train/event_spirit_train.tscn" id="30_6robm"]
 
 [sub_resource type="Animation" id="Animation_mm8lr"]
 length = 0.001
@@ -326,23 +328,6 @@ script = ExtResource("5_11q8u")
 [node name="GoalHandler" type="Node2D" parent="."]
 script = ExtResource("6_i0ysj")
 
-[node name="Locations" type="Node2D" parent="."]
-
-[node name="Home" parent="Locations" instance=ExtResource("2_wtwuq")]
-
-[node name="HomeInterior" parent="Locations" instance=ExtResource("4_p60nc")]
-position = Vector2(-1235, -1455)
-
-[node name="Town" parent="Locations" instance=ExtResource("11_qk8eh")]
-y_sort_enabled = true
-position = Vector2(2776, 1)
-
-[node name="HeadWitchHouseInterior" parent="Locations" instance=ExtResource("12_mbbd5")]
-position = Vector2(1004, -1443)
-
-[node name="Beach" parent="Locations" instance=ExtResource("11_h0xbp")]
-position = Vector2(-2567, -60)
-
 [node name="TimeHandler" type="CanvasModulate" parent="."]
 script = ExtResource("8_j7mc2")
 gradient = ExtResource("11_udcrd")
@@ -386,7 +371,88 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_dc52l")
 text = "12:00"
 
+[node name="EventHandler" type="Node2D" parent="."]
+script = ExtResource("11_gwlwf")
+
+[node name="SpiritTrain" parent="EventHandler" instance=ExtResource("30_6robm")]
+position = Vector2(2, 230)
+
+[node name="Locations" type="Node2D" parent="."]
+
+[node name="Home" parent="Locations" instance=ExtResource("2_wtwuq")]
+
+[node name="HomeInterior" parent="Locations" instance=ExtResource("4_p60nc")]
+position = Vector2(-1235, -1455)
+
+[node name="Town" parent="Locations" instance=ExtResource("11_qk8eh")]
+y_sort_enabled = true
+position = Vector2(2776, 1)
+
+[node name="HeadWitchHouseInterior" parent="Locations" instance=ExtResource("12_mbbd5")]
+position = Vector2(1004, -1443)
+
+[node name="Beach" parent="Locations" instance=ExtResource("11_h0xbp")]
+position = Vector2(-2567, -60)
+
+[node name="TestDrops" type="Node2D" parent="."]
+
+[node name="Drop" parent="TestDrops" instance=ExtResource("11_2wh48")]
+position = Vector2(-170, 29)
+type = "ingredient"
+item = "amber"
+
+[node name="Drop2" parent="TestDrops" instance=ExtResource("11_2wh48")]
+position = Vector2(-238, 115)
+type = "ingredient"
+item = "amber"
+
+[node name="Drop3" parent="TestDrops" instance=ExtResource("11_2wh48")]
+position = Vector2(-287, -47)
+type = "ingredient"
+item = "bamboo"
+
+[node name="Drop4" parent="TestDrops" instance=ExtResource("11_2wh48")]
+position = Vector2(-326, 51)
+type = "ingredient"
+item = "amber"
+
+[node name="Drop5" parent="TestDrops" instance=ExtResource("11_2wh48")]
+position = Vector2(-158, -69)
+type = "ingredient"
+item = "apper_carrot"
+
+[node name="Drop10" parent="TestDrops" instance=ExtResource("11_2wh48")]
+position = Vector2(-390, 130)
+type = "ingredient"
+item = "apper_carrot"
+
+[node name="Drop11" parent="TestDrops" instance=ExtResource("11_2wh48")]
+position = Vector2(-296, 187)
+type = "ingredient"
+item = "apper_carrot"
+
+[node name="Drop6" parent="TestDrops" instance=ExtResource("11_2wh48")]
+position = Vector2(-146, 113)
+type = "ingredient"
+item = "blue_back_salmon"
+
+[node name="Drop7" parent="TestDrops" instance=ExtResource("11_2wh48")]
+position = Vector2(-85, 41)
+type = "ingredient"
+item = "bashu_powder"
+
+[node name="Drop8" parent="TestDrops" instance=ExtResource("11_2wh48")]
+position = Vector2(-242, 28)
+type = "ingredient"
+item = "bashu_powder"
+
+[node name="Drop9" parent="TestDrops" instance=ExtResource("11_2wh48")]
+position = Vector2(-377, -29)
+type = "ingredient"
+item = "bashu_powder"
+
 [node name="InventoryUI" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("6_f00rt")
 
 [node name="MarginContainer" type="MarginContainer" parent="InventoryUI"]
@@ -1098,61 +1164,6 @@ mouse_filter = 2
 layout_mode = 2
 mouse_filter = 2
 alignment = 2
-
-[node name="Drop" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-170, 29)
-type = "ingredient"
-item = "amber"
-
-[node name="Drop2" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-238, 115)
-type = "ingredient"
-item = "amber"
-
-[node name="Drop3" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-287, -47)
-type = "ingredient"
-item = "bamboo"
-
-[node name="Drop4" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-326, 51)
-type = "ingredient"
-item = "amber"
-
-[node name="Drop5" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-158, -69)
-type = "ingredient"
-item = "apper_carrot"
-
-[node name="Drop10" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-390, 130)
-type = "ingredient"
-item = "apper_carrot"
-
-[node name="Drop11" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-296, 187)
-type = "ingredient"
-item = "apper_carrot"
-
-[node name="Drop6" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-146, 113)
-type = "ingredient"
-item = "blue_back_salmon"
-
-[node name="Drop7" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-85, 41)
-type = "ingredient"
-item = "bashu_powder"
-
-[node name="Drop8" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-242, 28)
-type = "ingredient"
-item = "bashu_powder"
-
-[node name="Drop9" parent="." instance=ExtResource("11_2wh48")]
-position = Vector2(-377, -29)
-type = "ingredient"
-item = "bashu_powder"
 
 [connection signal="pressed" from="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/InventoryButton" to="InventoryUI" method="inventory_button_pressed"]
 [connection signal="pressed" from="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/GoalsButton" to="InventoryUI" method="goals_button_pressed"]

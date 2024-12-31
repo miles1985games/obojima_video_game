@@ -4,6 +4,8 @@ extends PanelContainer
 @onready var next_button: Button = %NextButton
 @onready var quest_delivery_button: Button = %QuestDeliveryButton
 
+var interactable: Node2D
+
 var quest: Node2D
 
 var dialogue: Array
@@ -31,17 +33,33 @@ func _ready():
 	
 	if not dialogue.is_empty():
 		label.text = dialogue[dialogue_index]
+	
+	if interactable != null and interactable.has_method("interact_finished"):
+		dialogue_finished.connect(interactable.interact_finished)
+
+func advance_dialogue(index):
+	dialogue_index = index - 1
+	next_button_pressed()
 
 func next_button_pressed():
 	dialogue_index += 1
 	
-	if dialogue_index < dialogue.size():
-		label.text = dialogue[dialogue_index]
+	if (dialogue_index < dialogue.size()) and \
+	!dialogue[dialogue_index].is_empty():
+		var new_dialogue: String = dialogue[dialogue_index]
+		if new_dialogue.contains("/"):
+			var modified_dialogue = new_dialogue.erase(0,1)
+			if interactable != null:
+				if !interactable.dialogue_checked.is_connected(advance_dialogue):
+					interactable.dialogue_checked.connect(advance_dialogue)
+				interactable.check_dialogue(modified_dialogue)
+		else:
+			label.text = new_dialogue
 	else:
 		dialogue_finished.emit()
 		queue_free()
 	
-	if dialogue_index + 1 >= dialogue.size():
+	if (dialogue_index + 1 >= dialogue.size()) or dialogue[dialogue_index+1].is_empty():
 		if quest != null:
 			check_quest_delivery()
 		next_button.text = "Finish"

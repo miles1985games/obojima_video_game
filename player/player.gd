@@ -5,6 +5,7 @@ class_name Player
 @onready var state_machine = $StateMachine
 @onready var inventory = $Inventory
 @onready var camera = $Camera2D
+@onready var key_items = $KeyItems
 
 var current_movespeed: float = 5000.0
 

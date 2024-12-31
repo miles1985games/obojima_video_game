@@ -1,0 +1,195 @@
+[gd_scene load_steps=15 format=3 uid="uid://bfbla5ilirsrd"]
+
+[ext_resource type="Script" path="res://events/spirit_train/event_scene_spirit_train.gd" id="1_4br70"]
+[ext_resource type="Shader" path="res://events/spirit_train/shader_wavy_texture.gdshader" id="2_ykl7u"]
+[ext_resource type="Texture2D" uid="uid://c3h0m6gg7kvy3" path="res://events/spirit_train/sprite_spirit_train_track.png" id="3_7frhr"]
+[ext_resource type="Texture2D" uid="uid://c55ktlu4u74yg" path="res://events/spirit_train/sprite_spirit_train.png" id="4_2uhwd"]
+[ext_resource type="Script" path="res://events/spirit_train/interactable_npc_train.gd" id="5_6vba0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p5aoh"]
+shader = ExtResource("2_ykl7u")
+shader_parameter/waveAmplitude = 0.038
+shader_parameter/correctVertex = true
+shader_parameter/waveFrequency = 13.2
+shader_parameter/verticalWave = false
+shader_parameter/keepTransparency = true
+shader_parameter/useTime = true
+shader_parameter/waveSpeed = 1.0
+shader_parameter/progress = 0.0
+shader_parameter/firstHalf = 1.0
+shader_parameter/secondHalf = 1.0
+shader_parameter/freezeFirstHalf = false
+shader_parameter/freezeSecondHalf = false
+
+[sub_resource type="Shader" id="Shader_mt4hp"]
+code = "shader_type canvas_item;
+
+// The amplitude of the wave.
+uniform float waveAmplitude: hint_range(0.0, 1.0) = 0.25;
+// If true corrects the Vertexes to adjust for the UV displacement
+uniform bool correctVertex = true;
+// The frequency of the wave.
+uniform float waveFrequency: hint_range(0.0, 100.0) = 10.0;
+// If true the texture waves vertically otherwise horizontally.
+uniform bool verticalWave = true;
+// If true the sprite will deform to match the waves, otherwise we keep the background color clamped.
+uniform bool keepTransparency = true;
+// If true the TIME constant is used, otherwise progress is used to move the wave.
+uniform bool useTime = true;
+// If useTime is true then use this as a multiplier for the wave speed.
+uniform float waveSpeed: hint_range(0.0, 100.0) = 1.0;
+// If useTime is false then use this as a multiplier for the wave progress.
+uniform float progress: hint_range(0.0, 1.0) = 0.0;
+// How much of the left or top half of the texture is modified.
+uniform float firstHalf: hint_range(0.0, 1.0) = 0.5;
+// How much of the right or bottom half of the texture is modified.
+uniform float secondHalf: hint_range(0.0, 1.0) = 0.5;
+// Keeps one half stuck. Useful for things like flags.
+uniform bool freezeFirstHalf = false;
+// Keeps one half stuck. Useful for things like flags.
+uniform bool freezeSecondHalf = false;
+
+void vertex() {
+	if (correctVertex) {
+		VERTEX = (verticalWave ? vec2(VERTEX.x, VERTEX.y * (1.0 + waveAmplitude)): vec2(VERTEX.x * (1.0 + waveAmplitude), VERTEX.y));
+	}
+}
+
+void fragment() {
+	vec2 uv = UV;
+	float waveUv = (verticalWave ? uv.x : uv.y);
+	float againstWaveUv = (verticalWave ? uv.y: uv.x);
+	float freezeFactor = 1.0;
+	if (freezeFirstHalf) {freezeFactor = waveUv;} else if (freezeSecondHalf) {freezeFactor = 1.0 - waveUv;}
+	if (againstWaveUv < firstHalf || againstWaveUv > 1.0 - secondHalf) {
+		float wave;
+		// Progress based on time or progress variable.
+		if (useTime) {
+			wave = freezeFactor * sin(waveUv * waveFrequency + TIME * waveSpeed) * (waveAmplitude / 4.0);
+		} else {
+			wave = freezeFactor * sin(waveUv * waveFrequency + progress * 2.0 * PI) * (waveAmplitude / 4.0);
+		}
+		vec2 aspect = vec2(TEXTURE_PIXEL_SIZE.x / TEXTURE_PIXEL_SIZE.y, 1.0);
+	    vec2 center = 0.5 * aspect;
+		// Wave the UV.
+		uv -= center;
+		if (verticalWave) {
+		    uv.y += wave;
+			uv.y += uv.y * waveAmplitude;
+		} else {
+		    uv.x += wave;
+			uv.x += uv.x * waveAmplitude;
+		}
+		uv += center;
+		// Clamp the UVs to prevent texture wrapping.
+		uv = clamp(uv, vec2(0.0), vec2(1.0));
+		againstWaveUv = (verticalWave ? uv.y : uv.x);
+		vec4 texColor = texture(TEXTURE, uv);
+		// Apply the calculated color.
+		if (keepTransparency) {
+			if (againstWaveUv <= 0.0 || againstWaveUv >= 1.0) {
+				COLOR.a = 0.0;
+			} else {
+				COLOR = texColor;
+			}
+		} else {
+			COLOR = texColor;
+		}
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ggk7m"]
+shader = SubResource("Shader_mt4hp")
+shader_parameter/waveAmplitude = 0.038
+shader_parameter/correctVertex = true
+shader_parameter/waveFrequency = 26.0
+shader_parameter/verticalWave = false
+shader_parameter/keepTransparency = true
+shader_parameter/useTime = true
+shader_parameter/waveSpeed = 1.0
+shader_parameter/progress = 0.0
+shader_parameter/firstHalf = 0.5
+shader_parameter/secondHalf = 0.5
+shader_parameter/freezeFirstHalf = false
+shader_parameter/freezeSecondHalf = false
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wrg31"]
+size = Vector2(171, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kwgto"]
+
+[sub_resource type="Animation" id="Animation_p76lt"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_pl6in"]
+resource_name = "roll_in"
+length = 3.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TrainScene/Train:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-300, -0.25, 0, 0.25, 0, 0, -2.7, -1, 0.25, 0),
+"times": PackedFloat32Array(0, 2.96667)
+}
+
+[sub_resource type="Animation" id="Animation_l1h62"]
+resource_name = "roll_out"
+length = 3.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TrainScene/Train:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -2.7, -1, 1.66667, -0.5, 300, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 3)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ae6kr"]
+_data = {
+"RESET": SubResource("Animation_p76lt"),
+"roll_in": SubResource("Animation_pl6in"),
+"roll_out": SubResource("Animation_l1h62")
+}
+
+[node name="TrainScene" type="Node2D"]
+script = ExtResource("1_4br70")
+
+[node name="TrainTrack" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_p5aoh")
+position = Vector2(0, 2)
+texture = ExtResource("3_7frhr")
+
+[node name="Train" type="CharacterBody2D" parent="."]
+position = Vector2(-300, -51)
+collision_layer = 2
+
+[node name="TrainSprite" type="Sprite2D" parent="Train"]
+material = SubResource("ShaderMaterial_ggk7m")
+texture = ExtResource("4_2uhwd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Train"]
+position = Vector2(1.5, 33.5)
+shape = SubResource("RectangleShape2D_wrg31")
+
+[node name="InteractableNPC_Train" type="Area2D" parent="Train"]
+position = Vector2(66, 25)
+collision_layer = 2
+script = ExtResource("5_6vba0")
+dialogue = PackedStringArray("Hey kid! Say, you don\'t have any coal do ya?", "/check_for_shovel", "", "We could use everything you\'ve got!", "", "You don\'t even have a shovel??", "Here take this one. I expect some coal when I return.")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Train/InteractableNPC_Train"]
+shape = SubResource("RectangleShape2D_kwgto")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_ae6kr")
+}
+autoplay = "roll_in"

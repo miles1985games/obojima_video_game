@@ -22,6 +22,8 @@ Ingredients="*res://autoloads/ingredients.gd"
 Potions="*res://autoloads/potions.gd"
 Goals="*res://autoloads/goals.gd"
 NpcInfo="*res://autoloads/npc_info.gd"
+Events="*res://autoloads/events.gd"
+Items="*res://autoloads/items.gd"
 
 [display]
 

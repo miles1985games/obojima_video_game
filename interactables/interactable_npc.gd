@@ -6,6 +6,8 @@ class_name InteractableNPC
 @export var quest_id: String
 var quest_node: PackedScene = preload("res://npc/quest.tscn")
 
+signal dialogue_checked
+
 func _ready() -> void:
 	if !quest_id.is_empty():
 		create_quest(quest_id)
@@ -60,3 +62,10 @@ func find_random_reward(type) -> Array:
 			reward = Potions.potions_roster[subtype].keys().pick_random()
 	
 	return [subtype, reward]
+
+func check_dialogue(check):
+	if has_method(check):
+		call(check)
+
+func interact_finished():
+	pass

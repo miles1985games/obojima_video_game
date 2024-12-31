@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://cbhaf8txxy8n8"]
+[gd_scene load_steps=47 format=4 uid="uid://cbhaf8txxy8n8"]
 
 [ext_resource type="Script" path="res://locations/home.gd" id="1_lka2a"]
 [ext_resource type="Texture2D" uid="uid://bftayvr7hhear" path="res://assets/backgrounds/mt_arbora_blurred.png" id="2_0v348"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dxm3vigmmayb2" path="res://assets/objects/mailbox.png" id="7_lpvdk"]
 [ext_resource type="Script" path="res://locations/scene_transition.gd" id="9_bl8qo"]
 [ext_resource type="PackedScene" uid="uid://crlhmm08kmt4a" path="res://player/player.tscn" id="9_egtog"]
+[ext_resource type="Script" path="res://events/class_event_spawn_marker.gd" id="10_p6hrn"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5v43g"]
 vertices = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
@@ -861,3 +862,15 @@ shape = SubResource("RectangleShape2D_0ds47")
 position = Vector2(57, 0)
 
 [node name="Player" parent="." instance=ExtResource("9_egtog")]
+
+[node name="EventSpawnMarker" type="Node2D" parent="."]
+position = Vector2(-242, 306)
+script = ExtResource("10_p6hrn")
+
+[node name="EventSpawnMarker2" type="Node2D" parent="."]
+position = Vector2(281, 274)
+script = ExtResource("10_p6hrn")
+
+[node name="EventSpawnMarker3" type="Node2D" parent="."]
+position = Vector2(331, -10)
+script = ExtResource("10_p6hrn")
