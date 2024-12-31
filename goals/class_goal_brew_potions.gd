@@ -1,11 +1,9 @@
 extends DiscoverGoal
 class_name BrewPotionsGoal
 
-var current_index: int = 0
-var goal_increments: Array = [5,10,15]
-
 func _ready() -> void:
 	super()
+	
 	if goal_increments.size() > current_index:
 		goal_amount = goal_increments[current_index]
 	
@@ -24,6 +22,7 @@ func potion_brewed(subtype, type, id, amount):
 		completable = true
 
 func complete():
+	super()
 	current_index += 1
 	if goal_increments.size() > current_index:
 		goal_amount = goal_increments[current_index]

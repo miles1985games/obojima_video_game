@@ -1,6 +1,7 @@
-[gd_scene load_steps=64 format=3 uid="uid://ctc405b6xqaws"]
+[gd_scene load_steps=67 format=3 uid="uid://ctc405b6xqaws"]
 
 [ext_resource type="Script" path="res://mains/game.gd" id="1_me1qu"]
+[ext_resource type="Script" path="res://handlers/settings_handler.gd" id="2_ls32i"]
 [ext_resource type="PackedScene" uid="uid://cbhaf8txxy8n8" path="res://locations/home.tscn" id="2_wtwuq"]
 [ext_resource type="Script" path="res://handlers/location_handler.gd" id="3_gudru"]
 [ext_resource type="Script" path="res://handlers/interact_handler.gd" id="3_jpbie"]
@@ -10,9 +11,11 @@
 [ext_resource type="Script" path="res://ui/inventory_ui.gd" id="6_f00rt"]
 [ext_resource type="Theme" uid="uid://d1t08nb7i4mnk" path="res://assets/themes/default_theme.tres" id="6_gcd55"]
 [ext_resource type="Script" path="res://handlers/goal_handler.gd" id="6_i0ysj"]
+[ext_resource type="Script" path="res://goals/class_goal_discover_ingredients.gd" id="7_10fnu"]
 [ext_resource type="Texture2D" uid="uid://bgqsfuuqglwj6" path="res://assets/ui/ingredients_icon.png" id="7_in5lr"]
 [ext_resource type="Texture2D" uid="uid://5aeky0noulx5" path="res://assets/ui/inventory_icon.png" id="8_aq8sq"]
 [ext_resource type="Script" path="res://ui/daycycle.gd" id="8_j7mc2"]
+[ext_resource type="Script" path="res://goals/class_goal_brew_potions.gd" id="8_u7yya"]
 [ext_resource type="Texture2D" uid="uid://d3ocb3kp057de" path="res://assets/ingredients/amber.png" id="9_adc2n"]
 [ext_resource type="PackedScene" uid="uid://03yuses2lmgk" path="res://drops/drop.tscn" id="11_2wh48"]
 [ext_resource type="Script" path="res://handlers/event_handler.gd" id="11_gwlwf"]
@@ -286,6 +289,9 @@ thickness = 5
 [node name="Game" type="Node2D"]
 script = ExtResource("1_me1qu")
 
+[node name="SettingsHandler" type="Node2D" parent="."]
+script = ExtResource("2_ls32i")
+
 [node name="LocationHandler" type="Node2D" parent="."]
 script = ExtResource("3_gudru")
 
@@ -327,6 +333,14 @@ script = ExtResource("5_11q8u")
 
 [node name="GoalHandler" type="Node2D" parent="."]
 script = ExtResource("6_i0ysj")
+
+[node name="DiscoverIngredientsGoal" type="Node2D" parent="GoalHandler"]
+script = ExtResource("7_10fnu")
+goal_increments = [3, 10, 20]
+
+[node name="BrewPotionsGoal" type="Node2D" parent="GoalHandler"]
+script = ExtResource("8_u7yya")
+goal_increments = [5, 10, 15]
 
 [node name="TimeHandler" type="CanvasModulate" parent="."]
 script = ExtResource("8_j7mc2")
@@ -452,7 +466,6 @@ type = "ingredient"
 item = "bashu_powder"
 
 [node name="InventoryUI" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("6_f00rt")
 
 [node name="MarginContainer" type="MarginContainer" parent="InventoryUI"]
@@ -612,6 +625,7 @@ layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_43jf3")
 
 [node name="MarginContainer" type="MarginContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 0
@@ -621,6 +635,8 @@ theme_override_constants/margin_bottom = 15
 
 [node name="InventoryScrollContainer" type="ScrollContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
+visible = false
+clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("6_gcd55")
@@ -637,7 +653,7 @@ columns = 5
 
 [node name="GoalsScrollContainer" type="ScrollContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
-visible = false
+clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("6_gcd55")
@@ -656,6 +672,7 @@ theme_override_constants/v_separation = 20
 [node name="IngredientsScrollContainer" type="ScrollContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 visible = false
+clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("6_gcd55")
@@ -673,6 +690,7 @@ columns = 5
 [node name="PotionsScrollContainer" type="ScrollContainer" parent="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 visible = false
+clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("6_gcd55")

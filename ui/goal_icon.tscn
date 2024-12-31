@@ -20,7 +20,7 @@ expand_margin_left = 20.0
 expand_margin_right = 20.0
 
 [node name="GoalIcon" type="PanelContainer"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(275, 0)
 theme_override_styles/panel = SubResource("StyleBoxFlat_xs3hj")
 script = ExtResource("1_y471t")
 
@@ -33,19 +33,22 @@ theme_override_constants/margin_bottom = 10
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
-alignment = 1
+alignment = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="TitleLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="TitleLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 theme = ExtResource("1_jwgkq")
-text = "Brew 5 Potions"
-horizontal_alignment = 2
+theme_override_font_sizes/normal_font_size = 15
+text = "Brew 5 Combat Potions"
+fit_content = true
+scroll_active = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -76,13 +79,13 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 mouse_filter = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 5
 
 [node name="CompleteButton" type="Button" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(48, 32)
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 8
 size_flags_vertical = 4
 mouse_filter = 1
 theme = ExtResource("1_jwgkq")

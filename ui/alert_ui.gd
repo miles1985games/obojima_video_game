@@ -21,6 +21,7 @@ func spawn_interact(text):
 	var new_panel = interact_panel.instantiate()
 	margin_container.add_child(new_panel)
 	new_panel.label.text = text
+	World.tween_handler.text_crawl(new_panel.label)
 
 func interact_with_npc(interactable):
 	if !interactable.quest_id.is_empty():

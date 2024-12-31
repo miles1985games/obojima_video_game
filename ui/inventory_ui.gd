@@ -130,6 +130,7 @@ func spawn_inventory():
 			new_icon.pressed.connect(inventory_icon_pressed.bind(new_icon))
 
 func inventory_icon_pressed(new_icon):
+	World.tween_handler.snap_spin(new_icon)
 	match new_icon.type:
 		"ingredient":
 			ingredient_icon_pressed(new_icon.item)
@@ -188,11 +189,19 @@ func goals_button_pressed() -> void:
 	goals_scroll_container.show()
 
 func spawn_goals():
-	for i in goals_grid.get_children():
-		i.queue_free()
-	
+	#for i in goals_grid.get_children():
+		#i.queue_free()
+	#
 	for goal in World.goal_handler.get_children():
-		var new_goal_icon = goal_icon.instantiate()
-		new_goal_icon.goal = goal
-		new_goal_icon.complete_goal.connect(reset_goals)
-		goals_grid.add_child(new_goal_icon)
+		var index = 0
+		for icon in goals_grid.get_children():
+			if icon.goal == goal:
+				icon.update()
+			else:
+				index += 1
+				
+		if index >= goals_grid.get_children().size():
+			var new_goal_icon = goal_icon.instantiate()
+			new_goal_icon.goal = goal
+			new_goal_icon.complete_goal.connect(reset_goals)
+			goals_grid.add_child(new_goal_icon)

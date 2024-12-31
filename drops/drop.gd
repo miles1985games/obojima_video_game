@@ -32,7 +32,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func drop_animation():
-	var total_distance = Vector2(0, 50)
+	var total_distance = Vector2(0, 25)
 	World.tween_handler.drop(self, total_distance, 2)
 
 func move_area_body_entered(body):

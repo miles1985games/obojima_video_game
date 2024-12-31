@@ -1,11 +1,9 @@
 extends DiscoverGoal
 class_name DiscoverIngredientsGoal
 
-var current_index: int = 0
-var goal_increments: Array = [3,10,20]
-
 func _ready() -> void:
 	super()
+	
 	if goal_increments.size() > current_index:
 		goal_amount = goal_increments[current_index]
 	

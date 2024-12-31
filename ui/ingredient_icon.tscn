@@ -76,3 +76,5 @@ script = ExtResource("3_f0rv0")
 script = ExtResource("3_4cyc1")
 duration = 0.05
 scale_value = Vector2(1.05, 1.05)
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

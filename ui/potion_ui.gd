@@ -64,7 +64,7 @@ func spawn_ingredients():
 			new_icon.item = i.item
 			grid.add_child(new_icon)
 			new_icon.populate()
-			new_icon.pressed.connect(ingredient_pressed.bind(new_icon.item))
+			new_icon.pressed.connect(ingredient_pressed.bind(new_icon))
 
 func save_recipe(potion_type, potion_id, potion_name, ingredients_array):
 	var temp_array: Array = []
@@ -118,9 +118,11 @@ func recipe_pressed(ingredients_array):
 	for ingredient in ingredients_array:
 		for i in World.active_player.inventory.get_children():
 			if i.item == ingredient:
-				ingredient_pressed(ingredient)
+				ingredient_pressed(i)
 
-func ingredient_pressed(ingredient):
+func ingredient_pressed(icon):
+	World.tween_handler.snap_spin(icon)
+	var ingredient = icon.item
 	for i in chosen_panels:
 		if i.has_meta("ingredient"):
 			pass

@@ -1,6 +1,6 @@
 extends PanelContainer
 
-@onready var label: Label = %Label
+@onready var label: RichTextLabel = %Label
 @onready var next_button: Button = %NextButton
 @onready var quest_delivery_button: Button = %QuestDeliveryButton
 
@@ -17,6 +17,7 @@ signal quest_complete
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	label.visible_characters = 0
 	quest_delivery_button.hide()
 	if quest != null:
 		dialogue = quest.dialogue
@@ -33,6 +34,7 @@ func _ready():
 	
 	if not dialogue.is_empty():
 		label.text = dialogue[dialogue_index]
+		World.tween_handler.text_crawl(label)
 	
 	if interactable != null and interactable.has_method("interact_finished"):
 		dialogue_finished.connect(interactable.interact_finished)
@@ -55,6 +57,7 @@ func next_button_pressed():
 				interactable.check_dialogue(modified_dialogue)
 		else:
 			label.text = new_dialogue
+			World.tween_handler.text_crawl(label)
 	else:
 		dialogue_finished.emit()
 		queue_free()

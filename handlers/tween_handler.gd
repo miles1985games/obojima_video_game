@@ -39,3 +39,37 @@ func fade_in(node, duration):
 	await new_tween.finished
 	
 	return true
+
+func snap_spin(node):
+	if node is Control:
+		node.pivot_offset = node.size / 2
+	
+	var initial_rot = node.rotation
+	var initial_scl = node.scale
+	
+	var rot_tween_1 = create_tween()
+	rot_tween_1.tween_property(node, "rotation", initial_rot + .1, .05)
+	var scale_tween_1 = create_tween()
+	scale_tween_1.tween_property(node, "scale", initial_scl - Vector2(.2,.1), .05)
+	await rot_tween_1.finished
+	var rot_tween_2 = create_tween()
+	rot_tween_2.tween_property(node, "rotation", initial_rot - .1, .1)
+	var scale_tween_2 = create_tween()
+	scale_tween_2.tween_property(node, "scale", initial_scl + Vector2(.1,.05), .1)
+	await rot_tween_2.finished
+	var rot_tween_3 = create_tween()
+	rot_tween_3.tween_property(node, "rotation", initial_rot, .5).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	var scale_tween_3 = create_tween()
+	scale_tween_3.tween_property(node, "scale", initial_scl, .5).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	await rot_tween_3.finished
+
+	return true
+
+func text_crawl(node: RichTextLabel) -> bool:
+	node.visible_characters = 0
+	var speed = World.settings_handler.text_scroll_speed
+	var tween = create_tween()
+	tween.tween_property(node, "visible_characters", node.get_total_character_count(), speed).set_ease(Tween.EASE_OUT)
+	await tween.finished
+	
+	return true

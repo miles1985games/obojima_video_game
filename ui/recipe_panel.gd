@@ -38,4 +38,5 @@ func _ready() -> void:
 			print(i.modulate.a)
 
 func button_pressed() -> void:
+	World.tween_handler.snap_spin(self)
 	recipe_pressed.emit(ingredients)
