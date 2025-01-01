@@ -27,8 +27,7 @@ func _ready():
 			"ingredient":
 				item_name = Ingredients.ingredients_roster[quest.needed_item]["name"]
 		
-		quest_delivery_button.text = "Deliver: " + str(quest.amount_needed) + " " + item_name + \
-		" | " + "Reward: " + quest.reward_name
+		quest_delivery_button.text = "Deliver: " + str(quest.amount_needed) + " " + item_name
 		
 		quest_complete.connect(quest.complete_quest)
 	
@@ -79,6 +78,7 @@ func check_quest_delivery():
 	
 	if item_amount >= amount_needed:
 		quest_delivery_button.disabled = false
+	next_button.text = "No"
 	quest_delivery_button.show()
 
 func quest_delivery_button_pressed() -> void:

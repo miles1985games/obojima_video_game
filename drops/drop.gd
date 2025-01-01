@@ -15,7 +15,6 @@ var max_speed: float = 10000.0
 signal picked_up
 
 func _ready():
-	print(get_parent())
 	state = "dropping"
 	match type:
 		"ingredient":

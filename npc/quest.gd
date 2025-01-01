@@ -19,9 +19,55 @@ var reward: String
 var reward_name: String
 
 func _ready() -> void:
-	match reward_type:
+	find_quest_info()
+
+func find_quest_info() -> void:
+	var quest_info = NpcInfo.quest_roster[quest_id]
+	needed_item_type = quest_info["item_type"]
+	reward_type = quest_info["reward_type"]
+	dialogue = quest_info["dialogue"]
+	reward_dialogue = quest_info["reward_dialogue"]
+	
+	#find random item needing to be delivered
+	if quest_info["item"] == null:
+		needed_item = find_random_item(needed_item_type)
+	else:
+		needed_item = quest_info["item"]
+	
+	#find amount of items needed, random 1 to 3
+	if quest_info["amount"] == null:
+		amount_needed = randi_range(1,3)
+	else:
+		amount_needed = quest_info["amount"]
+	
+	#find random reward and reward subtype, like a combat potion
+	if quest_info["reward"] == null:
+		var r = find_random_reward(reward_type)
+		reward_subtype = r[0]
+		reward = r[1]
+		reward_name = r[2]
+	else:
+		reward_subtype = quest_info["reward_subtype"]
+		reward = quest_info["reward"]
+
+func find_random_item(type) -> String:
+	var item
+	match type:
+		"ingredient":
+			item = Ingredients.ingredients_roster.keys().pick_random()
+	return item
+
+func find_random_reward(type) -> Array:
+	var subtype
+	var reward
+	var n
+	match type:
 		"potion":
-			reward_name = Potions.potions_roster[reward_subtype][reward]["name"]
+			subtype = Potions.potions_roster.keys().pick_random()
+			reward = Potions.potions_roster[subtype].keys().pick_random()
+			n = Potions.potions_roster[subtype][reward]["name"]
+	
+	return [subtype, reward, n]
 
 func complete_quest():
 	var inventory = World.active_player.inventory

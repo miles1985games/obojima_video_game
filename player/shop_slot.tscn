@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjktporuxwbwt"]
+
+[ext_resource type="Theme" uid="uid://d1t08nb7i4mnk" path="res://assets/themes/default_theme.tres" id="1_b5ig7"]
+[ext_resource type="Texture2D" uid="uid://bvybucxlse52j" path="res://assets/ui/potions_icon.png" id="2_3g6jt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gpe0v"]
+bg_color = Color(0.917647, 0.901961, 0.862745, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.458824, 0.286275, 0.188235, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="ShopSlot" type="PanelContainer"]
+custom_minimum_size = Vector2(16, 16)
+offset_right = 16.0
+offset_bottom = 16.0
+theme = ExtResource("1_b5ig7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_gpe0v")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_3g6jt")
+expand_mode = 1
+stretch_mode = 4

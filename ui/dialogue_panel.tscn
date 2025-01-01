@@ -55,8 +55,9 @@ alignment = 1
 [node name="QuestDeliveryButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("1_gi3h5")
 disabled = true
-text = "Deliver: 3 Amber | Reward: Potion"
+text = "Deliver: 3 Amber"
 icon_alignment = 1
 expand_icon = true
 
