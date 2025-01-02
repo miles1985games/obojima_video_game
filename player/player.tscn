@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://crlhmm08kmt4a"]
+[gd_scene load_steps=31 format=3 uid="uid://crlhmm08kmt4a"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_kn8up"]
 [ext_resource type="Texture2D" uid="uid://cq6g5k2e5spnx" path="res://player/spritesheet_player_temp.png" id="1_u1kki"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://player/state_default.gd" id="4_wm8sj"]
 [ext_resource type="Script" path="res://player/state_ui.gd" id="5_24m15"]
 [ext_resource type="Script" path="res://player/inventory.gd" id="5_btu3x"]
+[ext_resource type="Script" path="res://player/state_build_preview.gd" id="7_wuv3o"]
+[ext_resource type="Script" path="res://ui/inventory_node.gd" id="8_pwudw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k2ng2"]
 shader = ExtResource("2_8f07w")
@@ -196,8 +198,18 @@ script = ExtResource("4_wm8sj")
 process_mode = 4
 script = ExtResource("5_24m15")
 
+[node name="build_preview" type="Node2D" parent="StateMachine"]
+process_mode = 4
+script = ExtResource("7_wuv3o")
+view = "side"
+
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("5_btu3x")
+
+[node name="InventoryNode" type="Node2D" parent="Inventory"]
+script = ExtResource("8_pwudw")
+type = "decor"
+item = "shop_table_medium"
 
 [node name="InteractArea" type="Area2D" parent="."]
 position = Vector2(0, -11)

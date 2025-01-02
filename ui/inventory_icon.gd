@@ -11,4 +11,6 @@ func populate():
 			icon = Ingredients.ingredients_roster[item]["icon"]
 		"potion":
 			icon = Potions.potions_roster[subtype][item]["icon"]
+		"decor":
+			icon = Decor.decor_roster[item]["side_sprite"]
 	text = str(stack)

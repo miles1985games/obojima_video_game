@@ -136,6 +136,15 @@ func inventory_icon_pressed(new_icon):
 			ingredient_icon_pressed(new_icon.item)
 		"potion":
 			potion_icon_pressed(new_icon.subtype, new_icon.item)
+		"decor":
+			decor_icon_pressed(new_icon.item)
+
+func decor_icon_pressed(item):
+	var player = World.active_player
+	if player != null:
+		player.preview_item = item
+		player.state_machine.state = "build_preview"
+		hide()
 
 func potions_button_pressed() -> void:
 	reset()
