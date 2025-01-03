@@ -1,9 +1,7 @@
 extends Node2D
 
-@onready var fade_animations = $FX_UI/FadeAnimations
-
 var active_location
-@onready var locations = $"../Locations"
+@onready var locations = get_children()
 
 func _ready():
 	World.location_handler = self
@@ -21,7 +19,7 @@ func change_location(body, from_location, to_location):
 		for i in World.locations_roster.keys():
 			if i == to_location:
 				new_location = World.locations_roster[i].instantiate()
-				locations.add_child(new_location)
+				add_child(new_location)
 				print("New Location Spawned: " + str(i))
 				loaded_location = new_location
 					
@@ -42,6 +40,6 @@ func change_location(body, from_location, to_location):
 		World.tween_handler.fade_in(loaded_location, .2)
 	
 func check_for_loaded_locations(id):
-	for i in locations.get_children():
+	for i in locations:
 		if i.location_id == id:
 			return i

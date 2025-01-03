@@ -2,29 +2,16 @@ extends Node
 
 var npc_roster = {
 	"head_witch" = {
-		"name" = "Head Witch",
+		"type" = "resident",
 		"scene" = load("res://npc/npc_head_witch.tscn"),
-		"schedule" = {
-			8: "home",
-			12: "town",
-			15: "head_witch_house_interior",
-		},
-		"interests" = {
-			"storefront": 5,
-		},
 	},
 	"cat" = {
-		"name" = "Cat",
+		"type" = "resident",
 		"scene" = load("res://npc/npc_cat.tscn"),
-		"schedule" = {
-			8: "town",
-			9: "head_witch_house_interior",
-			16: "home",
-			18: "town",
-		},
-		"interests" = {
-			"storefront": 5,
-		},
+	},
+	"postal_knight" = {
+		"type" = "traveler",
+		"scene" = load("res://npc/npc_mailman.tscn"),
 	},
 }
 

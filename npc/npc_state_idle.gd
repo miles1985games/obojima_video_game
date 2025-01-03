@@ -20,17 +20,10 @@ func _physics_process(delta):
 	owner.sprite.play("stand")
 
 func wander():
-	if owner.active_interests.is_empty():
-		find_random_point()
-		idle_timer.stop()
-		idle_timer.wait_time = idle_time + randf_range(0,6)
-	else:
-		var targeted_interest = find_targeted_interest()
-		if targeted_interest == null:
-			find_random_point()
-		else:
-			set_interest_point(targeted_interest)
-		
+	find_random_point()
+	idle_timer.stop()
+	idle_timer.wait_time = idle_time + randf_range(0,6)
+	
 	state_machine.state = "moving"
 
 func find_random_point():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://3dinw3rcuaqg"]
+[gd_scene load_steps=30 format=3 uid="uid://3dinw3rcuaqg"]
 
 [ext_resource type="Script" path="res://npc/npc_head_witch.gd" id="1_b3k6s"]
 [ext_resource type="Shader" path="res://shaders/pixel_filter.gdshader" id="2_m6dut"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://npc/npc_state_idle.gd" id="5_8c8v2"]
 [ext_resource type="Script" path="res://npc/npc_state_moving.gd" id="6_lmce2"]
 [ext_resource type="Script" path="res://interactables/interactable_npc.gd" id="7_bbvkf"]
-[ext_resource type="Script" path="res://npc/npc_state_entering_location.gd" id="7_e2c5j"]
 [ext_resource type="Script" path="res://npc/npc_state_exiting_location.gd" id="8_0hfrf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kl1y6"]
@@ -176,6 +175,10 @@ npc_id = "head_witch"
 sprite = NodePath("Sprite")
 state_machine = NodePath("StateMachine")
 nav_agent = NodePath("NavAgent")
+schedule = {
+9: "home",
+15: "head_witch_house_interior"
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0)
@@ -200,9 +203,6 @@ script = ExtResource("5_8c8v2")
 
 [node name="moving" type="Node2D" parent="StateMachine"]
 script = ExtResource("6_lmce2")
-
-[node name="entering_location" type="Node2D" parent="StateMachine"]
-script = ExtResource("7_e2c5j")
 
 [node name="exiting_location" type="Node2D" parent="StateMachine"]
 script = ExtResource("8_0hfrf")

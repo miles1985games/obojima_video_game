@@ -5,10 +5,7 @@ class_name NPC
 @export var sprite: AnimatedSprite2D
 @export var state_machine: Node2D
 @export var nav_agent: NavigationAgent2D
-
-var active_interests: Dictionary
-
-var npc_data: Dictionary
+@export var schedule: Dictionary
 
 var current_movespeed: float = 2000.0
 
@@ -26,26 +23,12 @@ func _ready():
 	World.time_handler.time_tick.connect(check_npc_schedule)
 	nav_ready = true
 
-	var npcs = NpcInfo.npc_roster
-	for i in npcs.keys():
-		if i == npc_id:
-			npc_data = npcs[i]
-
 func location_changed(new_location):
 	current_location = new_location
 	if current_location.location_id == targeted_location:
 		targeted_location = ""
 	else:
 		state_machine.state = "exiting_location"
-	
-	check_interests()
-
-func check_interests():
-	active_interests.clear()
-	for interest in npc_data["interests"].keys():
-		for child in current_location.get_children():
-			if child.is_in_group("interest") and child.is_in_group(interest):
-				active_interests[interest] = npc_data["interests"][interest]
 
 func pause_movement():
 	state_machine.process_mode = Node.PROCESS_MODE_DISABLED
@@ -54,11 +37,9 @@ func unpause_movement():
 	state_machine.process_mode = Node.PROCESS_MODE_INHERIT
 
 func check_npc_schedule(day, hour, minute):
-	if npc_data != null:
-		if npc_data["schedule"].keys().has(hour) and targeted_location.is_empty():
-			var new_location = npc_data["schedule"][hour]
+	if schedule != null:
+		if schedule.keys().has(hour) and targeted_location.is_empty():
+			var new_location = schedule[hour]
 			if current_location.location_id != new_location:
 				targeted_location = new_location
 				state_machine.state = "exiting_location"
-			#else:
-				#state_machine.state = "idle"

@@ -15,7 +15,7 @@ func _ready():
 	
 	await get_tree().create_timer(.1).timeout
 	World.time_handler.time_tick.connect(check_ingredient_spawns)
-	for location in World.location_handler.locations.get_children():
+	for location in World.location_handler.locations:
 		active_ingredients[location] = []
 
 func check_ingredient_spawns(day, hour, minute):

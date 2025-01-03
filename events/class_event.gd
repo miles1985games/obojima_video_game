@@ -11,7 +11,7 @@ func spawn_scene(hour):
 		if scene != null and hour != null:
 			var location_id: String = schedule[hour]
 			var location: Node2D
-			var locations: Array = World.location_handler.locations.get_children()
+			var locations: Array = World.location_handler.locations
 			
 			for l in locations:
 				if l.location_id == location_id:

@@ -1,6 +1,7 @@
-[gd_scene load_steps=66 format=3 uid="uid://ctc405b6xqaws"]
+[gd_scene load_steps=62 format=3 uid="uid://ctc405b6xqaws"]
 
 [ext_resource type="Script" path="res://mains/game.gd" id="1_me1qu"]
+[ext_resource type="Script" path="res://handlers/npc_handler.gd" id="1_rtyqm"]
 [ext_resource type="Script" path="res://handlers/settings_handler.gd" id="2_ls32i"]
 [ext_resource type="PackedScene" uid="uid://cbhaf8txxy8n8" path="res://locations/home.tscn" id="2_wtwuq"]
 [ext_resource type="Script" path="res://handlers/location_handler.gd" id="3_gudru"]
@@ -18,7 +19,6 @@
 [ext_resource type="Script" path="res://goals/class_goal_brew_potions.gd" id="8_u7yya"]
 [ext_resource type="Texture2D" uid="uid://d3ocb3kp057de" path="res://assets/ingredients/amber.png" id="9_adc2n"]
 [ext_resource type="Script" path="res://handlers/event_handler.gd" id="11_gwlwf"]
-[ext_resource type="PackedScene" uid="uid://bx483ceyr3kyq" path="res://locations/town.tscn" id="11_qk8eh"]
 [ext_resource type="Texture2D" uid="uid://dl5lj4dg3g324" path="res://shaders/daynightcycle-gradient-texture.tres" id="11_udcrd"]
 [ext_resource type="Script" path="res://ui/alert_ui.gd" id="12_4damj"]
 [ext_resource type="Texture2D" uid="uid://l5volsi2544r" path="res://assets/ui/goals_icon.png" id="12_dhkal"]
@@ -34,95 +34,17 @@
 [ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="19_bbuib"]
 [ext_resource type="PackedScene" uid="uid://ck72usntfodpk" path="res://events/spirit_train/event_spirit_train.tscn" id="30_6robm"]
 
-[sub_resource type="Animation" id="Animation_mm8lr"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BlackScreen:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BlackScreen:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_e3le0"]
-resource_name = "fade_in"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BlackScreen:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.0333334, 0.266667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BlackScreen:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.433333),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_kkxkl"]
-resource_name = "fade_to_black"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BlackScreen:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.0333333, 0.333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BlackScreen:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.0333333),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jn8jo"]
-_data = {
-"RESET": SubResource("Animation_mm8lr"),
-"fade_in": SubResource("Animation_e3le0"),
-"fade_to_black": SubResource("Animation_kkxkl")
-}
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dc52l"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.921569, 0.901961, 0.858824, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.501961, 0.345098, 0.247059, 1)
 
 [sub_resource type="Animation" id="Animation_go4h5"]
 length = 0.001
@@ -158,18 +80,6 @@ _data = {
 "RESET": SubResource("Animation_go4h5"),
 "bounce": SubResource("Animation_dgtae")
 }
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dc52l"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0.921569, 0.901961, 0.858824, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.501961, 0.345098, 0.247059, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_43jf3"]
 color = Color(0.490196, 0.321569, 0.239216, 1)
@@ -291,56 +201,6 @@ script = ExtResource("1_me1qu")
 [node name="SettingsHandler" type="Node2D" parent="."]
 script = ExtResource("2_ls32i")
 
-[node name="LocationHandler" type="Node2D" parent="."]
-script = ExtResource("3_gudru")
-
-[node name="FX_UI" type="CanvasLayer" parent="LocationHandler"]
-
-[node name="BlackScreen" type="ColorRect" parent="LocationHandler/FX_UI"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="FadeAnimations" type="AnimationPlayer" parent="LocationHandler/FX_UI"]
-libraries = {
-"": SubResource("AnimationLibrary_jn8jo")
-}
-
-[node name="InteractHandler" type="Node2D" parent="."]
-script = ExtResource("3_jpbie")
-
-[node name="Arrow" type="Node2D" parent="InteractHandler"]
-visible = false
-
-[node name="ArrowSprite" type="Sprite2D" parent="InteractHandler/Arrow"]
-z_index = 5
-texture_filter = 1
-texture = ExtResource("4_ht0s1")
-
-[node name="ArrowAnimation" type="AnimationPlayer" parent="InteractHandler/Arrow"]
-libraries = {
-"": SubResource("AnimationLibrary_rwj84")
-}
-autoplay = "bounce"
-
-[node name="TweenHandler" type="Node2D" parent="."]
-script = ExtResource("5_11q8u")
-
-[node name="GoalHandler" type="Node2D" parent="."]
-script = ExtResource("6_i0ysj")
-
-[node name="DiscoverIngredientsGoal" type="Node2D" parent="GoalHandler"]
-script = ExtResource("7_10fnu")
-goal_increments = [3, 10, 20]
-
-[node name="BrewPotionsGoal" type="Node2D" parent="GoalHandler"]
-script = ExtResource("8_u7yya")
-goal_increments = [5, 10, 15]
-
 [node name="TimeHandler" type="CanvasModulate" parent="."]
 script = ExtResource("8_j7mc2")
 gradient = ExtResource("11_udcrd")
@@ -385,6 +245,40 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_dc52l")
 text = "12:00"
 
+[node name="TweenHandler" type="Node2D" parent="."]
+script = ExtResource("5_11q8u")
+
+[node name="InteractHandler" type="Node2D" parent="."]
+script = ExtResource("3_jpbie")
+
+[node name="Arrow" type="Node2D" parent="InteractHandler"]
+visible = false
+
+[node name="ArrowSprite" type="Sprite2D" parent="InteractHandler/Arrow"]
+z_index = 5
+texture_filter = 1
+texture = ExtResource("4_ht0s1")
+
+[node name="ArrowAnimation" type="AnimationPlayer" parent="InteractHandler/Arrow"]
+libraries = {
+"": SubResource("AnimationLibrary_rwj84")
+}
+autoplay = "bounce"
+
+[node name="NPCHandler" type="Node2D" parent="."]
+script = ExtResource("1_rtyqm")
+
+[node name="GoalHandler" type="Node2D" parent="."]
+script = ExtResource("6_i0ysj")
+
+[node name="DiscoverIngredientsGoal" type="Node2D" parent="GoalHandler"]
+script = ExtResource("7_10fnu")
+goal_increments = [3, 10, 20]
+
+[node name="BrewPotionsGoal" type="Node2D" parent="GoalHandler"]
+script = ExtResource("8_u7yya")
+goal_increments = [5, 10, 15]
+
 [node name="EventHandler" type="Node2D" parent="."]
 script = ExtResource("11_gwlwf")
 
@@ -393,18 +287,15 @@ script = ExtResource("11_gwlwf")
 [node name="IngredientHandler" type="Node2D" parent="."]
 script = ExtResource("16_4cr7l")
 
-[node name="Locations" type="Node2D" parent="."]
+[node name="LocationHandler" type="Node2D" parent="."]
+script = ExtResource("3_gudru")
 
-[node name="Home" parent="Locations" instance=ExtResource("2_wtwuq")]
+[node name="Home" parent="LocationHandler" instance=ExtResource("2_wtwuq")]
 
-[node name="HomeInterior" parent="Locations" instance=ExtResource("4_p60nc")]
+[node name="HomeInterior" parent="LocationHandler" instance=ExtResource("4_p60nc")]
 position = Vector2(-1235, -1455)
 
-[node name="Town" parent="Locations" instance=ExtResource("11_qk8eh")]
-y_sort_enabled = true
-position = Vector2(2776, 1)
-
-[node name="HeadWitchHouseInterior" parent="Locations" instance=ExtResource("12_mbbd5")]
+[node name="HeadWitchHouseInterior" parent="LocationHandler" instance=ExtResource("12_mbbd5")]
 position = Vector2(1004, -1443)
 
 [node name="InventoryUI" type="CanvasLayer" parent="."]

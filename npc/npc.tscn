@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://btm3vuit4nshb"]
+[gd_scene load_steps=30 format=3 uid="uid://btm3vuit4nshb"]
 
 [ext_resource type="Script" path="res://npc/class_npc.gd" id="1_ptuc1"]
 [ext_resource type="Shader" path="res://shaders/pixel_filter.gdshader" id="2_44bfi"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://npc/npc_state_idle.gd" id="4_pk472"]
 [ext_resource type="Script" path="res://npc/npc_state_moving.gd" id="5_dh3mv"]
 [ext_resource type="Script" path="res://interactables/interactable_npc.gd" id="6_n2eei"]
-[ext_resource type="Script" path="res://npc/npc_state_entering_location.gd" id="7_qrqla"]
 [ext_resource type="Script" path="res://npc/npc_state_exiting_location.gd" id="8_4s2fo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kl1y6"]
@@ -199,9 +198,6 @@ script = ExtResource("4_pk472")
 
 [node name="moving" type="Node2D" parent="StateMachine"]
 script = ExtResource("5_dh3mv")
-
-[node name="entering_location" type="Node2D" parent="StateMachine"]
-script = ExtResource("7_qrqla")
 
 [node name="exiting_location" type="Node2D" parent="StateMachine"]
 script = ExtResource("8_4s2fo")

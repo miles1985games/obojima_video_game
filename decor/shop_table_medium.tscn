@@ -14,7 +14,7 @@ size = Vector2(80, 26)
 [node name="MediumShopTable" type="Node2D" node_paths=PackedStringArray("front", "side")]
 script = ExtResource("1_7j7sb")
 item = "shop_table_medium"
-view = "side"
+view = "front"
 front = NodePath("Front")
 side = NodePath("Side")
 
