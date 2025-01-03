@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cui2le1bgrmx2"]
+[gd_scene load_steps=37 format=3 uid="uid://cui2le1bgrmx2"]
 
 [ext_resource type="Script" path="res://npc/npc_mailman.gd" id="1_4uirm"]
 [ext_resource type="Shader" path="res://shaders/pixel_filter.gdshader" id="2_8tnwe"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://npc/npc_state_idle.gd" id="5_2f1u2"]
 [ext_resource type="Script" path="res://npc/npc_state_moving.gd" id="6_ckqsj"]
 [ext_resource type="Script" path="res://npc/npc_state_exiting_location.gd" id="7_ts2bk"]
-[ext_resource type="Script" path="res://interactables/interactable_npc.gd" id="8_p7dhb"]
+[ext_resource type="Script" path="res://npc/npc_state_buying.gd" id="8_ytn27"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kl1y6"]
 radius = 6.0
@@ -219,9 +219,6 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6yk21"]
-size = Vector2(20, 33)
-
 [node name="Mailman" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "state_machine", "nav_agent")]
 y_sort_enabled = true
 collision_layer = 8
@@ -236,6 +233,7 @@ schedule = {
 9: "home_interior",
 11: "home"
 }
+interact_text = "The postal knight is busy."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0)
@@ -264,19 +262,12 @@ script = ExtResource("6_ckqsj")
 [node name="exiting_location" type="Node2D" parent="StateMachine"]
 script = ExtResource("7_ts2bk")
 
+[node name="buying" type="Node2D" parent="StateMachine"]
+script = ExtResource("8_ytn27")
+
 [node name="NavAgent" type="NavigationAgent2D" parent="."]
 path_desired_distance = 2.0
 target_desired_distance = 2.0
 simplify_path = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 debug_path_custom_line_width = 2.0
-
-[node name="InteractableNPC" type="Area2D" parent="."]
-collision_layer = 2
-script = ExtResource("8_p7dhb")
-dialogue = PackedStringArray("I can\'t wait to see what you have in your shop today!")
-interact_text = "They don't feel like talking to you."
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableNPC"]
-position = Vector2(0, -10.5)
-shape = SubResource("RectangleShape2D_6yk21")

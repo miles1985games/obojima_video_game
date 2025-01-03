@@ -18,4 +18,6 @@ func set_colors_black():
 
 
 func _on_pressed():
-	World.tween_handler.snap_spin(self)
+	await get_tree().process_frame
+	if !is_queued_for_deletion():
+		World.tween_handler.snap_spin(self)

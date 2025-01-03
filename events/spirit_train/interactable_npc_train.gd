@@ -1,4 +1,4 @@
-extends InteractableNPC
+extends NPC
 
 var has_shovel: bool = false
 

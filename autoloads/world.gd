@@ -11,9 +11,11 @@ var event_handler: Node2D
 var settings_handler: Node2D
 var ingredient_handler: Node2D
 var npc_handler: Node2D
+var shop_handler: Node2D
 
 var alert_ui: CanvasLayer
 var potion_ui: CanvasLayer
+var shop_slot_ui: CanvasLayer
 
 var locations_roster: Dictionary = {
 	"home" = preload("res://locations/home.tscn"),

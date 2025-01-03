@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://ctc405b6xqaws"]
+[gd_scene load_steps=64 format=3 uid="uid://ctc405b6xqaws"]
 
 [ext_resource type="Script" path="res://mains/game.gd" id="1_me1qu"]
 [ext_resource type="Script" path="res://handlers/npc_handler.gd" id="1_rtyqm"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://d3ocb3kp057de" path="res://assets/ingredients/amber.png" id="9_adc2n"]
 [ext_resource type="Script" path="res://handlers/event_handler.gd" id="11_gwlwf"]
 [ext_resource type="Texture2D" uid="uid://dl5lj4dg3g324" path="res://shaders/daynightcycle-gradient-texture.tres" id="11_udcrd"]
+[ext_resource type="Script" path="res://handlers/shop_handler.gd" id="11_y3xef"]
 [ext_resource type="Script" path="res://ui/alert_ui.gd" id="12_4damj"]
 [ext_resource type="Texture2D" uid="uid://l5volsi2544r" path="res://assets/ui/goals_icon.png" id="12_dhkal"]
 [ext_resource type="PackedScene" uid="uid://bhuan11j6eovn" path="res://locations/head_witch_house_interior.tscn" id="12_mbbd5"]
@@ -32,7 +33,7 @@
 [ext_resource type="FontFile" uid="uid://wb7t5kwvgpkd" path="res://assets/fonts/Sneakers Pro Medium.ttf" id="16_8w25p"]
 [ext_resource type="Texture2D" uid="uid://crhjgapbgav6p" path="res://assets/backgrounds/potion_table.png" id="18_rledg"]
 [ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="19_bbuib"]
-[ext_resource type="PackedScene" uid="uid://ck72usntfodpk" path="res://events/spirit_train/event_spirit_train.tscn" id="30_6robm"]
+[ext_resource type="Script" path="res://ui/shop_slot_ui.gd" id="34_j10sc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dc52l"]
 content_margin_left = 5.0
@@ -195,6 +196,18 @@ grow_begin = 0.0
 grow_end = 0.0
 thickness = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ybe3v"]
+bg_color = Color(0.862745, 0.847059, 0.811765, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.498039, 0.341176, 0.25098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_me1qu")
 
@@ -204,7 +217,7 @@ script = ExtResource("2_ls32i")
 [node name="TimeHandler" type="CanvasModulate" parent="."]
 script = ExtResource("8_j7mc2")
 gradient = ExtResource("11_udcrd")
-INGAME_SPEED = 0.5
+INGAME_SPEED = 3.0
 INITIAL_HOUR = 8.0
 
 [node name="DayCycleUI" type="CanvasLayer" parent="TimeHandler"]
@@ -268,6 +281,9 @@ autoplay = "bounce"
 [node name="NPCHandler" type="Node2D" parent="."]
 script = ExtResource("1_rtyqm")
 
+[node name="ShopHandler" type="Node2D" parent="."]
+script = ExtResource("11_y3xef")
+
 [node name="GoalHandler" type="Node2D" parent="."]
 script = ExtResource("6_i0ysj")
 
@@ -281,8 +297,6 @@ goal_increments = [5, 10, 15]
 
 [node name="EventHandler" type="Node2D" parent="."]
 script = ExtResource("11_gwlwf")
-
-[node name="EventSpiritTrain" parent="EventHandler" instance=ExtResource("30_6robm")]
 
 [node name="IngredientHandler" type="Node2D" parent="."]
 script = ExtResource("16_4cr7l")
@@ -1017,9 +1031,83 @@ layout_mode = 2
 mouse_filter = 2
 alignment = 2
 
+[node name="ShopSlotUI" type="CanvasLayer" parent="."]
+script = ExtResource("34_j10sc")
+
+[node name="MarginContainer" type="MarginContainer" parent="ShopSlotUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 475
+theme_override_constants/margin_top = 250
+theme_override_constants/margin_right = 475
+theme_override_constants/margin_bottom = 250
+
+[node name="PanelContainer" type="PanelContainer" parent="ShopSlotUI/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ybe3v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShopSlotUI/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="ShopSlotUI/MarginContainer/PanelContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShopSlotUI/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ShopSlotUI/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_gcd55")
+text = "Choose a potion to sell"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="ShopSlotUI/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("6_gcd55")
+text = "X"
+
+[node name="VSeparator" type="VSeparator" parent="ShopSlotUI/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="PotionsScrollContainer" type="ScrollContainer" parent="ShopSlotUI/MarginContainer/PanelContainer/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("6_gcd55")
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="PotionSelectionGrid" type="GridContainer" parent="ShopSlotUI/MarginContainer/PanelContainer/VBoxContainer/PotionsScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+columns = 4
+
+[node name="ClearPotionButton" type="Button" parent="ShopSlotUI/MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("6_gcd55")
+disabled = true
+text = "Clear Slot"
+
 [connection signal="pressed" from="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/InventoryButton" to="InventoryUI" method="inventory_button_pressed"]
 [connection signal="pressed" from="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/GoalsButton" to="InventoryUI" method="goals_button_pressed"]
 [connection signal="pressed" from="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/IngredientsButton" to="InventoryUI" method="ingredients_button_pressed"]
 [connection signal="pressed" from="InventoryUI/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tabs/PotionsButton" to="InventoryUI" method="potions_button_pressed"]
 [connection signal="pressed" from="PotionUI/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/VBoxContainer/BrewButton" to="PotionUI" method="brew_button_pressed"]
 [connection signal="pressed" from="PotionUI/MarginContainer/CloseButton" to="PotionUI" method="close_button_pressed"]
+[connection signal="pressed" from="ShopSlotUI/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/CloseButton" to="ShopSlotUI" method="_on_close_button_pressed"]

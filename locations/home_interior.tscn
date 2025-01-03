@@ -501,4 +501,4 @@ shape = SubResource("RectangleShape2D_vkwp8")
 position = Vector2(0, -30)
 
 [node name="MediumShopTable" parent="." instance=ExtResource("8_vvt0b")]
-position = Vector2(51, -31)
+position = Vector2(50, -34)

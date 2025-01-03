@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://btm3vuit4nshb"]
+[gd_scene load_steps=28 format=3 uid="uid://btm3vuit4nshb"]
 
 [ext_resource type="Script" path="res://npc/class_npc.gd" id="1_ptuc1"]
 [ext_resource type="Shader" path="res://shaders/pixel_filter.gdshader" id="2_44bfi"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://npc/npc_state_machine.gd" id="3_5dg72"]
 [ext_resource type="Script" path="res://npc/npc_state_idle.gd" id="4_pk472"]
 [ext_resource type="Script" path="res://npc/npc_state_moving.gd" id="5_dh3mv"]
-[ext_resource type="Script" path="res://interactables/interactable_npc.gd" id="6_n2eei"]
 [ext_resource type="Script" path="res://npc/npc_state_exiting_location.gd" id="8_4s2fo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kl1y6"]
@@ -163,9 +162,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6yk21"]
-size = Vector2(20, 33)
-
 [node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "state_machine", "nav_agent")]
 y_sort_enabled = true
 collision_layer = 8
@@ -208,14 +204,3 @@ target_desired_distance = 16.0
 simplify_path = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 debug_path_custom_line_width = 2.0
-
-[node name="InteractableNPC" type="Area2D" parent="."]
-collision_layer = 2
-script = ExtResource("6_n2eei")
-dialogue = PackedStringArray("Welcome to town!", "Press WASD to move, left click to interact, TAB to open your inventory, and ESC to quit.", "I see some ingredients over there...")
-quest_id = "0"
-interact_text = "They don't feel like talking to you."
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableNPC"]
-position = Vector2(0, -10.5)
-shape = SubResource("RectangleShape2D_6yk21")

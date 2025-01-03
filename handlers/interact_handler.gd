@@ -7,6 +7,7 @@ var targeted_interactable
 signal interacted
 signal npc_interacted
 signal cauldron_interacted
+signal slot_interacted
 
 func _ready():
 	World.interact_handler = self
@@ -15,6 +16,7 @@ func _ready():
 	interacted.connect(World.alert_ui.spawn_interact)
 	cauldron_interacted.connect(World.potion_ui.open)
 	npc_interacted.connect(World.alert_ui.interact_with_npc)
+	slot_interacted.connect(World.shop_slot_ui.show_ui)
 
 func add_interactable(interactable):
 	in_range_interactables.append(interactable)
@@ -49,6 +51,8 @@ func _input(event):
 func interact():
 	if targeted_interactable is Cauldron:
 		cauldron_interacted.emit()
+	elif targeted_interactable is ShopSlot:
+		slot_interacted.emit(targeted_interactable)
 	elif targeted_interactable is DigSpot:
 		var key_items = World.active_player.key_items.get_children()
 		var index = 0
@@ -59,7 +63,7 @@ func interact():
 				index += 1
 		if index >= key_items.size():
 			interacted.emit(targeted_interactable.interact_text)
-	elif targeted_interactable is InteractableNPC:
+	elif targeted_interactable is NPC:
 		npc_interacted.emit(targeted_interactable)
 	else:
 		interacted.emit(targeted_interactable.interact_text)

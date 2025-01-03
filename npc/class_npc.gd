@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Interactable
 class_name NPC
 
 @export var npc_id: String
@@ -6,6 +6,9 @@ class_name NPC
 @export var state_machine: Node2D
 @export var nav_agent: NavigationAgent2D
 @export var schedule: Dictionary
+@export var dialogue: PackedStringArray
+@export var quest_id: String
+var quest_node: PackedScene = preload("res://npc/quest.tscn")
 
 var current_movespeed: float = 2000.0
 
@@ -13,6 +16,7 @@ var current_location: Node2D
 var targeted_location: String
 
 var nav_ready: bool = false
+signal dialogue_checked
 
 func _ready():
 	current_location = get_parent()
@@ -22,6 +26,20 @@ func _ready():
 		World.active_player.out_ui.connect(unpause_movement)
 	World.time_handler.time_tick.connect(check_npc_schedule)
 	nav_ready = true
+	if !quest_id.is_empty():
+		create_quest(quest_id)
+
+func create_quest(id):
+	var new_quest = quest_node.instantiate()
+	new_quest.quest_id = id
+	add_child(new_quest)
+
+func check_dialogue(check):
+	if has_method(check):
+		call(check)
+
+func interact_finished():
+	pass
 
 func location_changed(new_location):
 	current_location = new_location

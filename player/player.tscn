@@ -211,10 +211,22 @@ script = ExtResource("8_pwudw")
 type = "decor"
 item = "shop_table_medium"
 
+[node name="InventoryNode2" type="Node2D" parent="Inventory"]
+script = ExtResource("8_pwudw")
+type = "potion"
+subtype = "combat"
+item = "2"
+
+[node name="InventoryNode3" type="Node2D" parent="Inventory"]
+script = ExtResource("8_pwudw")
+type = "potion"
+subtype = "combat"
+item = "5"
+
 [node name="InteractArea" type="Area2D" parent="."]
 position = Vector2(0, -11)
 collision_layer = 0
-collision_mask = 2
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
 shape = SubResource("CircleShape2D_87mut")

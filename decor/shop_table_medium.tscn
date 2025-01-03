@@ -18,43 +18,43 @@ view = "front"
 front = NodePath("Front")
 side = NodePath("Side")
 
-[node name="Front" type="StaticBody2D" parent="."]
+[node name="Side" type="StaticBody2D" parent="."]
 visible = false
 collision_layer = 2
 
-[node name="FrontSprite" type="Sprite2D" parent="Front"]
+[node name="FrontSprite" type="Sprite2D" parent="Side"]
 texture = ExtResource("2_bgb1j")
 
-[node name="FrontCollision" type="CollisionShape2D" parent="Front"]
+[node name="FrontCollision" type="CollisionShape2D" parent="Side"]
 position = Vector2(-1, 6)
 shape = SubResource("RectangleShape2D_is6eh")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Front"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Side"]
 offset_left = -15.0
 offset_top = -38.0
 offset_right = 13.0
 offset_bottom = 19.0
 
-[node name="ShopSlot" parent="Front/VBoxContainer" instance=ExtResource("3_puxs4")]
+[node name="ShopSlot" parent="Side/VBoxContainer" instance=ExtResource("3_puxs4")]
 layout_mode = 2
 
-[node name="ShopSlot2" parent="Front/VBoxContainer" instance=ExtResource("3_puxs4")]
+[node name="ShopSlot2" parent="Side/VBoxContainer" instance=ExtResource("3_puxs4")]
 layout_mode = 2
 
-[node name="ShopSlot3" parent="Front/VBoxContainer" instance=ExtResource("3_puxs4")]
+[node name="ShopSlot3" parent="Side/VBoxContainer" instance=ExtResource("3_puxs4")]
 layout_mode = 2
 
-[node name="Side" type="StaticBody2D" parent="."]
+[node name="Front" type="StaticBody2D" parent="."]
 collision_layer = 2
 
-[node name="SideSprite" type="Sprite2D" parent="Side"]
+[node name="SideSprite" type="Sprite2D" parent="Front"]
 texture = ExtResource("1_fuwvm")
 
-[node name="SideCollision" type="CollisionShape2D" parent="Side"]
+[node name="SideCollision" type="CollisionShape2D" parent="Front"]
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_bncf1")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Side"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Front"]
 offset_left = -39.0
 offset_top = -20.0
 offset_right = 38.0
@@ -62,11 +62,11 @@ offset_bottom = 3.0
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="ShopSlot" parent="Side/HBoxContainer" instance=ExtResource("3_puxs4")]
+[node name="ShopSlot" parent="Front/HBoxContainer" instance=ExtResource("3_puxs4")]
 layout_mode = 2
 
-[node name="ShopSlot2" parent="Side/HBoxContainer" instance=ExtResource("3_puxs4")]
+[node name="ShopSlot2" parent="Front/HBoxContainer" instance=ExtResource("3_puxs4")]
 layout_mode = 2
 
-[node name="ShopSlot3" parent="Side/HBoxContainer" instance=ExtResource("3_puxs4")]
+[node name="ShopSlot3" parent="Front/HBoxContainer" instance=ExtResource("3_puxs4")]
 layout_mode = 2
