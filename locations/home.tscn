@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=4 uid="uid://cbhaf8txxy8n8"]
+[gd_scene load_steps=50 format=4 uid="uid://cbhaf8txxy8n8"]
 
 [ext_resource type="Script" path="res://locations/home.gd" id="1_lka2a"]
 [ext_resource type="Texture2D" uid="uid://bftayvr7hhear" path="res://assets/backgrounds/mt_arbora_blurred.png" id="2_0v348"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cfo8a0a43kl4p" path="res://npc/npc_cat.tscn" id="12_884qw"]
 [ext_resource type="Script" path="res://locations/class_npc_enter_point.gd" id="13_oevk8"]
 [ext_resource type="Script" path="res://locations/class_npc_exit_point.gd" id="14_lps4i"]
+[ext_resource type="Script" path="res://locations/class_npc_point_of_interest.gd" id="15_6tlbq"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5v43g"]
 vertices = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
@@ -922,3 +923,7 @@ script = ExtResource("13_oevk8")
 [node name="NPCExitPoint" type="Node2D" parent="."]
 position = Vector2(1579, 127)
 script = ExtResource("14_lps4i")
+
+[node name="PointOfInterest" type="Node2D" parent="."]
+position = Vector2(-40, 122)
+script = ExtResource("15_6tlbq")

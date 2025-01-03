@@ -20,7 +20,11 @@ func _physics_process(delta):
 	owner.sprite.play("stand")
 
 func wander():
-	find_random_point()
+	var random_poi = find_poi()
+	if random_poi == null:
+		find_random_point()
+	else:
+		set_poi_point(random_poi)
 	idle_timer.stop()
 	idle_timer.wait_time = idle_time + randf_range(0,6)
 	
@@ -41,44 +45,45 @@ func find_random_point():
 	
 	return total_vector
 
-func find_targeted_interest():
+func find_poi():
 	var targets: Array
-	var rng
-	for i in owner.active_interests.keys():
-		if owner.active_interests[i] == 5:
-			rng = randi_range(1,15)
-		if owner.active_interests[i] == 4:
-			rng = randi_range(1,20)
-		if owner.active_interests[i] == 3:
-			rng = randi_range(1,25)
-		if owner.active_interests[i] == 2:
-			rng = randi_range(1,30)
-		if owner.active_interests[i] == 1:
-			rng = randi_range(1,35)
 	
-		if rng < 10:
-			targets.append([i, owner.active_interests[i]])
-			targets.sort_custom(sort_ascending)
+	for node in owner.current_location.get_children():
+		if node is PointOfInterest:
+			targets.append(node)
+	var target
+	if targets.size() > 0:
+		target = targets.pick_random()
 	
-	var target = targets.pop_back()
 	return target
 
-func sort_ascending(a, b):
-	if a[1] < b[1]:
-		return true
-	return false
-
-func set_interest_point(interest):
-	var target
-	for child in owner.current_location.get_children():
-		if child.is_in_group("interest") and child.is_in_group(interest[0]):
-			target = child
-	
-	var random_vector = Vector2(randf_range(-50,50),randf_range(-50,50))
+func set_poi_point(poi):
+	var target = poi
+	var random_vector = Vector2(randf_range(-200,200),randf_range(-200,200))
 	var total_vector = target.global_position + random_vector
 	if target != null:
 		owner.nav_agent.target_position = total_vector
 		while not owner.nav_agent.is_target_reachable():
-			random_vector = Vector2(randf_range(-50,50),randf_range(-50,50))
+			random_vector = Vector2(randf_range(-200,200),randf_range(-200,200))
 			total_vector = target.global_position + random_vector
 			owner.nav_agent.target_position = total_vector
+
+#func sort_ascending(a, b):
+	#if a[1] < b[1]:
+		#return true
+	#return false
+#
+#func set_interest_point(interest):
+	#var target
+	#for child in owner.current_location.get_children():
+		#if child.is_in_group("interest") and child.is_in_group(interest[0]):
+			#target = child
+	#
+	#var random_vector = Vector2(randf_range(-50,50),randf_range(-50,50))
+	#var total_vector = target.global_position + random_vector
+	#if target != null:
+		#owner.nav_agent.target_position = total_vector
+		#while not owner.nav_agent.is_target_reachable():
+			#random_vector = Vector2(randf_range(-50,50),randf_range(-50,50))
+			#total_vector = target.global_position + random_vector
+			#owner.nav_agent.target_position = total_vector

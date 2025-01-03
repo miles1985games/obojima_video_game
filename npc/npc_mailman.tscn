@@ -274,8 +274,7 @@ debug_path_custom_line_width = 2.0
 [node name="InteractableNPC" type="Area2D" parent="."]
 collision_layer = 2
 script = ExtResource("8_p7dhb")
-dialogue = PackedStringArray("Welcome to town!", "Press WASD to move, left click to interact, TAB to open your inventory, and ESC to quit.", "I see some ingredients over there...")
-quest_id = "0"
+dialogue = PackedStringArray("I can\'t wait to see what you have in your shop today!")
 interact_text = "They don't feel like talking to you."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableNPC"]
