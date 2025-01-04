@@ -1,8 +1,6 @@
 extends CanvasModulate
 
 @export var gradient: GradientTexture1D
-@onready var day_cycle_ui = $DayCycleUI
-
 @export var INGAME_SPEED = 1.0
 @export var INITIAL_HOUR: float
 
@@ -41,5 +39,4 @@ func recalculate_time() -> void:
 	
 	if past_minute != minute:
 		past_minute = minute
-		day_cycle_ui.time_tick(day, hour, minute)
 		time_tick.emit(day, hour, minute)

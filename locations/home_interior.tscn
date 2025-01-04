@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://c4bl72owsiskt"]
+[gd_scene load_steps=25 format=4 uid="uid://c4bl72owsiskt"]
 
 [ext_resource type="Texture2D" uid="uid://dsltri33fclsj" path="res://assets/tilesets/home_interior/Floors.png" id="1_5ks5s"]
 [ext_resource type="Script" path="res://locations/home_interior.gd" id="1_mh43u"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c8kkyfya45cy6" path="res://assets/tilesets/home_interior/All Items.png" id="4_f7dej"]
 [ext_resource type="PackedScene" uid="uid://cbh7cykbfuxbt" path="res://interactables/cauldron.tscn" id="8_3sa6h"]
 [ext_resource type="PackedScene" uid="uid://byv1uy5lxu1hr" path="res://decor/shop_table_medium.tscn" id="8_vvt0b"]
+[ext_resource type="Script" path="res://locations/class_npc_point_of_interest.gd" id="9_30dx8"]
 [ext_resource type="Script" path="res://locations/scene_transition.gd" id="9_m245d"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_cdl6j"]
@@ -483,9 +484,6 @@ tile_set = SubResource("TileSet_4i1wm")
 [node name="Caudron" parent="." instance=ExtResource("8_3sa6h")]
 position = Vector2(-73, -77)
 
-[node name="NPCEnterPoint" type="Node2D" parent="."]
-position = Vector2(0, -40)
-
 [node name="SceneTransition" type="Area2D" parent="." node_paths=PackedStringArray("spawn_point")]
 position = Vector2(0, 29)
 script = ExtResource("9_m245d")
@@ -502,3 +500,7 @@ position = Vector2(0, -30)
 
 [node name="MediumShopTable" parent="." instance=ExtResource("8_vvt0b")]
 position = Vector2(50, -34)
+
+[node name="PointOfInterest" type="Node2D" parent="."]
+position = Vector2(50, -1)
+script = ExtResource("9_30dx8")

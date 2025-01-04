@@ -3,6 +3,7 @@ extends CanvasLayer
 @onready var potion_selection_grid = %PotionSelectionGrid
 var potion_icon = preload("res://ui/potion_icon.tscn")
 @onready var clear_potion_button = %ClearPotionButton
+@onready var panel = $MarginContainer/PanelContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,6 +23,7 @@ func show_ui(slot):
 		clear_potion_button.pressed.connect(clear_potion.bind(slot))
 		clear_potion_button.pressed.connect(World.shop_handler.remove_slot.bind(slot))
 	show()
+	World.tween_handler.snap_spin(panel)
 	await get_tree().create_timer(.1).timeout
 	for icon in potion_selection_grid.get_children():
 		icon.pressed.connect(potion_selected.bind(icon, slot))

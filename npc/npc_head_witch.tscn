@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://3dinw3rcuaqg"]
+[gd_scene load_steps=28 format=3 uid="uid://3dinw3rcuaqg"]
 
 [ext_resource type="Script" path="res://npc/npc_head_witch.gd" id="1_b3k6s"]
 [ext_resource type="Shader" path="res://shaders/pixel_filter.gdshader" id="2_m6dut"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://npc/npc_state_idle.gd" id="5_8c8v2"]
 [ext_resource type="Script" path="res://npc/npc_state_moving.gd" id="6_lmce2"]
 [ext_resource type="Script" path="res://npc/npc_state_exiting_location.gd" id="8_0hfrf"]
-[ext_resource type="Script" path="res://npc/npc_state_buying.gd" id="8_4skir"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kl1y6"]
 radius = 6.0
@@ -206,9 +205,6 @@ script = ExtResource("6_lmce2")
 
 [node name="exiting_location" type="Node2D" parent="StateMachine"]
 script = ExtResource("8_0hfrf")
-
-[node name="buying" type="Node2D" parent="StateMachine"]
-script = ExtResource("8_4skir")
 
 [node name="NavAgent" type="NavigationAgent2D" parent="."]
 path_desired_distance = 2.0

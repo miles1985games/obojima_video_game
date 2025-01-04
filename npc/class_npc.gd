@@ -14,17 +14,21 @@ var current_movespeed: float = 2000.0
 
 var current_location: Node2D
 var targeted_location: String
+var exit_point: NPCExitPoint
 
 var nav_ready: bool = false
 signal dialogue_checked
+signal despawn
 
 func _ready():
 	current_location = get_parent()
+	
 	await get_tree().create_timer(.1).timeout
 	if World.active_player != null:
 		World.active_player.in_ui.connect(pause_movement)
 		World.active_player.out_ui.connect(unpause_movement)
 	World.time_handler.time_tick.connect(check_npc_schedule)
+	despawn.connect(World.npc_handler.despawn_npc)
 	nav_ready = true
 	if !quest_id.is_empty():
 		create_quest(quest_id)
@@ -57,7 +61,14 @@ func unpause_movement():
 func check_npc_schedule(day, hour, minute):
 	if schedule != null:
 		if schedule.keys().has(hour) and targeted_location.is_empty():
-			var new_location = schedule[hour]
-			if current_location.location_id != new_location:
-				targeted_location = new_location
-				state_machine.state = "exiting_location"
+			if schedule[hour] == null:
+				for child in current_location.get_children():
+					if child is NPCExitPoint:
+						exit_point = child
+						nav_agent.target_position = child.global_position
+						state_machine.state = "moving"
+			else:
+				var new_location = schedule[hour]
+				if current_location.location_id != new_location:
+					targeted_location = new_location
+					state_machine.state = "exiting_location"

@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://byv1uy5lxu1hr"]
 
 [ext_resource type="Script" path="res://decor/class_decor_object.gd" id="1_7j7sb"]
-[ext_resource type="Texture2D" uid="uid://bgvb1o1vhgoa5" path="res://assets/objects/decor/sprite_shop_table_medium_side.png" id="1_fuwvm"]
-[ext_resource type="Texture2D" uid="uid://6bwx3wqvymws" path="res://assets/objects/decor/sprite_shop_table_medium_front.png" id="2_bgb1j"]
+[ext_resource type="Texture2D" uid="uid://bgvb1o1vhgoa5" path="res://assets/objects/decor/sprite_shop_table_medium_front.png" id="1_fuwvm"]
+[ext_resource type="Texture2D" uid="uid://6bwx3wqvymws" path="res://assets/objects/decor/sprite_shop_table_medium_side.png" id="2_bgb1j"]
 [ext_resource type="PackedScene" uid="uid://cjktporuxwbwt" path="res://decor/shop_slot.tscn" id="3_puxs4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is6eh"]
@@ -29,20 +29,14 @@ texture = ExtResource("2_bgb1j")
 position = Vector2(-1, 6)
 shape = SubResource("RectangleShape2D_is6eh")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Side"]
-offset_left = -15.0
-offset_top = -38.0
-offset_right = 13.0
-offset_bottom = 19.0
+[node name="ShopSlot" parent="Side" instance=ExtResource("3_puxs4")]
+position = Vector2(0, -30)
 
-[node name="ShopSlot" parent="Side/VBoxContainer" instance=ExtResource("3_puxs4")]
-layout_mode = 2
+[node name="ShopSlot2" parent="Side" instance=ExtResource("3_puxs4")]
+position = Vector2(0, -11)
 
-[node name="ShopSlot2" parent="Side/VBoxContainer" instance=ExtResource("3_puxs4")]
-layout_mode = 2
-
-[node name="ShopSlot3" parent="Side/VBoxContainer" instance=ExtResource("3_puxs4")]
-layout_mode = 2
+[node name="ShopSlot3" parent="Side" instance=ExtResource("3_puxs4")]
+position = Vector2(0, 9)
 
 [node name="Front" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -54,19 +48,11 @@ texture = ExtResource("1_fuwvm")
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_bncf1")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Front"]
-offset_left = -39.0
-offset_top = -20.0
-offset_right = 38.0
-offset_bottom = 3.0
-theme_override_constants/separation = 10
-alignment = 1
+[node name="ShopSlot" parent="Front" instance=ExtResource("3_puxs4")]
+position = Vector2(25, -8)
 
-[node name="ShopSlot" parent="Front/HBoxContainer" instance=ExtResource("3_puxs4")]
-layout_mode = 2
+[node name="ShopSlot2" parent="Front" instance=ExtResource("3_puxs4")]
+position = Vector2(0, -8)
 
-[node name="ShopSlot2" parent="Front/HBoxContainer" instance=ExtResource("3_puxs4")]
-layout_mode = 2
-
-[node name="ShopSlot3" parent="Front/HBoxContainer" instance=ExtResource("3_puxs4")]
-layout_mode = 2
+[node name="ShopSlot3" parent="Front" instance=ExtResource("3_puxs4")]
+position = Vector2(-25, -8)

@@ -27,7 +27,7 @@ func _physics_process(delta):
 	var traveled_distance = owner.global_position.distance_to(last_pos)
 	if is_zero_approx(traveled_distance):
 		stuck_frames += 1
-		if stuck_frames > 20:
+		if stuck_frames > 2:
 			stuck_frames = 0
 			state_machine.state = "idle"
 
@@ -46,3 +46,5 @@ func animate_movement(vector):
 
 func target_reached():
 	state_machine.state = "idle"
+	if owner.exit_point != null and owner.global_position.distance_to(owner.exit_point.global_position) < 50:
+		owner.despawn.emit(owner)

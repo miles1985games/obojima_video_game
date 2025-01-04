@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cfo8a0a43kl4p"]
+[gd_scene load_steps=28 format=3 uid="uid://cfo8a0a43kl4p"]
 
 [ext_resource type="Script" path="res://npc/npc_cat.gd" id="1_mkw32"]
 [ext_resource type="Shader" path="res://shaders/pixel_filter.gdshader" id="2_46m7r"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://npc/npc_state_idle.gd" id="5_fnurv"]
 [ext_resource type="Script" path="res://npc/npc_state_moving.gd" id="6_rpk2j"]
 [ext_resource type="Script" path="res://npc/npc_state_exiting_location.gd" id="8_fe2iw"]
-[ext_resource type="Script" path="res://npc/npc_state_buying.gd" id="8_jhxxj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kl1y6"]
 radius = 6.0
@@ -177,6 +176,7 @@ schedule = {
 9: "head_witch_house_interior",
 11: "home"
 }
+interact_text = "They don't feel like talking to you."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0)
@@ -204,9 +204,6 @@ script = ExtResource("6_rpk2j")
 
 [node name="exiting_location" type="Node2D" parent="StateMachine"]
 script = ExtResource("8_fe2iw")
-
-[node name="buying" type="Node2D" parent="StateMachine"]
-script = ExtResource("8_jhxxj")
 
 [node name="NavAgent" type="NavigationAgent2D" parent="."]
 path_desired_distance = 2.0

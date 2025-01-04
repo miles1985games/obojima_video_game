@@ -20,6 +20,11 @@ func _physics_process(delta):
 	owner.sprite.play("stand")
 
 func wander():
+	if owner is Traveler and owner.targeted_slot != null:
+		owner.nav_agent.target_position = owner.targeted_slot.global_position
+		state_machine.state = "moving"
+		return
+	
 	var random_poi = find_poi()
 	if random_poi == null:
 		find_random_point()
@@ -67,23 +72,3 @@ func set_poi_point(poi):
 			random_vector = Vector2(randf_range(-200,200),randf_range(-200,200))
 			total_vector = target.global_position + random_vector
 			owner.nav_agent.target_position = total_vector
-
-#func sort_ascending(a, b):
-	#if a[1] < b[1]:
-		#return true
-	#return false
-#
-#func set_interest_point(interest):
-	#var target
-	#for child in owner.current_location.get_children():
-		#if child.is_in_group("interest") and child.is_in_group(interest[0]):
-			#target = child
-	#
-	#var random_vector = Vector2(randf_range(-50,50),randf_range(-50,50))
-	#var total_vector = target.global_position + random_vector
-	#if target != null:
-		#owner.nav_agent.target_position = total_vector
-		#while not owner.nav_agent.is_target_reachable():
-			#random_vector = Vector2(randf_range(-50,50),randf_range(-50,50))
-			#total_vector = target.global_position + random_vector
-			#owner.nav_agent.target_position = total_vector

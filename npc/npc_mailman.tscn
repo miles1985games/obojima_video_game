@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cui2le1bgrmx2"]
+[gd_scene load_steps=36 format=3 uid="uid://cui2le1bgrmx2"]
 
 [ext_resource type="Script" path="res://npc/npc_mailman.gd" id="1_4uirm"]
 [ext_resource type="Shader" path="res://shaders/pixel_filter.gdshader" id="2_8tnwe"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://npc/npc_state_idle.gd" id="5_2f1u2"]
 [ext_resource type="Script" path="res://npc/npc_state_moving.gd" id="6_ckqsj"]
 [ext_resource type="Script" path="res://npc/npc_state_exiting_location.gd" id="7_ts2bk"]
-[ext_resource type="Script" path="res://npc/npc_state_buying.gd" id="8_ytn27"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kl1y6"]
 radius = 6.0
@@ -224,6 +223,13 @@ y_sort_enabled = true
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_4uirm")
+needed_potions = {
+"combat": {
+"5": "5"
+},
+"utility": {},
+"whimsy": {}
+}
 npc_id = "postal_knight"
 sprite = NodePath("Sprite")
 state_machine = NodePath("StateMachine")
@@ -231,7 +237,8 @@ nav_agent = NodePath("NavAgent")
 schedule = {
 8: "home",
 9: "home_interior",
-11: "home"
+10: "home",
+11: null
 }
 interact_text = "The postal knight is busy."
 
@@ -261,9 +268,6 @@ script = ExtResource("6_ckqsj")
 
 [node name="exiting_location" type="Node2D" parent="StateMachine"]
 script = ExtResource("7_ts2bk")
-
-[node name="buying" type="Node2D" parent="StateMachine"]
-script = ExtResource("8_ytn27")
 
 [node name="NavAgent" type="NavigationAgent2D" parent="."]
 path_desired_distance = 2.0

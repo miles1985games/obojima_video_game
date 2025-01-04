@@ -24,7 +24,7 @@
 [ext_resource type="Script" path="res://ui/alert_ui.gd" id="12_4damj"]
 [ext_resource type="Texture2D" uid="uid://l5volsi2544r" path="res://assets/ui/goals_icon.png" id="12_dhkal"]
 [ext_resource type="PackedScene" uid="uid://bhuan11j6eovn" path="res://locations/head_witch_house_interior.tscn" id="12_mbbd5"]
-[ext_resource type="Script" path="res://ui/day_cycle_ui.gd" id="12_noqdy"]
+[ext_resource type="Script" path="res://ui/hud.gd" id="12_noqdy"]
 [ext_resource type="Texture2D" uid="uid://bvybucxlse52j" path="res://assets/ui/potions_icon.png" id="12_sslvd"]
 [ext_resource type="Script" path="res://ui/ui_component_hover.gd" id="13_nua8p"]
 [ext_resource type="Texture2D" uid="uid://qm5ba6dvearm" path="res://assets/ui/exclamation.png" id="14_rtfug"]
@@ -34,18 +34,6 @@
 [ext_resource type="Texture2D" uid="uid://crhjgapbgav6p" path="res://assets/backgrounds/potion_table.png" id="18_rledg"]
 [ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="19_bbuib"]
 [ext_resource type="Script" path="res://ui/shop_slot_ui.gd" id="34_j10sc"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dc52l"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0.921569, 0.901961, 0.858824, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.501961, 0.345098, 0.247059, 1)
 
 [sub_resource type="Animation" id="Animation_go4h5"]
 length = 0.001
@@ -81,6 +69,18 @@ _data = {
 "RESET": SubResource("Animation_go4h5"),
 "bounce": SubResource("Animation_dgtae")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dc52l"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.921569, 0.901961, 0.858824, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.501961, 0.345098, 0.247059, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_43jf3"]
 color = Color(0.490196, 0.321569, 0.239216, 1)
@@ -220,44 +220,6 @@ gradient = ExtResource("11_udcrd")
 INGAME_SPEED = 3.0
 INITIAL_HOUR = 8.0
 
-[node name="DayCycleUI" type="CanvasLayer" parent="TimeHandler"]
-script = ExtResource("12_noqdy")
-
-[node name="MarginContainer" type="MarginContainer" parent="TimeHandler/DayCycleUI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 0
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TimeHandler/DayCycleUI/MarginContainer"]
-layout_mode = 2
-
-[node name="DayLabel" type="Label" parent="TimeHandler/DayCycleUI/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource("6_gcd55")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_dc52l")
-text = "Day 1"
-
-[node name="TimeLabel" type="Label" parent="TimeHandler/DayCycleUI/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource("6_gcd55")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_dc52l")
-text = "12:00"
-
 [node name="TweenHandler" type="Node2D" parent="."]
 script = ExtResource("5_11q8u")
 
@@ -311,6 +273,60 @@ position = Vector2(-1235, -1455)
 
 [node name="HeadWitchHouseInterior" parent="LocationHandler" instance=ExtResource("12_mbbd5")]
 position = Vector2(1004, -1443)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("12_noqdy")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer"]
+layout_mode = 2
+
+[node name="LeftSide" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="DayLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/LeftSide"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("6_gcd55")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_dc52l")
+text = "Day 1"
+
+[node name="TimeLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/LeftSide"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("6_gcd55")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_dc52l")
+text = "12:00"
+
+[node name="RightSide" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="MoneyLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/RightSide"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("6_gcd55")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_dc52l")
+text = "$100"
 
 [node name="InventoryUI" type="CanvasLayer" parent="."]
 visible = false
@@ -1032,6 +1048,7 @@ mouse_filter = 2
 alignment = 2
 
 [node name="ShopSlotUI" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("34_j10sc")
 
 [node name="MarginContainer" type="MarginContainer" parent="ShopSlotUI"]

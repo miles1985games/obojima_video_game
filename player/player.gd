@@ -8,6 +8,7 @@ class_name Player
 @onready var key_items = $KeyItems
 
 var current_movespeed: float = 5000.0
+var current_money: int = 0
 
 var preview_item: String
 

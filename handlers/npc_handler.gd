@@ -51,3 +51,8 @@ func spawn_traveler(hour):
 	location.add_child(new_traveler)
 	
 	return new_traveler
+
+func despawn_npc(npc):
+	if travelers.has(npc):
+		travelers.erase(npc)
+	npc.queue_free()

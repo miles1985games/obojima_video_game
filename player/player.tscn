@@ -201,7 +201,7 @@ script = ExtResource("5_24m15")
 [node name="build_preview" type="Node2D" parent="StateMachine"]
 process_mode = 4
 script = ExtResource("7_wuv3o")
-view = "side"
+view = "front"
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("5_btu3x")
